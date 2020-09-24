@@ -1,0 +1,6 @@
+#!/bin/bash
+setxkbmap \
+	-layout "us,no" \
+	-option "ctrl:swap_rwin_rctl" \
+	-option "ctrl:nocaps" \
+	-option "grp:ctrls_toggle"
