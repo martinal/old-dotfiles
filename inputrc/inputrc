@@ -1,0 +1,22 @@
+set bell-style visible
+set blink-matching-paren On
+set colored-completion-prefix On
+set colored-stats On
+#set completion-display-width 80
+set completion-ignore-case On
+set completion-map-case On
+#set convert-meta Off
+set enable-bracketed-paste On
+set expand-tilde On
+set keyseq-timeout 200
+set menu-complete-display-prefix On
+set show-all-if-ambiguous On
+set show-all-if-unmodified On
+set show-mode-in-prompt On
+set skip-completed-text On
+
+set editing-mode emacs
+#set editing-mode vi
+#set keymap vi-command
+#set vi-cmd-mode-string (cmd)
+#set vi-ins-mode-string (ins)
