@@ -48,17 +48,17 @@ Plug 'https://github.com/junegunn/limelight.vim'
 " Text objects and motions
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/kana/vim-textobj-entire'
-" Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/vim-scripts/argtextobj.vim'
+Plug 'https://github.com/tommcdo/vim-exchange'
+Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/wellle/targets.vim'
+Plug 'https://github.com/wellle/line-targets.vim'
+Plug 'https://github.com/easymotion/vim-easymotion'
 " Plug 'https://github.com/dahu/vim-fanfingtastic'
 " Plug 'https://github.com/terryma/vim-expand-region'
 " Plug 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
-" Plug 'https://github.com/tommcdo/vim-exchange'
 " Plug 'https://github.com/tommcdo/vim-text-objects'
-" Plug 'https://github.com/vim-scripts/argtextobj.vim'
-" Plug 'https://github.com/tpope/vim-surround'
-" Plug 'https://github.com/wellle/line-targets.vim'
-" Plug 'https://github.com/wellle/targets.vim'
-" Plug 'https://github.com/tpope/vim-commentary'
 " vim-textobj-user list of textobject plugins
 " https://github.com/coderifous/textobj-word-coloumn.vim
 " vim-textobj-lastpat
@@ -103,7 +103,7 @@ Plug 'https://github.com/junegunn/vim-easy-align'
 
 " Unsorted plugins
 " Plug 'https://github.com/ycm-core/YouCompleteMe'
-" Plug 'https://github.com/vim-scripts/ReplaceWithRegister'
+Plug 'https://github.com/vim-scripts/ReplaceWithRegister'
 " Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 " Plug 'https://github.com/chrisbra/Recover.vim'
 " Plug 'https://github.com/jceb/vim-orgmode'

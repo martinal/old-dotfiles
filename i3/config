@@ -32,8 +32,8 @@ floating_modifier $mod
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-	font pango:DejaVu Sans Mono 10
-        status_command i3status
+    font pango:DejaVu Sans Mono 10
+    status_command i3status
 }
 
 # start a terminal
@@ -94,11 +94,19 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# TODO: Floating mode
+# focus mode_toggle
+# floating toggle
+# sticky toggle
+# move position center
+# resize set 640 480 px, move position center
+# resize set 1720 960 px, move position center
+
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+p focus child
 
 # switch to workspace (1=10,9=19)
 bindsym $mod+1 workspace 1
@@ -135,240 +143,269 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Switch workspace
 set $mode_ws Switch workspace: a...;  |  Move window to workspace: q...p  |  (enter or escape to close)
 mode "$mode_ws" {
-        # switch to workspace (1=10,9=19)
-        bindsym a workspace 1, mode "default"
-        bindsym s workspace 2, mode "default"
-        bindsym d workspace 3, mode "default"
-        bindsym f workspace 4, mode "default"
-        bindsym g workspace 5, mode "default"
-        bindsym h workspace 6, mode "default"
-        bindsym j workspace 7, mode "default"
-        bindsym k workspace 8, mode "default"
-        bindsym l workspace 9, mode "default"
-        bindcode 47 workspace 10, mode "default"
+    # switch to workspace (1=10,9=19)
+    bindsym a workspace 1, mode "default"
+    bindsym s workspace 2, mode "default"
+    bindsym d workspace 3, mode "default"
+    bindsym f workspace 4, mode "default"
+    bindsym g workspace 5, mode "default"
+    bindsym h workspace 6, mode "default"
+    bindsym j workspace 7, mode "default"
+    bindsym k workspace 8, mode "default"
+    bindsym l workspace 9, mode "default"
+    bindcode 47 workspace 10, mode "default"
  
-        # move focused container to workspace
-        bindsym q move container to workspace 1, mode "default"
-        bindsym w move container to workspace 2, mode "default"
-        bindsym e move container to workspace 3, mode "default"
-        bindsym r move container to workspace 4, mode "default"
-        bindsym t move container to workspace 5, mode "default"
-        bindsym y move container to workspace 6, mode "default"
-        bindsym u move container to workspace 7, mode "default"
-        bindsym i move container to workspace 8, mode "default"
-        bindsym o move container to workspace 9, mode "default"
-        bindsym p move container to workspace 10, mode "default"
+    # move focused container to workspace
+    bindsym q move container to workspace 1, mode "default"
+    bindsym w move container to workspace 2, mode "default"
+    bindsym e move container to workspace 3, mode "default"
+    bindsym r move container to workspace 4, mode "default"
+    bindsym t move container to workspace 5, mode "default"
+    bindsym y move container to workspace 6, mode "default"
+    bindsym u move container to workspace 7, mode "default"
+    bindsym i move container to workspace 8, mode "default"
+    bindsym o move container to workspace 9, mode "default"
+    bindsym p move container to workspace 10, mode "default"
 
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    # move focused container to workspace and follow
+    bindsym z move container to workspace 1,  workspace 1,  mode "default"
+    bindsym x move container to workspace 2,  workspace 2,  mode "default"
+    bindsym c move container to workspace 3,  workspace 3,  mode "default"
+    bindsym v move container to workspace 4,  workspace 4,  mode "default"
+    bindsym b move container to workspace 5,  workspace 5,  mode "default"
+    bindsym n move container to workspace 6,  workspace 6,  mode "default"
+    bindsym m move container to workspace 7,  workspace 7,  mode "default"
+    #bindsym , move container to workspace 8,  workspace 8,  mode "default"
+    #bindsym . move container to workspace 9,  workspace 9,  mode "default"
+    #bindsym / move container to workspace 10, workspace 10, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
+# Mark window
+set $mode_mark [M]ark, [A]dd, [R]eplace, [T]oggle, [U]nmark, [G]oto, [F]etch, [S]wap: <letter> | (enter or escape to close)
+mode "$mode_mark" {
+    # Read 1 char mark and apply to the current window
+    bindsym m exec i3-input -F 'mark %s' -l 1 -P 'Mark: ', mode "default"
+
+    # Read 1 char mark and add to the current window
+    bindsym a exec i3-input -F 'mark --add %s' -l 1 -P 'Add mark: ', mode "default"
+
+    # Read 1 char mark and replace mark on the current window
+    bindsym r exec i3-input -F 'mark --replace %s' -l 1 -P 'Replace mark: ', mode "default"
+
+    # Read 1 char mark and toggle mark on the current window
+    bindsym t exec i3-input -F 'mark --toggle %s' -l 1 -P 'Toggle mark: ', mode "default"
+
+    # Read 1 char mark and unmark it from all windows
+    bindsym u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark all: ', mode "default"
+
+    # Read 1 char mark and go to the matching window
+    bindsym g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto marked: ', mode "default"
+
+    # Read 1 char mark and move the matching here
+    bindsym f exec i3-input -F '[con_mark="%s"] move container to workspace current' -l 1 -P 'Fetch marked: ', mode "default"
+
+    # Read 1 char mark and swap the current container with the marked one
+    bindsym s exec i3-input -F 'swap container with mark "%s"' -l 1 -P 'Swap with marked: ', mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+# T for Tag, M was taken
+bindsym $mod+t mode "$mode_mark"
 
 # resize window (you can also use the mouse for that)
 set $mode_resize Resize: jkl; or arrows (enter or escape to close)
 # set $resize_size 10 px or 10 ppt
 set $resize_size 160 px
 mode "$mode_resize" {
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-	# (jkl;)
-        bindcode 44 resize shrink width 160 px
-        bindcode 45 resize grow height 160 px
-        bindcode 46 resize shrink height 160 px
-        bindcode 47 resize grow width 160 px
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    # (jkl;)
+    bindcode 44 resize shrink width 160 px
+    bindcode 45 resize grow height 160 px
+    bindcode 46 resize shrink height 160 px
+    bindcode 47 resize grow width 160 px
 
-        # same bindings, but for the arrow keys
-        bindcode 113 resize shrink width 10 px or 10 ppt
-        bindcode 116 resize grow height 10 px or 10 ppt
-        bindcode 111 resize shrink height 10 px or 10 ppt
-        bindcode 114 resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindcode 113 resize shrink width 10 px or 10 ppt
+    bindcode 116 resize grow height 10 px or 10 ppt
+    bindcode 111 resize shrink height 10 px or 10 ppt
+    bindcode 114 resize grow width 10 px or 10 ppt
 
-        # TODO: Document this, maybe swap shift here and above
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-	# (jkl;)
-        bindcode Shift+44 resize grow left 160 px
-        bindcode Shift+45 resize shrink left 160 px
-        bindcode Shift+46 resize shrink right 160 px
-        bindcode Shift+47 resize grow right 160 px
+    # TODO: Document this, maybe swap shift here and above
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    # (jkl;)
+    bindcode Shift+44 resize grow left 160 px
+    bindcode Shift+45 resize shrink left 160 px
+    bindcode Shift+46 resize shrink right 160 px
+    bindcode Shift+47 resize grow right 160 px
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # move floating windows
 set $mode_move Move: jkl; or arrows (enter or escape to close)
 mode "$mode_move" {
-	bindsym $mod+Tab focus right
-	bindsym $mod+Shift+Tab focus left
+    bindsym $mod+Tab focus right
+    bindsym $mod+Shift+Tab focus left
 
-	# (jkl;)
-        bindcode 44 move left
-        bindcode 45 move right
-        bindcode 46 move up
-        bindcode 47 move down
+    # (jkl;)
+    bindcode 44 move left
+    bindcode 45 move right
+    bindcode 46 move up
+    bindcode 47 move down
 
-        # same bindings, but for the arrow keys
-        bindcode 113 move left
-        bindcode 116 move right
-        bindcode 111 move up
-        bindcode 114 move down
+    # same bindings, but for the arrow keys
+    bindcode 113 move left
+    bindcode 116 move right
+    bindcode 111 move up
+    bindcode 114 move down
 
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Custom system actions mode
 set $mode_system System: [l]ock, log[o]ut, [s]uspend, [h]ibernate, [r]eboot, [Shift+s] shutdown (enter or escape to close)
 mode "$mode_system" {
-	bindsym l exec --no-startup-id i3exit lock, mode "default"
-	bindsym o exec --no-startup-id i3exit logout, mode "default"
-	bindsym s exec --no-startup-id i3exit suspend, mode "default"
-	bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-	bindsym r exec --no-startup-id i3exit reboot, mode "default"
-	bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym o exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Custom display config mode
 set $mode_display Display: [b]uiltin, [e]xternal, external [l]eft, external [r]ight, [h]ome external above, [d]ongle (enter or escape to close)
 mode "$mode_display" {
-	bindsym b exec --no-startup-id ${HOME}/.screenlayout/builtinonly.sh, mode "default"
-	bindsym e exec --no-startup-id ${HOME}/.screenlayout/externalonly.sh, mode "default"
-	bindsym l exec --no-startup-id ${HOME}/.screenlayout/externalleft.sh, mode "default"
-	bindsym r exec --no-startup-id ${HOME}/.screenlayout/externalright.sh, mode "default"
-	bindsym h exec --no-startup-id ${HOME}/.screenlayout/home-external-above.sh, mode "default"
-	bindsym d exec --no-startup-id ${HOME}/.screenlayout/dongle.sh, mode "default"
+    bindsym b exec --no-startup-id ${HOME}/.screenlayout/builtinonly.sh, mode "default"
+    bindsym e exec --no-startup-id ${HOME}/.screenlayout/externalonly.sh, mode "default"
+    bindsym l exec --no-startup-id ${HOME}/.screenlayout/externalleft.sh, mode "default"
+    bindsym r exec --no-startup-id ${HOME}/.screenlayout/externalright.sh, mode "default"
+    bindsym h exec --no-startup-id ${HOME}/.screenlayout/home-external-above.sh, mode "default"
+    bindsym d exec --no-startup-id ${HOME}/.screenlayout/dongle.sh, mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Chrome profile launcher mode
 set $mode_chrome Chrome profile: [M]artin, [X]AL, [V]ipps
 mode "$mode_chrome" {
-	bindsym x exec google-chrome --profile-directory="Default", mode "default"
-	bindsym v exec google-chrome --profile-directory="Profile 1", mode "default"
-	bindsym m exec google-chrome --profile-directory="Profile 2", mode "default"
+    bindsym x exec google-chrome --profile-directory="Default", mode "default"
+    bindsym v exec google-chrome --profile-directory="Profile 1", mode "default"
+    bindsym m exec google-chrome --profile-directory="Profile 2", mode "default"
 
-	bindsym Shift+x exec google-chrome --profile-directory="Default"
-	bindsym Shift+v exec google-chrome --profile-directory="Profile 1"
-	bindsym Shift+m exec google-chrome --profile-directory="Profile 2"
+    bindsym Shift+x exec google-chrome --profile-directory="Default"
+    bindsym Shift+v exec google-chrome --profile-directory="Profile 1"
+    bindsym Shift+m exec google-chrome --profile-directory="Profile 2"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Custom launcher mode
 set $mode_quicklaunch Quicklaunch: [c]hrome, [f]irefox, [g]oland, [d]atagrip, [s]lack, [k]eybase (enter or escape to close)
 mode "$mode_quicklaunch" {
-	bindsym c mode "$mode_chrome"
-	bindsym f exec firefox, mode "default"
-	bindsym i exec --no-startup-id idea, mode "default"
-	bindsym g exec --no-startup-id goland, mode "default"
-	bindsym d exec --no-startup-id datagrip, mode "default"
-	bindsym s exec --no-startup-id slack, mode "default"
-	bindsym k exec keybase, mode "default"
+    bindsym c mode "$mode_chrome"
+    bindsym f exec firefox, mode "default"
+    bindsym i exec --no-startup-id idea, mode "default"
+    bindsym g exec --no-startup-id goland, mode "default"
+    bindsym d exec --no-startup-id datagrip, mode "default"
+    bindsym s exec --no-startup-id slack, mode "default"
+    bindsym k exec keybase, mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
-# Jetbrains modal
-set $mode_goland Goland modal navigation: WIP
-mode "$mode_goland" {
-
-	# This kinda works but it's slow
-	# (jkl;)
-        bindcode --release 44 exec --no-startup-id xdotool key Alt+Left
-        bindcode --release 45 exec --no-startup-id xdotool key Alt+Down
-        bindcode --release 46 exec --no-startup-id xdotool key Alt+Up
-        bindcode --release 47 exec --no-startup-id xdotool key Alt+Right
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# Volume mode
+# Volume mode TODO: Use pactl
 set $mode_volume Volume = [1], ..., [9], 1[0], [j] decrease, [k] increase, [m]ute (enter or escape to close)
 mode "$mode_volume" {
-	bindsym 1 exec --no-startup-id "amixer set 'Master' 10%" , mode "default"
-	bindsym 2 exec --no-startup-id "amixer set 'Master' 20%" , mode "default"
-	bindsym 3 exec --no-startup-id "amixer set 'Master' 30%" , mode "default"
-	bindsym 4 exec --no-startup-id "amixer set 'Master' 40%" , mode "default"
-	bindsym 5 exec --no-startup-id "amixer set 'Master' 50%" , mode "default"
-	bindsym 6 exec --no-startup-id "amixer set 'Master' 60%" , mode "default"
-	bindsym 7 exec --no-startup-id "amixer set 'Master' 70%" , mode "default"
-	bindsym 8 exec --no-startup-id "amixer set 'Master' 80%" , mode "default"
-	bindsym 9 exec --no-startup-id "amixer set 'Master' 90%" , mode "default"
-	bindsym 0 exec --no-startup-id "amixer set 'Master' 100%" , mode "default"
-	bindsym j exec --no-startup-id "amixer set 'Master' 5%-" , mode "default"
-	bindsym k exec --no-startup-id "amixer set 'Master' 5%+" , mode "default"
-	bindsym m exec --no-startup-id "amixer set 'Master' 9%" , mode "default"
+    bindsym 1 exec --no-startup-id "amixer set 'Master' 10%" , mode "default"
+    bindsym 2 exec --no-startup-id "amixer set 'Master' 20%" , mode "default"
+    bindsym 3 exec --no-startup-id "amixer set 'Master' 30%" , mode "default"
+    bindsym 4 exec --no-startup-id "amixer set 'Master' 40%" , mode "default"
+    bindsym 5 exec --no-startup-id "amixer set 'Master' 50%" , mode "default"
+    bindsym 6 exec --no-startup-id "amixer set 'Master' 60%" , mode "default"
+    bindsym 7 exec --no-startup-id "amixer set 'Master' 70%" , mode "default"
+    bindsym 8 exec --no-startup-id "amixer set 'Master' 80%" , mode "default"
+    bindsym 9 exec --no-startup-id "amixer set 'Master' 90%" , mode "default"
+    bindsym 0 exec --no-startup-id "amixer set 'Master' 100%" , mode "default"
+    bindsym j exec --no-startup-id "amixer set 'Master' 5%-" , mode "default"
+    bindsym k exec --no-startup-id "amixer set 'Master' 5%+" , mode "default"
+    bindsym m exec --no-startup-id "amixer set 'Master' 9%" , mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Backlight mode
 set $mode_backlight Laptop screen backlight = [1], ..., [9], 1[0] (enter or escape to close)
 mode "$mode_backlight" {
-	bindsym 1 exec --no-startup-id i3backlight 0.1 , mode "default"
-	bindsym 2 exec --no-startup-id i3backlight 0.2 , mode "default"
-	bindsym 3 exec --no-startup-id i3backlight 0.3 , mode "default"
-	bindsym 4 exec --no-startup-id i3backlight 0.4 , mode "default"
-	bindsym 5 exec --no-startup-id i3backlight 0.5 , mode "default"
-	bindsym 6 exec --no-startup-id i3backlight 0.6 , mode "default"
-	bindsym 7 exec --no-startup-id i3backlight 0.7 , mode "default"
-	bindsym 8 exec --no-startup-id i3backlight 0.8 , mode "default"
-	bindsym 9 exec --no-startup-id i3backlight 0.9 , mode "default"
-	bindsym 0 exec --no-startup-id i3backlight 1.0 , mode "default"
+    bindsym 1 exec --no-startup-id i3backlight 0.1 , mode "default"
+    bindsym 2 exec --no-startup-id i3backlight 0.2 , mode "default"
+    bindsym 3 exec --no-startup-id i3backlight 0.3 , mode "default"
+    bindsym 4 exec --no-startup-id i3backlight 0.4 , mode "default"
+    bindsym 5 exec --no-startup-id i3backlight 0.5 , mode "default"
+    bindsym 6 exec --no-startup-id i3backlight 0.6 , mode "default"
+    bindsym 7 exec --no-startup-id i3backlight 0.7 , mode "default"
+    bindsym 8 exec --no-startup-id i3backlight 0.8 , mode "default"
+    bindsym 9 exec --no-startup-id i3backlight 0.9 , mode "default"
+    bindsym 0 exec --no-startup-id i3backlight 1.0 , mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Keyboard layout mode
 set $mode_keyboard Keyboard layout = [N]O, [U]S, [D]ual (enter or escape to close)
 mode "$mode_keyboard" {
-	bindsym n exec --no-startup-id i3xkb-no , mode "default"
-	bindsym u exec --no-startup-id i3xkb-us , mode "default"
-	bindsym d exec --no-startup-id i3xkb-dual , mode "default"
+    bindsym n exec --no-startup-id i3xkb-no , mode "default"
+    bindsym u exec --no-startup-id i3xkb-us , mode "default"
+    bindsym d exec --no-startup-id i3xkb-dual , mode "default"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Supermode, top level menu
 set $mode_top Modes: [L]auncher, [S]ystem, [D]isplay, [B]acklight, [V]olume, [K]eyboard (enter or escape to close)
 mode "$mode_top" {
-	bindsym l mode "$mode_quicklaunch"
-	bindsym s mode "$mode_system"
-	bindsym d mode "$mode_display"
-	bindsym b mode "$mode_backlight"
-	bindsym v mode "$mode_volume"
-	bindsym k mode "$mode_keyboard"
+    bindsym l mode "$mode_quicklaunch"
+    bindsym s mode "$mode_system"
+    bindsym d mode "$mode_display"
+    bindsym b mode "$mode_backlight"
+    bindsym v mode "$mode_volume"
+    bindsym k mode "$mode_keyboard"
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Top level menu
@@ -385,7 +422,6 @@ bindsym $mod+u mode "$mode_volume"
 bindsym $mod+y mode "$mode_keyboard"
 
 # Shortcuts to other modes
-bindsym $mod+g mode "$mode_goland"
 bindsym $mod+r mode "$mode_resize"
 bindsym $mod+m mode "$mode_move" focus floating
 bindsym $mod+c mode "$mode_chrome"
@@ -411,20 +447,20 @@ assign [title=".*DataGrip"] 2
 assign [title=".*Slack"] 3
 
 # Default colors:
-# class                 border  backgr. text    indicator child_border
-# client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+# class             border  backgr. text    indicator child_border
+# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
 # client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
+# client.urgent       #2f343a #900000 #ffffff #900000   #900000
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # client.background       #ffffff
 
 # Custom colors:
-# class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+# class             border  backgr. text    indicator child_border
+client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.unfocused    #333333 #222222 #888888 #292d2e   #222222
+client.urgent       #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 

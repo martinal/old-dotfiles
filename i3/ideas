@@ -1,0 +1,175 @@
+q 
+w close
+e layout entire screen
+r resize window
+t layout tabs
+
+y 
+u volume
+i 
+o toggle floating
+p focus ... (direction, marks, parent)
+
+a mark window with label ...
+s layout stacked
+d 
+f layout fullscreen
+g toggle focus mode
+
+h horizontal split
+j jump to workspace ...
+k jump to window mark ...
+l lock
+; 
+
+z 
+x 
+c 
+v vertical split
+b brightness
+
+n move window to workspace ... and switch
+m move window to workspace ...
+. 
+, 
+? dmenu search
+
+in modes:
+hjkl = arrows  mn;., = ???
+qw...op = 12...90 (numbered workspaces)
+asdfg zxcvb = marks
+
+resize to:  0.2 0.25 0.33 0.375 0.5 0.625 0.667 0.8
+/5 /4 /3 g /2 h
+horiz , vert
+2x8=16 variants
+relative to resolution?
+
+Actions:
+Launch mode:
+- Dmenu
+- Dmenu desktop
+- Dmenu curated
+- Terminal
+- Chrome
+- Slack
+- Startup script
+- Etc
+System mode:
+- Reload i3
+- Restart i3
+- Exit i3
+- Lock Screen
+- Restart Linux 
+- Shutdown Linux 
+- Log out
+- Hibernate
+Layout mode:
+- Layout stacking
+- Layout tabbed
+- Layout default
+- Full screen toggle
+- Focus mode toggle (floating)
+Tree navigation:
+- Split h
+- Split v
+- Focus parent
+- Focus child
+Focus:
+- Container DIR
+- Workspace back and forth
+- Workspace N
+Move:
+- Container DIR
+- Container to workspace N
+- Container to scratchpad
+- Workspace to output
+Scratchpad:
+- Move
+- Show
+Marks:
+- Toggle mark M
+- Add mark M
+- Replace mark M
+- Unmark M
+- Focus mark M
+- Move mark M here
+- Swap with mark M
+Resize mode:
+- Grow/shrink small/large v/h = 8x
+- Fixed float size e.g. 80% h&v
+- Fixed float size n*10% h/v
+- Fixed middle split
+- Fixed golden ratio split
+Utility modes:
+- Audio mode (pactl)
+- Display resolutions mode (xrandr)
+- Screen brightness mode
+- Wifi mode (custom dmenu?)
+- Notifications mode (dunstctl)
+Dmenu ideas:
+- Workspace list
+- Open app list
+- Display info from i3bar in system menu, drop i3bar
+- Marks list?
+
+I3bar info to move to dmenu:
+- WiFi
+- battery 
+- memory
+- CPU
+- 
+- notifications
+- windows and workspaces
+- tray: Dropbox, ...
+
+LETTERS:
+QWERT YUIOP
+ASDFG HJKL;
+ZXCVB NM,./
+
+BEST:
+WERT YUIO
+ASDFG HJKL;
+
+
+Example commands:
+bindsym $mod+x move container to workspace 3; workspace 3
+bindsym $mod+v split vertical
+bindsym $mod+h split horizontal
+bindsym $mod+t split toggle
+...
+layout toggle split, layout stacking, layout tabbed, layout splitv or layout splith
+...
+fullscreen toggle
+fullscreen toggle global
+layout toggle tabbed stacking splitv splith
+...
+# focus next/prev
+focus output left...
+focus output primary
+focus output NAME
+...
+move [absolute] position center
+swap container with mark M
+sticky enable|disable|toggle
+[con_mark="^M$"] move container to workspace current
+workspace next_on_output
+workspace prev_on_output
+...
+move container to output left|right|down|up|current|primary|<output> move workspace to output left|right|down|up|current|primary|<output>
+...
+resize set width 62.5 ppt
+resize set width 37.5 ppt
+
+# Floating window resize and center:
+resize set 640 480 px, move position center
+resize set 1720 960 px, move position center
+
+
+Example configs:
+border none
+workspace 1 output HDMI
+...
+Block autofocus?
+

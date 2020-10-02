@@ -12,11 +12,12 @@ set keyseq-timeout 200
 set menu-complete-display-prefix On
 set show-all-if-ambiguous On
 set show-all-if-unmodified On
-set show-mode-in-prompt On
 set skip-completed-text On
 
 set editing-mode emacs
+
 #set editing-mode vi
 #set keymap vi-command
+#set show-mode-in-prompt On
 #set vi-cmd-mode-string (cmd)
 #set vi-ins-mode-string (ins)
