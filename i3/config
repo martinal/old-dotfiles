@@ -340,22 +340,44 @@ mode "$mode_quicklaunch" {
     bindsym Escape mode "default"
 }
 
-# Volume mode TODO: Use pactl
-set $mode_volume Volume = [1], ..., [9], 1[0], [j] decrease, [k] increase, [m]ute (enter or escape to close)
+# Volume mode
+set $AUDSINK 0
+set $AUDSRC 1
+set $mode_volume Mic volume 0%-100% = [qwert] | -+6dB = [ui] | mute/unmute= [op] | Speaker 0-100% = [asdfg] | -+6dB = [jk] | mute/unmute = [l;] (enter or escape to close)
 mode "$mode_volume" {
-    bindsym 1 exec --no-startup-id "amixer set 'Master' 10%" , mode "default"
-    bindsym 2 exec --no-startup-id "amixer set 'Master' 20%" , mode "default"
-    bindsym 3 exec --no-startup-id "amixer set 'Master' 30%" , mode "default"
-    bindsym 4 exec --no-startup-id "amixer set 'Master' 40%" , mode "default"
-    bindsym 5 exec --no-startup-id "amixer set 'Master' 50%" , mode "default"
-    bindsym 6 exec --no-startup-id "amixer set 'Master' 60%" , mode "default"
-    bindsym 7 exec --no-startup-id "amixer set 'Master' 70%" , mode "default"
-    bindsym 8 exec --no-startup-id "amixer set 'Master' 80%" , mode "default"
-    bindsym 9 exec --no-startup-id "amixer set 'Master' 90%" , mode "default"
-    bindsym 0 exec --no-startup-id "amixer set 'Master' 100%" , mode "default"
-    bindsym j exec --no-startup-id "amixer set 'Master' 5%-" , mode "default"
-    bindsym k exec --no-startup-id "amixer set 'Master' 5%+" , mode "default"
-    bindsym m exec --no-startup-id "amixer set 'Master' 9%" , mode "default"
+
+    bindsym z exec --no-startup-id "notify-send $AUDSINK"
+    bindsym x exec --no-startup-id "notify-send $AUDSINK"
+
+    # Set sink volume (mic)
+    bindsym a exec --no-startup-id "pactl set-sink-volume $AUDSINK 0%"
+    bindsym s exec --no-startup-id "pactl set-sink-volume $AUDSINK 25%"
+    bindsym d exec --no-startup-id "pactl set-sink-volume $AUDSINK 50%"
+    bindsym f exec --no-startup-id "pactl set-sink-volume $AUDSINK 75%"
+    bindsym g exec --no-startup-id "pactl set-sink-volume $AUDSINK 100%"
+
+    # Adjust sink volume (mic)
+    bindsym j exec --no-startup-id "pactl set-sink-volume $AUDSINK -6dB"
+    bindsym k exec --no-startup-id "pactl set-sink-volume $AUDSINK +6dB"
+
+    # Switch sink mute state (mic) (47=; on us layout)
+    bindsym l exec --no-startup-id "pactl set-sink-mute $AUDSINK true"
+    bindcode 47 exec --no-startup-id "pactl set-sink-mute $AUDSINK false"
+
+    # Set source volume (mic)
+    bindsym q exec --no-startup-id "pactl set-source-volume $AUDSRC 0%"
+    bindsym w exec --no-startup-id "pactl set-source-volume $AUDSRC 25%"
+    bindsym e exec --no-startup-id "pactl set-source-volume $AUDSRC 50%"
+    bindsym r exec --no-startup-id "pactl set-source-volume $AUDSRC 75%"
+    bindsym t exec --no-startup-id "pactl set-source-volume $AUDSRC 100%"
+
+    # Adjust source volume (mic)
+    bindsym u exec --no-startup-id "pactl set-source-volume $AUDSRC -6dB"
+    bindsym i exec --no-startup-id "pactl set-source-volume $AUDSRC +6dB"
+
+    # Switch source mute state (mic)
+    bindsym o exec --no-startup-id "pactl set-source-mute $AUDSRC true"
+    bindsym p exec --no-startup-id "pactl set-source-mute $AUDSRC false"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -363,18 +385,33 @@ mode "$mode_volume" {
 }
 
 # Backlight mode
-set $mode_backlight Laptop screen backlight = [1], ..., [9], 1[0] (enter or escape to close)
+set $EXTOUT HDMI-2
+set $INTOUT eDP-1
+set $mode_backlight Laptop backlight = [asdfgqwert] | HDMI backlight = [hjkl;yuiop] (enter or escape to close)
 mode "$mode_backlight" {
-    bindsym 1 exec --no-startup-id i3backlight 0.1 , mode "default"
-    bindsym 2 exec --no-startup-id i3backlight 0.2 , mode "default"
-    bindsym 3 exec --no-startup-id i3backlight 0.3 , mode "default"
-    bindsym 4 exec --no-startup-id i3backlight 0.4 , mode "default"
-    bindsym 5 exec --no-startup-id i3backlight 0.5 , mode "default"
-    bindsym 6 exec --no-startup-id i3backlight 0.6 , mode "default"
-    bindsym 7 exec --no-startup-id i3backlight 0.7 , mode "default"
-    bindsym 8 exec --no-startup-id i3backlight 0.8 , mode "default"
-    bindsym 9 exec --no-startup-id i3backlight 0.9 , mode "default"
-    bindsym 0 exec --no-startup-id i3backlight 1.0 , mode "default"
+    # External screen
+    bindsym q exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.1"
+    bindsym w exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.2"
+    bindsym e exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.3"
+    bindsym r exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.4"
+    bindsym t exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.5"
+    bindsym y exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.6"
+    bindsym u exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.7"
+    bindsym i exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.8"
+    bindsym o exec --no-startup-id   "xrandr --output $EXTOUT --brightness 0.9"
+    bindsym p exec --no-startup-id   "xrandr --output $EXTOUT --brightness 1.0"
+
+    # Laptop screen
+    bindsym a   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.1"
+    bindsym s   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.2"
+    bindsym d   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.3"
+    bindsym f   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.4"
+    bindsym g   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.5"
+    bindsym h   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.6"
+    bindsym j   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.7"
+    bindsym k   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.8"
+    bindsym l   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.9"
+    bindcode 47 exec --no-startup-id "xrandr --output $INTOUT --brightness 1.0"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
