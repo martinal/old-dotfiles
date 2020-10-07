@@ -32,8 +32,59 @@ floating_modifier $mod
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-    font pango:DejaVu Sans Mono 10
+    position bottom
     status_command i3status
+
+    font pango:DejaVu Sans Mono 12
+    separator_symbol "║"
+
+    # Default colors
+#   colors {
+#       background #000000
+#       statusline #ffffff
+#       separator #666666
+#       # <colorclass> <border> <background> <text>
+#       focused_workspace  #4c7899 #285577 #ffffff
+#       active_workspace   #333333 #5f676a #ffffff
+#       inactive_workspace #333333 #222222 #888888
+#       urgent_workspace   #2f343a #900000 #ffffff
+#       binding_mode       #2f343a #900000 #ffffff
+#   }
+
+    # Custom colors
+#   colors {
+#       background #111111
+#       statusline #eeeeee
+#       separator #0044aa
+#       # <colorclass> <border> <background> <text>
+#       focused_workspace  #0044aa #0044aa #ffffff
+#       active_workspace   #0044aa #003388 #888888
+#       inactive_workspace #0044aa #222222 #888888
+#       urgent_workspace   #0044aa #771018 #888888
+#       binding_mode       #0044aa #083a08 #ffffff
+#   }
+
+    # Darkula colors:
+    colors {
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+        # <colorclass> <border> <background> <text>
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+    }
+
+    # Hide by default, shows when holding Mod4 (Win)
+    #mode hide
+    #hidden_state hide
+    #modifier Mod4
+
+    # Disable scroll wheel switches workspace
+    bindsym button4 nop
+    bindsym button5 nop
 }
 
 # start a terminal
@@ -43,12 +94,11 @@ bindsym $mod+Shift+Return exec --no-startup-id zsh
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
+# Start dmenu any-path menu with Darkula colors
+bindsym $mod+d exec "dmenu_run -nf '#F7F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-12' -p 'Path search -❯' -l 10"
+
+# Start dmenu .desktop app menu with Darkula colors
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu_run -i -nf '#F7F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-12' -p 'Desktop apps search -❯' -l 10"
 
 # change focus (j,k,l,;)
 bindcode $mod+44 focus left
@@ -141,8 +191,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 
 # Switch workspace
-set $mode_ws Switch workspace: a...;  |  Move window to workspace: q...p  |  (enter or escape to close)
-mode "$mode_ws" {
+set $mode_workspaces Switch workspace: a...;  |  Move window to workspace: q...p  |  (enter or escape to close)
+mode "$mode_workspaces" {
     # switch to workspace (1=10,9=19)
     bindsym a workspace 1, mode "default"
     bindsym s workspace 2, mode "default"
@@ -431,7 +481,7 @@ mode "$mode_keyboard" {
 }
 
 # Supermode, top level menu
-set $mode_top Modes: [L]auncher, [S]ystem, [D]isplay, [B]acklight, [V]olume, [K]eyboard (enter or escape to close)
+set $mode_top Modes: [L]auncher, [S]ystem, [D]isplay, [B]acklight, [V]olume, [K]eyboard, [T]ags, [W]orkspaces (enter or escape to close)
 mode "$mode_top" {
     bindsym l mode "$mode_quicklaunch"
     bindsym s mode "$mode_system"
@@ -439,14 +489,16 @@ mode "$mode_top" {
     bindsym b mode "$mode_backlight"
     bindsym v mode "$mode_volume"
     bindsym k mode "$mode_keyboard"
+    bindsym t mode "$mode_mark"
+    bindsym w mode "$mode_workspaces"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
 # Top level menu
 bindsym $mod+z mode "$mode_top"
+
 
 # Deeplink shortcuts to modes
 bindsym $mod+x mode "$mode_quicklaunch"
@@ -462,6 +514,7 @@ bindsym $mod+y mode "$mode_keyboard"
 bindsym $mod+r mode "$mode_resize"
 bindsym $mod+m mode "$mode_move" focus floating
 bindsym $mod+c mode "$mode_chrome"
+# 22 = backspace
 bindcode $mod+22 mode "$mode_ws"
 
 # Deeplink to keyboard layouts
@@ -494,12 +547,12 @@ assign [title=".*Slack"] 3
 
 # Custom colors:
 # class             border  backgr. text    indicator child_border
-client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused    #333333 #222222 #888888 #292d2e   #222222
-client.urgent       #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
+# client.urgent       #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# client.background       #ffffff
 
 # Other custom config
 no_focus [class="Slack"]

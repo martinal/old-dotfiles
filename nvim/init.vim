@@ -186,6 +186,7 @@ set scrolloff=5
 set whichwrap=b,s,<,>,[,]  " wrap to next line for backspace, space, and arrows
 set startofline  " commands move cursor to first non-blank in line
 set mouse=ar  " enable the use of mouse clicks
+filetype on
 
 " ------------------------------------------------------------------------------
 " Parenthesis matching

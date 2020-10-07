@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -f /tmp/test-mic.wav
+arecord -f S16_LE -d 10 -r 44100 -c 2 --device="hw:0,0" /tmp/test-mic.wav
+aplay /tmp/test-mic.wav
+rm -f /tmp/test-mic.wav

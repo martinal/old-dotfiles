@@ -111,6 +111,7 @@
 " "ChangeScheme
 " "ChangeSignature                                    <C-F6>
 " "ChangeSplitOrientation
+
 " "ChangesView.AddUnversioned                         <A-C-A>
 " "ChangesView.ApplyPatch
 " "ChangesView.ApplyPatchFromClipboard
@@ -140,6 +141,7 @@
 " "ChangesView.ViewOptions
 " "ChangesViewPopupMenu
 " "ChangesViewToolbar
+
 " "ChangeTemplateDataLanguage
 " "ChangeView
 " "chart-demo
@@ -150,6 +152,7 @@
 " "ChooseDebugConfiguration                           <A-S-F9>
 " "ChooseRunConfiguration                             <A-S-F10>
 " "ClassNameCompletion                                <A-C- >
+
 " "CloseActiveTab                                     <C-S-F4>
 " "CloseAllEditors
 " "CloseAllEditorsButActive
@@ -164,6 +167,7 @@
 " "CloseEditorsGroup
 " "CloseFirstNotification
 " "CloseProject
+
 " "CloudConfigAction
 " "CloudConfigActionGroup
 " "CloudConfigDisableAction
@@ -171,6 +175,7 @@
 " "CloudConfigSelfSettingsAction
 " "CloudConfigSilentlyAction
 " "CloudConfigUpdateApi
+
 " "CodeCleanup
 " "CodeCompletion                                     <C- >
 " "CodeCompletionGroup
@@ -180,6 +185,7 @@
 " "CodeInsightEditorActions
 " "CodeInspection.OnEditor                            <A-S-I>
 " "CodeMenu
+
 " "CollapseAll                                        <C-m> <C-->
 " "CollapseAllRegions                                 <C-S-m> <C-S-->
 " "CollapseBlock                                      <C-S-.>
@@ -189,20 +195,24 @@
 " "CollapseRegionRecursively                          <A-C-m> <A-C-->
 " "CollapseSelection                                  <C-.>
 " "CollapseTreeNode                                   <m>
+
 " "CollectZippedLogs
 " "com.goide.vgo.actions.VgoSyncAction
 " "com.goide.vgo.actions.VgoTidyAction
 " "com.intellij.ws.actions.ConvertCurlToHttpRequestAction
 " "com.jetbrains.plugins.remotesdk.console.RunSshConsoleAction
+
 " "CommentByBlockComment                              <C-S-/> <C-S-o>
 " "CommentByLineComment                               <C-/> <C-o>
 " "CommentGroup
+
 " "CommittedChanges.Clear
 " "CommittedChanges.Details
 " "CommittedChanges.Filter
 " "CommittedChanges.Refresh
 " "CommittedChanges.Revert
 " "CommittedChangesToolbar
+
 " "Compare.LastVersion
 " "Compare.SameVersion
 " "Compare.Selected
@@ -214,6 +224,7 @@
 " "CompareTwoFiles                                    <C-D>
 " "ConfigureEditorTabs
 " "ConfigureSoftWraps
+
 " "Console.Dialect.SpecificGroup
 " "Console.EditorTableResult.Group
 " "Console.Execute                                    <CR>
@@ -222,6 +233,7 @@
 " "Console.History.Next
 " "Console.History.Previous
 " "Console.HistoryActions
+
 " "Console.Jdbc.BrowseHistory                         <A-C-E>
 " "Console.Jdbc.ChooseSchema
 " "Console.Jdbc.ChooseSession
@@ -241,9 +253,11 @@
 " "Console.Jdbc.Terminate                             <C-F2>
 " "Console.Jdbc.ToggleParameters
 " "Console.JdbcActions
+
 " "Console.Open                                       <C-S-F10>
 " "Console.Oracle.DbmsOutput                          <C-F8>
 " "Console.SplitLine                                  <C-CR>
+
 " "Console.TableResult.AddColumn                      <A-S-Ins>
 " "Console.TableResult.AddRow                         <A-Ins>
 " "Console.TableResult.Cancel                         <C-F2>
@@ -330,6 +344,7 @@
 " "Console.TableResult.ViewAsExtractor
 " "Console.TableResult.ViewAsTable
 " "Console.TableResult.ViewAsTreeTable
+
 " "Console.TabPopupGroup
 " "Console.TabPopupGroup.Embedded
 " "Console.Toggle.Notebook.Mode
@@ -342,6 +357,7 @@
 " "ConsoleView.ClearAll
 " "ConsoleView.PopupMenu
 " "ConsoleView.ShowAsJsonAction
+
 " "ContextHelp                                        <F1>
 " "ConvertContentsToAttributeAction
 " "ConvertIndentsGroup
@@ -351,6 +367,7 @@
 " "ConvertToMacLineSeparators
 " "ConvertToUnixLineSeparators
 " "ConvertToWindowsLineSeparators
+
 " "Copy.Paste.Special
 " "CopyAbsolutePath
 " "CopyAsPlainText
@@ -371,15 +388,18 @@
 " "CopySourceRootPath
 " "CopyTBXReference
 " "CopyUrl
+
 " "Coverage
 " "CoverageMenu
 " "CoveragePlatformMenu
+
 " "CreateDesktopEntry
 " "CreateEditorConfigFile
 " "CreateLauncherScript
 " "CreateRunConfiguration
 " "CreateWebProject
 " "CutCopyPasteGroup
+
 " "Database.Settings
 " "DatabaseView.AddActionGroup
 " "DatabaseView.AddActionGroupPopup
@@ -442,6 +462,7 @@
 " "DatabaseView.Tools.TruncateTableAction
 " "DatabaseViewPopupMenu
 " "DatabaseViewToolbar
+
 " "Debug                                              <S-F9>
 " "DebugClass
 " "Debugger.AddToWatch
@@ -458,9 +479,11 @@
 " "DebuggingActionsGroup
 " "DebugMainMenu
 " "DebugReloadGroup
+
 " "DecreaseColumnWidth                                <C-S-Left>
 " "DecrementWindowHeight                              <C-S-Up>
 " "DecrementWindowWidth                               <C-S-Left>
+
 " "DefaultProfilerExecutorGroup
 " "DefaultProfilerExecutorGroupContextActionId
 " "DelegateMethods
@@ -471,6 +494,7 @@
 " "DiagnosticGroup
 " "Diagram.DeselectAll                                <A-C-A>
 " "Diagram.SelectAll                                  <C-A>
+
 " "Diff.AppendLeftSide
 " "Diff.AppendRightSide
 " "Diff.ApplyLeftSide                                 <A-S-Right>
@@ -503,6 +527,7 @@
 " "Diff.ShowSettingsPopup                             <C-S-D>
 " "Diff.ViewerPopupMenu
 " "Diff.ViewerToolbar
+
 " "DirDiffMenu
 " "DirDiffMenu.CancelComparingNewFilesWithEachOther
 " "DirDiffMenu.CompareNewFilesWithEachOtherAction
@@ -521,12 +546,14 @@
 " "DirDiffMenu.SynchronizeDiff.All                    <C-CR>
 " "DirDiffMenu.WarnOnDeletion
 " "DirDiffOperationsMenu
+
 " "DisableInspection
 " "DlvDebugger.ViewAsGroup
 " "DlvRecordAndDebug
 " "DlvRewindAction
 " "DlvToggleThreadsAction
 " "DocCommentGutterIconContextMenu
+
 " "Docker.AddDockerConnection
 " "Docker.Filter
 " "Docker.FilterStoppedContainers
@@ -555,6 +582,7 @@
 " "Docker.RemoteServersViewPopup
 " "Docker.RemoteServersViewToolbar
 " "Docker.RemoteServersViewToolbar.Top
+
 " "DockPinnedMode
 " "DockUnpinnedMode
 " "Document2XSD
@@ -568,13 +596,16 @@
 " "DomElementsTreeView.GotoDomElementDeclarationAction <F4>
 " "DomElementsTreeView.TreePopup
 " "DumpLookupElementWeights                           <A-C-S-W>
+
 " "DumpMLCompletionFeatures                           <A-C-S-0>
 " "DuplicatesForm.SendToLeft                          <C-1>
 " "DuplicatesForm.SendToRight                         <C-2>
 " "DupLocate
+
 " "Dvcs.FileHistory.ContextMenu
 " "Dvcs.Log.ContextMenu
 " "Dvcs.Log.Toolbar
+
 " "EditBookmark
 " "EditBookmarksGroup
 " "EditBreakpoint                                     <C-S-F8>
@@ -746,11 +777,13 @@
 " "EditSource                                         <F4>
 " "EditSourceInNewWindow                              <S-F4>
 " "EmacsStyleIndent
+
 " "Emmet
 " "EmmetNextEditPoint                                 <A-S-]>
 " "EmmetPreview
 " "EmmetPreviousEditPoint                             <A-S-[>
 " "EmmetUpdateTag
+
 " "EmojiAndSymbols
 " "EnablePackageJsonMismatchedDependenciesNotification
 " "ES6.Generate.Index
@@ -758,6 +791,7 @@
 " "EslintImportCodeStyle
 " "EvaluateExpression                                 <A-F8>
 " "Exit
+
 " "ExpandAll                                          <C-k> <C-=>
 " "ExpandAllRegions                                   <C-S-k> <C-S-=>
 " "ExpandAllToLevel
@@ -779,12 +813,15 @@
 " "ExpandToLevel4                                     <C-j> <C-j>
 " "ExpandToLevel5                                     <C-j> <C-j>
 " "ExpandTreeNode                                     <k>
+
 " "ExportImportGroup
 " "ExportSettings
 " "ExportTestResults
 " "ExportToHTML
 " "ExportToTextFile                                   <A-O>
+
 " "ExpressionTypeInfo                                 <C-S-P>
+
 " "ExternalJavaDoc                                    <S-F1>
 " "ExternalSystem.Actions
 " "ExternalSystem.AfterCompile
@@ -823,6 +860,7 @@
 " "ExternalSystem.ToggleAutoReload.All
 " "ExternalSystem.ToggleAutoReload.None
 " "ExternalSystem.ToggleAutoReload.Selective
+
 " "ExternalSystemView.ActionsToolbar
 " "ExternalSystemView.ActionsToolbar.CenterPanel
 " "ExternalSystemView.ActionsToolbar.LeftPanel
@@ -834,6 +872,7 @@
 " "ExternalSystemView.TaskActivationGroup
 " "ExternalSystemView.TaskMenu
 " "ExternalToolsGroup
+
 " "ExtractClass
 " "ExtractInclude
 " "ExtractInterface
@@ -841,7 +880,9 @@
 " "ExtractMethodToolWindow.TreePopup
 " "ExtractModule
 " "ExtractSuperclass
+
 " "FavoritesViewPopupMenu
+
 " "FileChooser
 " "FileChooser.Delete                                 <Del>
 " "FileChooser.GotoDesktop                            <C-D>
