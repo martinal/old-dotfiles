@@ -46,17 +46,20 @@ battery 0 {
 
 run_watch DHCP {
         pidfile = "/var/run/dhclient*.pid"
+        format = "%title"
 }
 
 run_watch VPNC {
         # file containing the PID of a vpnc process
         pidfile = "/var/run/vpnc/pid"
+        format = "%title"
         format_down = ""
 }
 
 path_exists VPN {
         # path exists when a VPN tunnel launched by nmcli/nm-applet is active
         path = "/proc/sys/net/ipv4/conf/tun0"
+        format = "%title"
         format_down = ""
 }
 
