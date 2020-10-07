@@ -11,37 +11,36 @@ general {
 #order += "memory"
 order += "battery 0"
 order += "disk /"
-order += "run_watch DHCP"
-#order += "run_watch VPNC"
-#order += "path_exists VPN"
-#order += "wireless wlan0"
-order += "wireless wlp0s20f3"
-order += "ethernet eth0"
-# order += "ipv6"
 order += "cpu_temperature 0"
 order += "load"
+order += "run_watch DHCP"
+order += "run_watch VPNC"
+order += "path_exists VPN"
+order += "wireless _first_"
+order += "ethernet _first_"
+# order += "ipv6"
 order += "tztime local"
 
-#wireless wlan0 {
-wireless wlp0s20f3 {
-        format_up = "W: (%quality at %essid, %bitrate) %ip"
-        format_down = "W: down"
+wireless _first_ {
+        format_up = "  %ip (%quality at %essid, %bitrate)"
+        format_down = "睊"
 }
 
-ethernet eth0 {
-        format_up = "E: %ip (%speed)"
-        format_down = "🖧"
+ethernet _first_ {
+        format_up = " %ip (%speed)"
+        format_down = ""
 }
 
 battery 0 {
         format = "%status %percentage %remaining %emptytime"
-        format_down = "🔋No battery"
-        status_chr = "🔋⚡"
-        status_bat = "🔋"
-        status_unk = "🔋"
-        status_full = "🔋☻"
+        format_down = ""
+        status_chr = ""
+        status_bat = ""
+        status_unk = ""
+        status_full = ""
         path = "/sys/class/power_supply/BAT%d/uevent"
-        low_threshold = 10
+        threshold_type = time
+        low_threshold = 20
         integer_battery_capacity = true
 }
 
@@ -49,31 +48,34 @@ run_watch DHCP {
         pidfile = "/var/run/dhclient*.pid"
 }
 
-#run_watch VPNC {
-#        # file containing the PID of a vpnc process
-#        pidfile = "/var/run/vpnc/pid"
-#}
+run_watch VPNC {
+        # file containing the PID of a vpnc process
+        pidfile = "/var/run/vpnc/pid"
+        format_down = ""
+}
 
-#path_exists VPN {
-#        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
-#        path = "/proc/sys/net/ipv4/conf/tun0"
-#}
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
+        format_down = ""
+}
 
 tztime local {
-        format = "%Y-%m-%d %H:%M:%S"
+        format = " %Y-%m-%d %H:%M:%S"
 }
 
 load {
-        format = "🌞 %1min"
+        format = "Load: %1min"
         max_threshold = 4
-        format_above_threshold = "🌪: %1min"
+        format_above_threshold = "Load: %1min"
 }
 
+
 cpu_temperature 0 {
-        format = "%degrees °C"
+        format = " %degrees °C"
         path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"
         max_threshold = 75
-        format_above_threshold = "🔥 %degrees °C"
+        format_above_threshold = " %degrees °C"
 }
 
 #memory {
@@ -85,8 +87,8 @@ cpu_temperature 0 {
 disk "/" {
         threshold_type = percentage_free
         low_threshold = 20
-        format = "💾 %avail"
-        format_below_threshold = "💾 %percentage_avail"
+        format = " %avail"
+        format_below_threshold = " %percentage_avail"
 }
 
 #read_file uptime {

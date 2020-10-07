@@ -1,10 +1,3 @@
-# This file has been copied from the i3 keycodes based file and manually edited.
-# It will not be overwritten, so edit it as you like.
-#
-#
-#
-#
-
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
@@ -17,7 +10,9 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 20
+#font pango:DejaVu Sans Mono 14
+#font pango:DejaVu Sans Mono Nerd Font Complete 14
+font pango:Fira Code Regular Nerd Font Complete 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -35,7 +30,8 @@ bar {
     position bottom
     status_command i3status
 
-    font pango:DejaVu Sans Mono 12
+    #font pango:DejaVu Sans Mono 12
+    font pango:Fira Code Regular Nerd Font Complete 12
     separator_symbol "║"
 
     # Default colors
@@ -86,6 +82,33 @@ bar {
     bindsym button4 nop
     bindsym button5 nop
 }
+
+# Darkula colors:
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.background       #F8F8F2
+
+# Default colors:
+# class             border  backgr. text    indicator child_border
+# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
+# client.urgent       #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# client.background       #ffffff
+
+# Custom colors:
+# class             border  backgr. text    indicator child_border
+# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
+# client.urgent       #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# client.background       #ffffff
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -535,24 +558,6 @@ assign [title=".*IDEA"] 1
 assign [title=".*GoLand"] 1
 assign [title=".*DataGrip"] 2
 assign [title=".*Slack"] 3
-
-# Default colors:
-# class             border  backgr. text    indicator child_border
-# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
-# client.urgent       #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-# client.background       #ffffff
-
-# Custom colors:
-# class             border  backgr. text    indicator child_border
-# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
-# client.urgent       #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-# client.background       #ffffff
 
 # Other custom config
 no_focus [class="Slack"]
