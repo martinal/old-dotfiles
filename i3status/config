@@ -8,10 +8,11 @@ general {
   interval = 5
 }
 
-#order += "memory"
+order += "memory"
 order += "battery 0"
 order += "disk /"
 order += "cpu_temperature 0"
+order += "cpu_usage"
 order += "load"
 order += "run_watch DHCP"
 order += "run_watch VPNC"
@@ -65,6 +66,12 @@ path_exists VPN {
 
 tztime local {
         format = " %Y-%m-%d %H:%M:%S"
+}
+
+cpu_usage {
+    format = "CPU %usage"
+    max_threshold = 75
+    format_above_threshold = "CPU %usage!"
 }
 
 load {

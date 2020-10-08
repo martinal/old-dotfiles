@@ -157,7 +157,8 @@ sticky enable|disable|toggle
 workspace next_on_output
 workspace prev_on_output
 ...
-move container to output left|right|down|up|current|primary|<output> move workspace to output left|right|down|up|current|primary|<output>
+move container to output left|right|down|up|current|primary|<output>
+move workspace to output left|right|down|up|current|primary|<output>
 ...
 resize set width 62.5 ppt
 resize set width 37.5 ppt

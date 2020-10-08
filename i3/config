@@ -147,6 +147,12 @@ bindcode $mod+Shift+116 move down
 bindcode $mod+Shift+111 move up
 bindcode $mod+Shift+114 move right
 
+# move workspace to output (j,k,l,;)
+bindcode $mod+Ctrl+44 move workspace to output left
+bindcode $mod+Ctrl+45 move workspace to output down
+bindcode $mod+Ctrl+46 move workspace to output up
+bindcode $mod+Ctrl+47 move workspace to output right
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -485,6 +491,18 @@ mode "$mode_backlight" {
     bindsym k   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.8"
     bindsym l   exec --no-startup-id "xrandr --output $INTOUT --brightness 0.9"
     bindcode 47 exec --no-startup-id "xrandr --output $INTOUT --brightness 1.0"
+
+    # Other
+    bindsym z    exec --no-startup-id i3-other-brightness 0.1
+    bindsym x    exec --no-startup-id i3-other-brightness 0.2
+    bindsym c    exec --no-startup-id i3-other-brightness 0.3
+    bindsym v    exec --no-startup-id i3-other-brightness 0.4
+    bindsym b    exec --no-startup-id i3-other-brightness 0.5
+    bindsym n    exec --no-startup-id i3-other-brightness 0.6
+    bindsym m    exec --no-startup-id i3-other-brightness 0.7
+    bindcode 59  exec --no-startup-id i3-other-brightness 0.8
+    bindcode 60  exec --no-startup-id i3-other-brightness 0.9
+    bindcode 61  exec --no-startup-id i3-other-brightness 1.0
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
