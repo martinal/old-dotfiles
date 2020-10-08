@@ -70,7 +70,8 @@ bar {
         active_workspace   #282A36 #44475A #F8F8F2
         inactive_workspace #282A36 #282A36 #BFBFBF
         urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
+        #binding_mode       #FF5555 #FF5555 #F8F8F2  # this was hard to read
+        binding_mode       #FF5555 #EEEEEE #111111
     }
 
     # Hide by default, shows when holding Mod4 (Win)
