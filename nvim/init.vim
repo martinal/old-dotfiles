@@ -74,6 +74,7 @@ Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/nvim-treesitter/nvim-treesitter'
 
 " Go plugins
+" This one requires VIM 8.1:
 " Plug 'https://github.com/govim/govim'
 
 " SQL plugins
