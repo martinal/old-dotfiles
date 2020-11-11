@@ -1,5 +1,9 @@
 " --- :actionlist from GoLand:
 
+" "VimActions
+" "VimPluginToggle
+" "VimShortcutKeyAction
+
 " --- Basics:
 " "$Copy                                              <C-C> <C-Ins>
 " "$Cut                                               <C-X> <S-Del>
@@ -112,36 +116,6 @@
 " "ChangeSignature                                    <C-F6>
 " "ChangeSplitOrientation
 
-" "ChangesView.AddUnversioned                         <A-C-A>
-" "ChangesView.ApplyPatch
-" "ChangesView.ApplyPatchFromClipboard
-" "ChangesView.Browse
-" "ChangesView.CommitToolbar
-" "ChangesView.CreatePatch
-" "ChangesView.CreatePatchFromChanges
-" "ChangesView.CreatePatchToClipboard
-" "ChangesView.Diff                                   <C-D>
-" "ChangesView.Edit
-" "ChangesView.GroupBy
-" "ChangesView.GroupBy.Directory                      <A-C-P>
-" "ChangesView.GroupBy.Repository
-" "ChangesView.Move                                   <A-S-M>
-" "ChangesView.NewChangeList
-" "ChangesView.Refresh
-" "ChangesView.RemoveChangeList
-" "ChangesView.RemoveDeleted
-" "ChangesView.Rename                                 <F2> <S-F6>
-" "ChangesView.Revert                                 <A-C-Z>
-" "ChangesView.SetDefault                             <C- >
-" "ChangesView.Shelve
-" "ChangesView.ShelveSilently                         <C-S-H>
-" "ChangesView.ShowCommitOptions
-" "ChangesView.ToggleCommitUi                         <C-K>
-" "ChangesView.UnshelveSilently                       <A-C-U>
-" "ChangesView.ViewOptions
-" "ChangesViewPopupMenu
-" "ChangesViewToolbar
-
 " "ChangeTemplateDataLanguage
 " "ChangeView
 " "chart-demo
@@ -167,14 +141,6 @@
 " "CloseEditorsGroup
 " "CloseFirstNotification
 " "CloseProject
-
-" "CloudConfigAction
-" "CloudConfigActionGroup
-" "CloudConfigDisableAction
-" "CloudConfigPluginsAction
-" "CloudConfigSelfSettingsAction
-" "CloudConfigSilentlyAction
-" "CloudConfigUpdateApi
 
 " "CodeCleanup
 " "CodeCompletion                                     <C- >
@@ -225,138 +191,6 @@
 " "ConfigureEditorTabs
 " "ConfigureSoftWraps
 
-" "Console.Dialect.SpecificGroup
-" "Console.EditorTableResult.Group
-" "Console.Execute                                    <CR>
-" "Console.Execute.Multiline                          <C-CR>
-" "Console.History.Browse                             <A-C-E>
-" "Console.History.Next
-" "Console.History.Previous
-" "Console.HistoryActions
-
-" "Console.Jdbc.BrowseHistory                         <A-C-E>
-" "Console.Jdbc.ChooseSchema
-" "Console.Jdbc.ChooseSession
-" "Console.Jdbc.Common
-" "Console.Jdbc.Debug
-" "Console.Jdbc.Execute                               <C-CR>
-" "Console.Jdbc.Execute.2
-" "Console.Jdbc.Execute.3
-" "Console.Jdbc.ExplainAnalyse
-" "Console.Jdbc.ExplainAnalyse.Raw
-" "Console.Jdbc.ExplainGroup
-" "Console.Jdbc.ExplainPlan
-" "Console.Jdbc.ExplainPlan.Raw
-" "Console.Jdbc.Left
-" "Console.Jdbc.Right
-" "Console.Jdbc.RunContextGroup
-" "Console.Jdbc.Terminate                             <C-F2>
-" "Console.Jdbc.ToggleParameters
-" "Console.JdbcActions
-
-" "Console.Open                                       <C-S-F10>
-" "Console.Oracle.DbmsOutput                          <C-F8>
-" "Console.SplitLine                                  <C-CR>
-
-" "Console.TableResult.AddColumn                      <A-S-Ins>
-" "Console.TableResult.AddRow                         <A-Ins>
-" "Console.TableResult.Cancel                         <C-F2>
-" "Console.TableResult.CellEditor.Popup
-" "Console.TableResult.ChangeCellEditorFileEncoding
-" "Console.TableResult.ChangeCellEditorLanguage
-" "Console.TableResult.ChangeColumnLanguage
-" "Console.TableResult.ChangeIsolation
-" "Console.TableResult.ChangePageSize
-" "Console.TableResult.ChooseExtractor
-" "Console.TableResult.ChooseExtractor.Group
-" "Console.TableResult.CloneColumn                    <A-C-S-D>
-" "Console.TableResult.CloneRow                       <C-D>
-" "Console.TableResult.ColumnActions
-" "Console.TableResult.ColumnHeaderPopup
-" "Console.TableResult.ColumnsList                    <C-F12>
-" "Console.TableResult.ColumnSortAsc                  <A-S-Up>
-" "Console.TableResult.ColumnSortDesc                 <A-S-Down>
-" "Console.TableResult.ColumnSortingActions
-" "Console.TableResult.ColumnSortReset                <A-C-S-BS>
-" "Console.TableResult.ColumnVisibility               < >
-" "Console.TableResult.CompareCells                   <C-S-D>
-" "Console.TableResult.CompareWith
-" "Console.TableResult.Copy.Csv.Settings
-" "Console.TableResult.Copy.Csv.Settings.ForExport
-" "Console.TableResult.CountRows
-" "Console.TableResult.Csv.PopupGroup
-" "Console.TableResult.Csv.PreviewPopupGroup
-" "Console.TableResult.Data
-" "Console.TableResult.DeleteColumns                  <A-S-Del>
-" "Console.TableResult.DeleteRows                     <C-Y>
-" "Console.TableResult.DocumentTableHeader.AddColumn
-" "Console.TableResult.DocumentTableHeader.CloneColumn
-" "Console.TableResult.DocumentTableHeader.DeleteColumn
-" "Console.TableResult.EditFilterCriteria             <A-C-S-F>
-" "Console.TableResult.EditMaximized.Group
-" "Console.TableResult.EditMaximized.ToggleSoftWrap
-" "Console.TableResult.EditValue                      <F2> <CR> <A-CR>
-" "Console.TableResult.EditValueMaximized             <S-CR> <A-S-CR>
-" "Console.TableResult.ExportToClipboard
-" "Console.TableResult.Filter.Custom
-" "Console.TableResult.FindInGrid                     <C-F> <A-F3>
-" "Console.TableResult.FirstPage
-" "Console.TableResult.GoToGroup
-" "Console.TableResult.GoToScriptsDirectory
-" "Console.TableResult.Group
-" "Console.TableResult.Group.Common
-" "Console.TableResult.Group.Secondary
-" "Console.TableResult.Header.ChangeColumnLanguage
-" "Console.TableResult.HideColumn
-" "Console.TableResult.HideEditMaximized              <S-Esc>
-" "Console.TableResult.HideOtherColumns
-" "Console.TableResult.ImportTable
-" "Console.TableResult.LastPage
-" "Console.TableResult.LoadFile
-" "Console.TableResult.MaximizeEditingCell            <A-C-S-M>
-" "Console.TableResult.MutationsGroup
-" "Console.TableResult.NavigateAction                 <F4>
-" "Console.TableResult.NavigateExportedAction         <A-F7>
-" "Console.TableResult.NavigateForeignAction          <C-B> button=1 clickCount=1 modifiers=128
-" "Console.TableResult.NavigationAndEditing.Group
-" "Console.TableResult.NextPage                       <A-C-Down>
-" "Console.TableResult.Options
-" "Console.TableResult.PasteFormat
-" "Console.TableResult.PopupGroup
-" "Console.TableResult.PreviewDml
-" "Console.TableResult.PreviousPage                   <A-C-Up>
-" "Console.TableResult.Reload                         <C-F5>
-" "Console.TableResult.RenameTab
-" "Console.TableResult.ResetView
-" "Console.TableResult.RevertSelected                 <A-C-Z>
-" "Console.TableResult.SaveLobAs
-" "Console.TableResult.SelectRow                      <S- >
-" "Console.TableResult.SetDefault                     <A-C-D>
-" "Console.TableResult.SetNull                        <A-C-N>
-" "Console.TableResult.ShowDumpDialogAction
-" "Console.TableResult.ShowQuery
-" "Console.TableResult.SortToggle
-" "Console.TableResult.Submit                         <C-CR>
-" "Console.TableResult.SubmitAndCommit                <A-C-S-CR>
-" "Console.TableResult.ToggleFilters
-" "Console.TableResult.Transpose
-" "Console.TableResult.ViewAs
-" "Console.TableResult.ViewAsExtractor
-" "Console.TableResult.ViewAsTable
-" "Console.TableResult.ViewAsTreeTable
-
-" "Console.TabPopupGroup
-" "Console.TabPopupGroup.Embedded
-" "Console.Toggle.Notebook.Mode
-" "Console.Transaction
-" "Console.Transaction.Commit                         <A-C-S-CR>
-" "Console.Transaction.RevertAndRollback
-" "Console.Transaction.Rollback
-" "Console.Transaction.TxSettings
-" "ConsoleEditorPopupMenu
-" "ConsoleView.ClearAll
-" "ConsoleView.PopupMenu
-" "ConsoleView.ShowAsJsonAction
 
 " "ContextHelp                                        <F1>
 " "ConvertContentsToAttributeAction
@@ -399,86 +233,6 @@
 " "CreateRunConfiguration
 " "CreateWebProject
 " "CutCopyPasteGroup
-
-" "Database.Settings
-" "DatabaseView.AddActionGroup
-" "DatabaseView.AddActionGroupPopup
-" "DatabaseView.AddDataSourceFromPath
-" "DatabaseView.AddDataSourceFromThat
-" "DatabaseView.AddDataSourceFromUrl
-" "DatabaseView.AddDataSourceGroup
-" "DatabaseView.AddDataSourceHere
-" "DatabaseView.AddDriver
-" "DatabaseView.AddDriverAndDataSource
-" "DatabaseView.AddSchemasAction
-" "DatabaseView.AssignColor
-" "DatabaseView.BatchModifyIndices
-" "DatabaseView.CloseConnectionAction                 <C-F2>
-" "DatabaseView.CopyAction                            <C-D>
-" "DatabaseView.CopyDataSourceSettings
-" "DatabaseView.CopyDdlAction                         <A-C-S-G> <C-S-C>
-" "DatabaseView.CopyDdlFromDbAction
-" "DatabaseView.CopyTable                             <F5>
-" "DatabaseView.CreateDataSourceFromSettings
-" "DatabaseView.Ddl.AddColumn
-" "DatabaseView.Ddl.AddForeignKey
-" "DatabaseView.Ddl.AddIndex
-" "DatabaseView.Ddl.AddObject
-" "DatabaseView.Ddl.AddPrimaryKey
-" "DatabaseView.Ddl.AddTable
-" "DatabaseView.Ddl.AlterObject
-" "DatabaseView.Ddl.BatchAddIndices
-" "DatabaseView.Ddl.CommentOnObject
-" "DatabaseView.Ddl.DropForeignKey
-" "DatabaseView.Ddl.DropPrimaryKey
-" "DatabaseView.DebugRoutine
-" "DatabaseView.DropAction                            <Del>
-" "DatabaseView.Dump.Native
-" "DatabaseView.ExecuteRoutine
-" "DatabaseView.FilterAction
-" "DatabaseView.ForceRefresh                          <C-S-F5>
-" "DatabaseView.ForgetSchemaAction
-" "DatabaseView.FullTextSearch                        <A-C-S-F>
-" "DatabaseView.GoToScriptsDirectory
-" "DatabaseView.HideSchemasAction
-" "DatabaseView.Import
-" "DatabaseView.ImportDataSources
-" "DatabaseView.ImportFromSql
-" "DatabaseView.MoveToGroup                           <F6>
-" "DatabaseView.OpenDdlInConsole                      <A-C-S-B>
-" "DatabaseView.PropertiesAction                      <S-CR>
-" "DatabaseView.Refresh                               <C-F5>
-" "DatabaseView.Restore.Native
-" "DatabaseView.RunExtensionScriptGroup
-" "DatabaseView.Scripted.Extensions
-" "DatabaseView.ShowContentDiff
-" "DatabaseView.ShowDiff                              <C-D>
-" "DatabaseView.Sql.Scripts
-" "DatabaseView.SqlGenerator                          <A-C-G>
-" "DatabaseView.Tools                                 <A-CR>
-" "DatabaseView.Tools.PrepareIntrospectionDiagnostic
-" "DatabaseView.Tools.RecompileAction
-" "DatabaseView.Tools.RefreshMatViewAction
-" "DatabaseView.Tools.TruncateTableAction
-" "DatabaseViewPopupMenu
-" "DatabaseViewToolbar
-
-" "Debug                                              <S-F9>
-" "DebugClass
-" "Debugger.AddToWatch
-" "Debugger.CopyStack
-" "Debugger.EvaluateInConsole
-" "Debugger.FocusOnBreakpoint
-" "Debugger.MarkObject                                <F11>
-" "Debugger.RemoveAllBreakpoints
-" "Debugger.RemoveAllBreakpointsInFile
-" "Debugger.RestoreBreakpoint
-" "Debugger.ShowLibraryFrames
-" "Debugger.ShowReferring
-" "Debugger.Tree.EvaluateInConsole
-" "DebuggingActionsGroup
-" "DebugMainMenu
-" "DebugReloadGroup
 
 " "DecreaseColumnWidth                                <C-S-Left>
 " "DecrementWindowHeight                              <C-S-Up>
@@ -554,35 +308,6 @@
 " "DlvToggleThreadsAction
 " "DocCommentGutterIconContextMenu
 
-" "Docker.AddDockerConnection
-" "Docker.Filter
-" "Docker.FilterStoppedContainers
-" "Docker.FilterUntaggedImages
-" "Docker.RemoteServers.Attach2Container
-" "Docker.RemoteServers.CopyContainerId
-" "Docker.RemoteServers.CopyContainerImageId
-" "Docker.RemoteServers.CopyImageId
-" "Docker.RemoteServers.CreateContainer
-" "Docker.RemoteServers.DeleteContainer
-" "Docker.RemoteServers.DeleteImage
-" "Docker.RemoteServers.DownComposeApp
-" "Docker.RemoteServers.ExecInContainer
-" "Docker.RemoteServers.InspectContainerOrImage
-" "Docker.RemoteServers.PullImage
-" "Docker.RemoteServers.PushImage
-" "Docker.RemoteServers.ScaleComposeService
-" "Docker.RemoteServers.SelectContainerImage
-" "Docker.RemoteServers.ShowContainerLog
-" "Docker.RemoteServers.ShowContainerProcesses
-" "Docker.RemoteServers.StartComposeService
-" "Docker.RemoteServers.StartContainer
-" "Docker.RemoteServers.StopComposeApp
-" "Docker.RemoteServers.StopComposeService
-" "Docker.RemoteServers.StopContainer
-" "Docker.RemoteServersViewPopup
-" "Docker.RemoteServersViewToolbar
-" "Docker.RemoteServersViewToolbar.Top
-
 " "DockPinnedMode
 " "DockUnpinnedMode
 " "Document2XSD
@@ -625,7 +350,6 @@
 " "EditorBackSpace                                    <BS> <S-BS>
 " "EditorBackwardParagraph
 " "EditorBackwardParagraphWithSelection
-" "EditorBidiTextDirection
 " "EditorBreadcrumbsHideBoth
 " "EditorBreadcrumbsSettings
 " "EditorBreadcrumbsShowAbove
@@ -947,112 +671,8 @@
 " "GenerateGroup
 " "GeneratePattern
 " "GenerateXmlTag
-" "Git.Add                                            <A-C-A>
-" "Git.Branches                                       <C-S-À>
-" "Git.BranchOperationGroup
-" "Git.BrowseRepoAtRevision
-" "Git.Checkout.Branch
-" "Git.CheckoutGroup
-" "Git.CheckoutRevision
-" "Git.CherryPick.Abort
-" "Git.Clone
-" "Git.Commit.And.Push.Executor                       <A-C-K>
-" "Git.CompareWithBranch
-" "Git.Configure.Remotes
-" "Git.ContextMenu
-" "Git.CreateNewBranch
-" "Git.CreateNewTag
-" "Git.Drop.Commits
-" "Git.Fetch
-" "Git.FileHistory.ContextMenu
-" "Git.Fixup.To.Commit
-" "Git.Ignore.File
-" "Git.Init
-" "Git.Interactive.Rebase
-" "Git.Log
-" "Git.Log.ContextMenu
-" "Git.Log.ContextMenu.CheckoutBrowse
-" "Git.Log.DeepCompare
-" "Git.Log.Hide.Branches
-" "Git.Log.Toolbar
-" "Git.LogContextMenu
-" "Git.Menu
-" "Git.Merge
-" "Git.Merge.Abort
-" "Git.Ongoing.Rebase.Actions
-" "Git.OpenExcludeFile
-" "Git.Pull
-" "Git.Rebase
-" "Git.Rebase.Abort
-" "Git.Rebase.Continue
-" "Git.Rebase.Skip
-" "Git.Rename.Local.Branch                            <F2> <S-F6>
-" "Git.RepositoryContextMenu
-" "Git.Reset
-" "Git.Reset.In.Log
-" "Git.ResolveConflicts
-" "Git.Revert.Abort
-" "Git.Revert.In.Log
-" "Git.Reword.Commit                                  <F2> <S-F6>
-" "Git.SelectInGitLog
-" "Git.Squash.Commits
-" "Git.Squash.Into.Commit
-" "Git.Stage.Add                                      <A-C-A>
-" "Git.Stage.Refresh                                  <C-F5>
-" "Git.Stage.Reset                                    <A-C-Z>
-" "Git.Stage.Revert                                   <A-C-Z>
-" "Git.Stage.Toolbar
-" "Git.Stage.Tree.Menu
-" "Git.Stash
-" "Git.Tag
-" "Git.Uncommit
-" "Git.Unstash
-" "GitFileActions
-" "Github.Accounts.AddAccount
-" "Github.Accounts.AddGHAccount
-" "Github.Accounts.AddGHAccountWithToken
-" "Github.Accounts.AddGHEAccount
-" "Github.Create.Gist
-" "Github.Create.Pull.Request
-" "Github.Open.In.Browser
-" "Github.PullRequest.Branch.Create
-" "Github.PullRequest.Changes.Reload                  <C-F5>
-" "Github.PullRequest.Comments.Reload                 <C-F5>
-" "Github.PullRequest.Details.Popup
-" "Github.PullRequest.Details.Reload                  <C-F5>
-" "Github.PullRequest.List.Reload                     <C-F5>
-" "Github.PullRequest.Show
-" "Github.PullRequest.Timeline.Popup
-" "Github.PullRequest.Timeline.Show
-" "Github.PullRequest.Timeline.Update                 <C-F5>
-" "Github.PullRequest.ToolWindow.List.Popup
-" "Github.Rebase
-" "Github.Share
-" "Github.View.Pull.Request
-" "GitRepositoryActions
-" "Go.NewGoFile
-" "GoAddContentRootFromGopath
-" "GoCallHierarchyPopupMenu
-" "GoCallHierarchyPopupMenu.BaseOnThisDeclaration     <A-C-H>
-" "GoCoreDumpAction
-" "GoFmtFileAction                                    <A-C-S-F>
-" "GoFmtProjectAction                                 <A-C-S-P>
-" "GoGenerateConstructorAction
-" "GoGenerateFileAction                               <A-C-G>
-" "GoGenerateForStruct
-" "GoGenerateGetterAction
-" "GoGenerateGetterSetterAction
-" "GoGenerateSetterAction
-" "GoIdeNewProjectAction
-" "GoImportsFileAction
-" "GoMarkRootGroup
-" "GoOpenProjectFromGopath
-" "GoOpenSettings                                     <F4>
-" "GoRemoveContentRootAction
-" "GoReplayTraceAction
-" "GoShareInPlaygroundAction                          <A-C-S-S>
-" "GoTestGenerateGroup
-" "GotoAction                                         <C-S-A>
+
+
 " "GotoBookmark0                                      <C-0>
 " "GotoBookmark1                                      <C-1>
 " "GotoBookmark2                                      <C-2>
@@ -1063,6 +683,24 @@
 " "GotoBookmark7                                      <C-7>
 " "GotoBookmark8                                      <C-8>
 " "GotoBookmark9                                      <C-9>
+" "GotoNextBookmark
+" "GotoPreviousBookmark
+" "GutterMenuBookmarks
+" "ShowBookmarks                                      <S-F11>
+" "ToggleBookmark                                     <F11>
+" "ToggleBookmark0                                    <C-S-0>
+" "ToggleBookmark1                                    <C-S-1>
+" "ToggleBookmark2                                    <C-S-2>
+" "ToggleBookmark3                                    <C-S-3>
+" "ToggleBookmark4                                    <C-S-4>
+" "ToggleBookmark5                                    <C-S-5>
+" "ToggleBookmark6                                    <C-S-6>
+" "ToggleBookmark7                                    <C-S-7>
+" "ToggleBookmark8                                    <C-S-8>
+" "ToggleBookmark9                                    <C-S-9>
+" "ToggleBookmarkWithMnemonic                         <C-F11>
+
+" "GotoAction                                         <C-S-A>
 " "GotoChangedFile                                    <C-N>
 " "GoToChangeMarkerGroup
 " "GotoClass                                          <C-N>
@@ -1078,12 +716,10 @@
 " "GotoLine                                           <C-G>
 " "GoToLinkTarget
 " "GoToMenu
-" "GotoNextBookmark
 " "GotoNextElementUnderCaretUsage
 " "GotoNextError                                      <F2>
 " "GoTools
 " "GotoPrevElementUnderCaretUsage
-" "GotoPreviousBookmark
 " "GotoPreviousError                                  <S-F2>
 " "GotoRelated                                        <A-C-Home>
 " "GotoRow                                            <C-G>
@@ -1101,8 +737,7 @@
 " "GoToTargetEx
 " "GotoTest                                           <C-S-T>
 " "GotoTypeDeclaration                                <C-S-B> button=1 clickCount=1 modifiers=192
-" "GoTypeHierarchyPopupMenu
-" "GoVetFileAction
+
 " "Graph.ActualSize                                   <C-o> <C-/>
 " "Graph.ApplyCurrentLayout                           <F5>
 " "Graph.CommonLayoutGroup
@@ -1126,45 +761,11 @@
 " "Graph.ZoomIn                                       <k> <=>
 " "Graph.ZoomOut                                      <m> <->
 " "GridGeoViewer
-" "GutterMenuBookmarks
 " "Help.JetBrainsTV
 " "Help.KeymapReference
 " "HelpDiagnosticTools
 " "HelpMenu
 " "HelpTopics
-" "Hg.Commit.And.Push.Executor                        <A-C-K>
-" "Hg.Ignore.File
-" "Hg.Init
-" "Hg.Log.ContextMenu
-" "Hg.Mq
-" "Hg.MQ.Unapplied
-" "hg4idea.add                                        <A-C-A>
-" "hg4idea.branches
-" "hg4idea.CompareWithBranch
-" "hg4idea.CreateNewBranch
-" "hg4idea.CreateNewTag
-" "hg4idea.file.menu
-" "hg4idea.Graft.Continue
-" "hg4idea.merge.files
-" "hg4idea.MergeWithRevision
-" "hg4idea.mq.ShowUnAppliedPatches
-" "hg4idea.pull
-" "hg4idea.QDelete                                    <Del>
-" "hg4idea.QFinish
-" "hg4idea.QFold                                      <A-S-D>
-" "hg4idea.QGoto
-" "hg4idea.QGotoFromPatches                           <A-S-G>
-" "hg4idea.QImport
-" "hg4idea.QPushAction                                <A-S-P>
-" "hg4idea.QRefresh                                   <C-F5>
-" "hg4idea.QRename
-" "hg4idea.Rebase.Abort
-" "hg4idea.Rebase.Continue
-" "hg4idea.resolve.mark
-" "hg4idea.run.conflict.resolver
-" "hg4idea.tag
-" "hg4idea.updateTo
-" "hg4idea.UpdateToRevision
 " "HideActiveWindow                                   <S-Esc>
 " "HideAllWindows                                     <C-S-F12>
 " "HideCoverage
@@ -1749,7 +1350,6 @@
 " "ShowAnnotateOperationsPopupGroup
 " "ShowAppliedStylesAction
 " "ShowBlankDiffWindow
-" "ShowBookmarks                                      <S-F11>
 " "ShowColorPicker
 " "ShowContent                                        <A-Down>
 " "ShowErrorDescription                               <C-F1>
@@ -1794,23 +1394,9 @@
 " "SmRunTestGroup
 " "SplitHorizontally
 " "SplitVertically
-" "sql.ChangeDialect
-" "sql.ChangeDialect.toolbar
-" "Sql.EditParameter                                  <F4>
-" "sql.ExtractFunctionAction                          <A-C-M>
-" "sql.ExtractNamedQueryAction
-" "sql.IntroduceAliasAction
-" "sql.SelectCurrentStatement
-" "sql.SelectInDatabaseView
-" "SqlGenerateGroup
 " "StandardMacroActions
 " "Start.Use.Vcs
 " "StartStopMacroRecording
-" "StepInto                                           <F7>
-" "StepOut                                            <S-F8>
-" "StepOver                                           <F8>
-" "Stop                                               <C-F2>
-" "StopBackgroundProcesses                            <C-S-F2>
 " "StoreDefaultLayout
 " "StretchSplitToBottom
 " "StretchSplitToLeft
@@ -1878,18 +1464,6 @@
 " "TodoViewGroupByGroup
 " "TodoViewGroupByShowModules                         <A-C-M>
 " "TodoViewGroupByShowPackages                        <A-C-P>
-" "ToggleBookmark                                     <F11>
-" "ToggleBookmark0                                    <C-S-0>
-" "ToggleBookmark1                                    <C-S-1>
-" "ToggleBookmark2                                    <C-S-2>
-" "ToggleBookmark3                                    <C-S-3>
-" "ToggleBookmark4                                    <C-S-4>
-" "ToggleBookmark5                                    <C-S-5>
-" "ToggleBookmark6                                    <C-S-6>
-" "ToggleBookmark7                                    <C-S-7>
-" "ToggleBookmark8                                    <C-S-8>
-" "ToggleBookmark9                                    <C-S-9>
-" "ToggleBookmarkWithMnemonic                         <C-F11>
 " "ToggleBreakpointEnabled
 " "ToggleCompletionHintsAction
 " "ToggleContentUiTypeMode
@@ -1952,42 +1526,20 @@
 " "Tree-selectPreviousExtendSelection                 <S-Up>
 " "TreeActions
 " "TreeNodeExclusion
-" "TsLintFileFixAction
-" "TslintImportCodeStyleAction
 " "TW.MoveToGroup
 " "TW.ViewModeGroup
 " "TWViewModes
 " "TWViewModesLegacy
+
 " "TypeHierarchy                                      <C-H>
 " "TypeHierarchy.Class
 " "TypeHierarchy.Subtypes
 " "TypeHierarchy.Supertypes
 " "TypeHierarchyBase.BaseOnThisType                   <C-H>
 " "TypeHierarchyPopupMenu
-" "TypeScript.Enable.Service
-" "TypeScript.Include.Sources
-" "TypeScript.Restart.Service
-" "TypeScriptExtractTypeAlias
+
 " "UiDebugger
 " "UIToggleActions
-" "Uml.CollapseNodes                                  <C>
-" "UML.DefaultGraphPopup
-" "UML.EditorGroup
-" "Uml.ExpandNodes                                    <E>
-" "UML.Find                                           <C-F> <A-F3>
-" "UML.Group
-" "UML.Group.Simple
-" "Uml.NewElement                                     <A-Ins>
-" "Uml.NewGroup
-" "Uml.NodeCellEditorPopup
-" "Uml.NodeIntentions                                 <A-CR>
-" "Uml.PsiElement.Actions
-" "Uml.Refactoring
-" "UML.SaveDiagram
-" "UML.ShowChanges                                    <A-C-S-D>
-" "Uml.ShowDiff                                       <C-S-D>
-" "UML.ShowStructure                                  <C-F12>
-" "UML.SourceActionsGroup
 " "UndockMode
 " "UnmarkResourceRootDirectory
 " "UnmarkRoot
@@ -2017,121 +1569,9 @@
 " "UsageView.Rerun                                    <C-F5>
 " "UsageView.ShowRecentFindUsages                     <A-Down>
 " "ValidateXml
-" "Vcs.ApplySelectedChanges
-" "Vcs.Browse
-" "Vcs.CheckinProjectMenu
-" "Vcs.CheckinProjectToolbar
-" "Vcs.CherryPick
-" "Vcs.CommitExecutor.Actions
-" "Vcs.CopyRevisionNumberAction
-" "Vcs.Diff.ExcludeChangedLinesFromCommit
-" "Vcs.Diff.IncludeOnlyChangedLinesIntoCommit
-" "Vcs.EditSource                                     <F4>
-" "Vcs.FileHistory.ContextMenu
-" "Vcs.FileHistory.PresentationSettings
-" "Vcs.FileHistory.Toolbar
-" "Vcs.Force.Push
-" "Vcs.GetVersion
-" "Vcs.History
-" "Vcs.Import
-" "Vcs.IntegrateProject
-" "Vcs.KeymapGroup
-" "Vcs.Log.AlignLabels
-" "Vcs.Log.AnnotateRevisionAction
-" "Vcs.Log.ChangesBrowser.Popup
-" "Vcs.Log.ChangesBrowser.Toolbar
-" "Vcs.Log.CollapseAll
-" "Vcs.Log.CompactReferencesView
-" "Vcs.Log.CompareRevisions
-" "Vcs.Log.ContextMenu
-" "Vcs.Log.Diff.Preview.Location
-" "Vcs.Log.EnableFilterByRegexAction
-" "Vcs.Log.ExpandAll
-" "Vcs.Log.FocusTextFilter                            <C-L>
-" "Vcs.Log.GetVersion
-" "Vcs.Log.GoToChild                                  <Left>
-" "Vcs.Log.GoToParent                                 <Right>
-" "Vcs.Log.GoToRef                                    <C-F> <A-F3>
-" "Vcs.Log.HighlightersActionGroup
-" "Vcs.Log.IntelliSortChooser
-" "Vcs.Log.LayoutConfiguration
-" "Vcs.Log.MatchCaseAction
-" "Vcs.Log.MoveDiffPreviewToBottom
-" "Vcs.Log.MoveDiffPreviewToRight
-" "Vcs.Log.OpenAnotherTab
-" "Vcs.Log.OpenRepositoryVersion
-" "Vcs.Log.PreferCommitDate
-" "Vcs.Log.PresentationSettings
-" "Vcs.Log.Refresh                                    <C-F5>
-" "Vcs.Log.ResumeIndexing
-" "Vcs.Log.ShowAllAffected                            <A-S-A>
-" "Vcs.Log.ShowChangesFromParents
-" "Vcs.Log.ShowDetailsAction
-" "Vcs.Log.ShowDiffPreview
-" "Vcs.Log.ShowLongEdges
-" "Vcs.Log.ShowOnlyAffectedChanges
-" "Vcs.Log.ShowOtherBranches
-" "Vcs.Log.ShowRootsColumnAction
-" "Vcs.Log.ShowTagNames
-" "Vcs.Log.ShowTooltip                                <C-Q> button=2 clickCount=1 modifiers=512
-" "Vcs.Log.TextFilterSettings
-" "Vcs.Log.ToggleColumns
-" "Vcs.Log.Toolbar
-" "Vcs.Log.Toolbar.Internal
-" "Vcs.Log.Toolbar.RightCorner
-" "Vcs.MessageActionGroup
-" "Vcs.MoveChangedLinesToChangelist                   <A-S-M>
-" "Vcs.OpenRepositoryVersion
-" "Vcs.Operations.Popup
-" "Vcs.Operations.Popup.Annotate
-" "Vcs.Operations.Popup.NonVcsAware
-" "Vcs.Operations.Popup.Vcs.Providers
-" "Vcs.Operations.Popup.VcsAware
-" "Vcs.Operations.Popup.VcsNameSeparator
-" "Vcs.Push                                           <C-S-K>
-" "Vcs.Push.Actions
-" "Vcs.QuickListPopupAction                           <A-À>
-" "Vcs.ReformatCommitMessage                          <A-C-L>
-" "Vcs.RefreshFileHistory                             <C-F5>
-" "Vcs.RefreshStatuses
-" "Vcs.RepositoryChangesBrowserMenu
-" "Vcs.RepositoryChangesBrowserToolbar
-" "Vcs.RevertSelectedChanges
-" "Vcs.RollbackChangedLines                           <A-C-Z>
-" "Vcs.Show.Local.Changes
-" "Vcs.Show.Log
-" "Vcs.Show.Shelf
-" "Vcs.Show.Toolwindow.Tab
-" "Vcs.ShowDiffWithLocal
-" "Vcs.ShowDiffWithLocal.Before
-" "Vcs.ShowHistoryForBlock
-" "Vcs.ShowHistoryForRevision
-" "Vcs.ShowMessageHistory                             <C-M> <C-E>
-" "Vcs.ShowTabbedFileHistory
-" "Vcs.Specific
-" "Vcs.ToggleAmendCommitMode                          <A-M>
-" "Vcs.UpdateProject                                  <C-T>
-" "Vcs.VcsClone
-" "VcsFileGroupPopup
-" "VcsGeneral.KeymapGroup
-" "VcsGlobalGroup
-" "VcsGroup
-" "VcsGroups
-" "VcsHistory.ShowAllAffected                         <A-S-A>
-" "VcsHistoryActionsGroup
-" "VcsHistoryActionsGroup.Toolbar
-" "VcsHistoryInternalGroup.Popup
-" "VcsHistoryInternalGroup.Toolbar
-" "VcsNavBarToobarActions
-" "VcsSelectionHistoryDialog.Popup
-" "VcsShowCurrentChangeMarker
-" "VcsShowNextChangeMarker                            <A-C-S-Down>
-" "VcsShowPrevChangeMarker                            <A-C-S-Up>
-" "VcsToobarActions
-" "VcsToolbarLabelAction
-" "VcsTouchBarGroup
-" "VersionControlsGroup
+
 " "Vgo.NewGoModFile
+
 " "ViewAppearanceGroup
 " "ViewBreakpoints                                    <C-S-F8>
 " "ViewImportPopups
@@ -2147,9 +1587,7 @@
 " "ViewStatusBarWidgetsGroup
 " "ViewToolBar
 " "ViewToolButtons
-" "VimActions
-" "VimPluginToggle
-" "VimShortcutKeyAction
+
 " "VisualizeSourceMap
 " "WD.UploadCurrentRemoteFileAction                   <A-S-Q>
 " "WebDeployment.BrowseServers
@@ -2159,75 +1597,9 @@
 " "WebOpenInAction                                    <A-F2>
 " "WebServicesPlugin.CreateRESTClient
 " "WeighingNewGroup
-" "WelcomeScreen.ChangeProjectIcon
-" "WelcomeScreen.Configure
-" "WelcomeScreen.Configure.CollectZippedLogs
-" "WelcomeScreen.Configure.DesktopEntry
-" "WelcomeScreen.Configure.Export
-" "WelcomeScreen.Configure.Import
-" "WelcomeScreen.Configure.Properties
-" "WelcomeScreen.Configure.RestoreDefault
-" "WelcomeScreen.Configure.VMOptions
-" "WelcomeScreen.CopyProjectPath                      <C-S-C>
-" "WelcomeScreen.CreateDirectoryProject
-" "WelcomeScreen.CreateWebProject
-" "WelcomeScreen.Documentation
-" "WelcomeScreen.EditGroup
-" "WelcomeScreen.ManageLicense
-" "WelcomeScreen.MoveToGroup
-" "WelcomeScreen.NewGroup
-" "WelcomeScreen.OpenDirectoryProject
-" "WelcomeScreen.OpenSelected
-" "WelcomeScreen.Platform.NewProject
-" "WelcomeScreen.Plugins
-" "WelcomeScreen.QuickStart
-" "WelcomeScreen.QuickStart.Platform
-" "WelcomeScreen.RemoveSelected
-" "WelcomeScreen.Settings
-" "WelcomeScreen.Update
 " "WelcomeScreenRecentProjectActionGroup
 " "WindowMenu
 " "WindowMode
 " "WrapTagAction
 " "WrapTagContentsAction
-" "XDebugger.Actions
-" "XDebugger.AttachGroup
-" "XDebugger.AttachToProcess                          <A-C-5>
-" "XDebugger.CompareValueWithClipboard
-" "XDebugger.CopyName
-" "XDebugger.CopyValue                                <C-C> <C-Ins>
-" "XDebugger.CopyWatch                                <C-D>
-" "XDebugger.EditWatch                                <F2>
-" "XDebugger.Evaluate.Code.Fragment.Editor.Popup
-" "XDebugger.Evaluation.Dialog.Tree.Popup
-" "XDebugger.Frames.TopToolbar
-" "XDebugger.Frames.Tree.Popup
-" "XDebugger.Inline
-" "XDebugger.Inspect
-" "XDebugger.Inspect.Tree.Popup
-" "XDebugger.JumpToSource                             <F4>
-" "XDebugger.JumpToTypeSource                         <S-F4>
-" "XDebugger.MoveWatchDown                            <A-S-Down>
-" "XDebugger.MoveWatchUp                              <A-S-Up>
-" "XDebugger.MuteBreakpoints
-" "XDebugger.NewWatch                                 <Ins>
-" "XDebugger.PinToTop
-" "XDebugger.RemoveAllWatches
-" "XDebugger.RemoveWatch                              <Del>
-" "XDebugger.Settings
-" "XDebugger.SetValue                                 <F2>
-" "XDebugger.SwitchWatchesInVariables
-" "XDebugger.ToggleSortValues
-" "XDebugger.ToolWindow.LeftToolbar
-" "XDebugger.ToolWindow.TopToolbar
-" "XDebugger.UnmuteOnStop
-" "XDebugger.ValueGroup
-" "XDebugger.ValueGroup.CopyJson
-" "XDebugger.Variables.Tree.Popup
-" "XDebugger.Variables.Tree.Toolbar
-" "XDebugger.Watches.Tree.Popup
-" "XDebugger.Watches.Tree.Toolbar
-" "XmlGenerateToolsGroup
-" "XMLRefactoringMenu
-" "XSD2Document
 " "ZoomCurrentWindow
