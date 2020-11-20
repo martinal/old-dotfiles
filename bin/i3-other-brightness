@@ -1,0 +1,5 @@
+#!/bin/bash
+B=$1
+notify-send "Should be setting brightness to $B"
+echo $B > ~/dotfiles/br.txt
+#python3 lights.py 12,13 on true bri 220 ct 420
