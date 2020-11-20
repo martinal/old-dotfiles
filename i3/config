@@ -16,6 +16,7 @@ set $ws8 "08"
 set $ws9 "09"
 set $wsX "10"
 
+
 #################### FONTS #################### 
 
 set $FONTSIZE 14
@@ -25,10 +26,19 @@ set $FONTSIZE 14
 font pango:Fira Code Regular Nerd Font Complete $FONTSIZE
 
 
-#################### FONTS #################### 
+#################### GENERIC BEHAVIOUR #################### 
+
+# I want my focus stable and without surprises
+focus_follows_mouse no
+workspace_auto_back_and_forth yes
+mouse_warping none
+focus_on_window_activation urgent
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+
+#################### KEYBINDINGS #################### 
 
 # TODO: Detect home screen and run home randr script
 # grep HDMI[^ \t]* connected [\d]+x([\d]+)
@@ -36,7 +46,6 @@ floating_modifier $mod
 # TODO: Use scratchpad feature for nvim instance?
 # bindsym grave scratchpad show
 # bindsym $mod+grave move scratchpad
-
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -522,10 +531,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# I want my focus stable and without surprises
-focus_follows_mouse no
-workspace_auto_back_and_forth no
-
 
 #################### Program specific rules #################### 
 
@@ -613,35 +618,12 @@ client.background       #ffffff
 # i3bar config (see also i3status config file)
 bindsym $mod+Control+b bar mode toggle
 bar {
-    position bottom
+    position top
     status_command i3status
 
     #font pango:DejaVu Sans Mono $FONTSIZE
     font pango:Fira Code Regular Nerd Font Complete $FONTSIZE
     separator_symbol "║"
-
-    # grayscale theme
-#    colors {
-#        # bar background
-#        background #222222
-#        # bar text
-#        statusline #eeeeee
-#        # block separator
-#        separator  #777777
-#
-#        #                   border  backgr. text
-#        # Active on current display:
-#        focused_workspace   #000000 #cccccc #222222
-#        # Active on other display:
-#        active_workspace    #000000 #cccccc #222222
-#        # Inactive on any display:
-#        inactive_workspace  #000000 #222222 #cccccc
-#        # Nagging window
-#        urgent_workspace    #ccaaaa #331111 #ffdddd
-#
-#        # i3 mode menus
-#        binding_mode        #000000 #eeeeee #222222
-#    }
 
     # gruvbox color scheme
 	colors {
@@ -649,6 +631,9 @@ bar {
 		background #3c3836
 		statusline #ebdbb2
 		separator  #666666
+		focused_background #3c3836
+		focused_statusline #ebdbb2
+		focused_separator  #666666
 
 		focused_workspace  #458588 #458588 #ebdbb2
 		active_workspace   #83a598 #83a598 #ebdbb2
@@ -660,11 +645,18 @@ bar {
 	}
 
     # Hide by default, shows when holding Mod4 (Win)
-    #mode hide
-    #hidden_state hide
+    mode hide
+    hidden_state hide
     modifier Mod4
 
     # Disable scroll wheel switches workspace
     bindsym button4 nop
     bindsym button5 nop
+
+    # disable clicking on workspace buttons
+    #bindsym button1 nop
+    # Take a screenshot by right clicking on the bar
+    bindsym --release button3 exec --no-startup-id import $HOME/screenshot-$(date +%Y-%m-%d--%H-%M-%S).png
+    # execute custom script when scrolling downwards
+    #bindsym button5 exec ~/.i3/scripts/custom_wheel_down
 }
