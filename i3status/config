@@ -1,10 +1,9 @@
-# Darkula colors
 general {
   output_format = "i3bar"
   colors = true
-  color_good = "#50FA7B"
-  color_degraded = "#F1FA8C"
-  color_bad = "#FF5555"
+  color_good = "#eeeeee"
+  color_degraded = "#dddd88"
+  color_bad = "#ee5544"
   interval = 5
 }
 
@@ -88,11 +87,11 @@ cpu_temperature 0 {
         format_above_threshold = " %degrees °C"
 }
 
-#memory {
-#        format = "%used"
-#        threshold_degraded = "10%"
-#        format_degraded = "MEMORY: %free"
-#}
+memory {
+        format = "U: %used F: %free"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
 
 disk "/" {
         threshold_type = percentage_free

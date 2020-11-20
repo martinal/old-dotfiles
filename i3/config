@@ -4,113 +4,39 @@
 
 set $mod Mod4
 
+# workspace names
+set $ws1 "01"
+set $ws2 "02"
+set $ws3 "03"
+set $ws4 "04"
+set $ws5 "05"
+set $ws6 "06"
+set $ws7 "07"
+set $ws8 "08"
+set $ws9 "09"
+set $wsX "10"
+
+#################### FONTS #################### 
+
 set $FONTSIZE 14
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-#font pango:monospace 10
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 14
-#font pango:DejaVu Sans Mono Nerd Font Complete 14
 font pango:Fira Code Regular Nerd Font Complete $FONTSIZE
 
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+
+#################### FONTS #################### 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Start i3bar to display a workspace bar
-# (plus the system information i3status finds out, if available)
-bar {
-    position bottom
-    status_command i3status
+# TODO: Detect home screen and run home randr script
+# grep HDMI[^ \t]* connected [\d]+x([\d]+)
 
-    #font pango:DejaVu Sans Mono $FONTSIZE
-    font pango:Fira Code Regular Nerd Font Complete $FONTSIZE
-    separator_symbol "║"
+# TODO: Use scratchpad feature for nvim instance?
+# bindsym grave scratchpad show
+# bindsym $mod+grave move scratchpad
 
-    # Default colors
-#   colors {
-#       background #000000
-#       statusline #ffffff
-#       separator #666666
-#       # <colorclass> <border> <background> <text>
-#       focused_workspace  #4c7899 #285577 #ffffff
-#       active_workspace   #333333 #5f676a #ffffff
-#       inactive_workspace #333333 #222222 #888888
-#       urgent_workspace   #2f343a #900000 #ffffff
-#       binding_mode       #2f343a #900000 #ffffff
-#   }
-
-    # Custom colors
-#   colors {
-#       background #111111
-#       statusline #eeeeee
-#       separator #0044aa
-#       # <colorclass> <border> <background> <text>
-#       focused_workspace  #0044aa #0044aa #ffffff
-#       active_workspace   #0044aa #003388 #888888
-#       inactive_workspace #0044aa #222222 #888888
-#       urgent_workspace   #0044aa #771018 #888888
-#       binding_mode       #0044aa #083a08 #ffffff
-#   }
-
-    # Darkula colors:
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
-        # <colorclass> <border> <background> <text>
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        #binding_mode       #FF5555 #FF5555 #F8F8F2  # this was hard to read
-        binding_mode       #FF5555 #EEEEEE #111111
-    }
-
-    # Hide by default, shows when holding Mod4 (Win)
-    #mode hide
-    #hidden_state hide
-    #modifier Mod4
-
-    # Disable scroll wheel switches workspace
-    bindsym button4 nop
-    bindsym button5 nop
-}
-
-# Darkula colors:
-# class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-client.background       #F8F8F2
-
-# Default colors:
-# class             border  backgr. text    indicator child_border
-# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
-# client.urgent       #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-# client.background       #ffffff
-
-# Custom colors:
-# class             border  backgr. text    indicator child_border
-# client.focused      #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused    #333333 #222222 #888888 #292d2e   #222222
-# client.urgent       #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-# client.background       #ffffff
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -119,11 +45,13 @@ bindsym $mod+Shift+Return exec --no-startup-id zsh
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# Start dmenu any-path menu with Darkula colors
-bindsym $mod+d exec "dmenu_run -nf '#F7F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-$FONTSIZE' -p 'Path search -❯' -l 10"
-
-# Start dmenu .desktop app menu with Darkula colors
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu_run -i -nf '#F7F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-$FONTSIZE' -p 'Desktop apps search -❯' -l 10"
+# Open rofi menus (theming in rofi config)
+# path search menu
+bindsym $mod+d exec "rofi -dmenu -p 'Path search -❯' -l 10"
+# .desktop app menu
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu="rofi -dmenu -i -p 'Desktop apps search -❯' -l 10"
+# window switcher menu
+bindsym $mod+Tab exec "rofi -show"
 
 # change focus (j,k,l,;)
 bindcode $mod+44 focus left
@@ -155,6 +83,10 @@ bindcode $mod+Ctrl+45 move workspace to output down
 bindcode $mod+Ctrl+46 move workspace to output up
 bindcode $mod+Ctrl+47 move workspace to output right
 
+# TODO:
+#bindsym $mod+Ctrl+Right workspace next
+#bindsym $mod+Ctrl+Left workspace prev
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -176,8 +108,6 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # TODO: Floating mode
-# focus mode_toggle
-# floating toggle
 # sticky toggle
 # move position center
 # resize set 640 480 px, move position center
@@ -198,40 +128,40 @@ bindsym $mod+p focus child
 # For argument use "numpad" m,.jkluiop as well as regular number row
 
 # switch to workspace (1=10,9=19)
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $wsX
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $wsX
 
 # rename current workspace to other number
-bindsym $mod+Ctrl+1 rename workspace to 1
-bindsym $mod+Ctrl+2 rename workspace to 2
-bindsym $mod+Ctrl+3 rename workspace to 3
-bindsym $mod+Ctrl+4 rename workspace to 4
-bindsym $mod+Ctrl+5 rename workspace to 5
-bindsym $mod+Ctrl+6 rename workspace to 6
-bindsym $mod+Ctrl+7 rename workspace to 7
-bindsym $mod+Ctrl+8 rename workspace to 8
-bindsym $mod+Ctrl+9 rename workspace to 9
-bindsym $mod+Ctrl+0 rename workspace to 10
+bindsym $mod+Ctrl+1 rename workspace to $ws1
+bindsym $mod+Ctrl+2 rename workspace to $ws2
+bindsym $mod+Ctrl+3 rename workspace to $ws3
+bindsym $mod+Ctrl+4 rename workspace to $ws4
+bindsym $mod+Ctrl+5 rename workspace to $ws5
+bindsym $mod+Ctrl+6 rename workspace to $ws6
+bindsym $mod+Ctrl+7 rename workspace to $ws7
+bindsym $mod+Ctrl+8 rename workspace to $ws8
+bindsym $mod+Ctrl+9 rename workspace to $ws9
+bindsym $mod+Ctrl+0 rename workspace to $wsX
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -240,45 +170,44 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-
 # Switch workspace
 set $mode_workspaces Switch workspace: a...;  |  Move window to workspace: q...p  |  (enter or escape to close)
 mode "$mode_workspaces" {
     # switch to workspace (1=10,9=19)
-    bindsym a workspace 1, mode "default"
-    bindsym s workspace 2, mode "default"
-    bindsym d workspace 3, mode "default"
-    bindsym f workspace 4, mode "default"
-    bindsym g workspace 5, mode "default"
-    bindsym h workspace 6, mode "default"
-    bindsym j workspace 7, mode "default"
-    bindsym k workspace 8, mode "default"
-    bindsym l workspace 9, mode "default"
-    bindcode 47 workspace 10, mode "default"
+    bindsym a    workspace $ws1, mode "default"
+    bindsym s    workspace $ws2, mode "default"
+    bindsym d    workspace $ws3, mode "default"
+    bindsym f    workspace $ws4, mode "default"
+    bindsym g    workspace $ws5, mode "default"
+    bindsym h    workspace $ws6, mode "default"
+    bindsym j    workspace $ws7, mode "default"
+    bindsym k    workspace $ws8, mode "default"
+    bindsym l    workspace $ws9, mode "default"
+    bindcode 47  workspace $wsX, mode "default"
  
     # move focused container to workspace
-    bindsym q move container to workspace 1, mode "default"
-    bindsym w move container to workspace 2, mode "default"
-    bindsym e move container to workspace 3, mode "default"
-    bindsym r move container to workspace 4, mode "default"
-    bindsym t move container to workspace 5, mode "default"
-    bindsym y move container to workspace 6, mode "default"
-    bindsym u move container to workspace 7, mode "default"
-    bindsym i move container to workspace 8, mode "default"
-    bindsym o move container to workspace 9, mode "default"
-    bindsym p move container to workspace 10, mode "default"
+    bindsym q move container to workspace $ws1, mode "default"
+    bindsym w move container to workspace $ws2, mode "default"
+    bindsym e move container to workspace $ws3, mode "default"
+    bindsym r move container to workspace $ws4, mode "default"
+    bindsym t move container to workspace $ws5, mode "default"
+    bindsym y move container to workspace $ws6, mode "default"
+    bindsym u move container to workspace $ws7, mode "default"
+    bindsym i move container to workspace $ws8, mode "default"
+    bindsym o move container to workspace $ws9, mode "default"
+    bindsym p move container to workspace $wsX, mode "default"
 
     # move focused container to workspace and follow
-    bindsym z move container to workspace 1,  workspace 1,  mode "default"
-    bindsym x move container to workspace 2,  workspace 2,  mode "default"
-    bindsym c move container to workspace 3,  workspace 3,  mode "default"
-    bindsym v move container to workspace 4,  workspace 4,  mode "default"
-    bindsym b move container to workspace 5,  workspace 5,  mode "default"
-    bindsym n move container to workspace 6,  workspace 6,  mode "default"
-    bindsym m move container to workspace 7,  workspace 7,  mode "default"
-    #bindsym , move container to workspace 8,  workspace 8,  mode "default"
-    #bindsym . move container to workspace 9,  workspace 9,  mode "default"
-    #bindsym / move container to workspace 10, workspace 10, mode "default"
+    bindsym z move container to workspace $ws1,  workspace $ws1,  mode "default"
+    bindsym x move container to workspace $ws2,  workspace $ws2,  mode "default"
+    bindsym c move container to workspace $ws3,  workspace $ws3,  mode "default"
+    bindsym v move container to workspace $ws4,  workspace $ws4,  mode "default"
+    bindsym b move container to workspace $ws5,  workspace $ws5,  mode "default"
+    bindsym n move container to workspace $ws6,  workspace $ws6,  mode "default"
+    bindsym m move container to workspace $ws7,  workspace $ws7,  mode "default"
+    #bindsym , move container to workspace $ws8,  workspace $ws8,  mode "default"
+    #bindsym . move container to workspace $ws9,  workspace $ws9,  mode "default"
+    #bindsym / move container to workspace $wsX,  workspace $wsX,  mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -593,18 +522,149 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Assign to workspaces
-assign [title=".*IDEA"] 1
-assign [title=".*GoLand"] 1
-assign [title=".*DataGrip"] 2
-assign [title=".*Slack"] 3
-
-# Other custom config
-no_focus [class="Slack"]
-no_focus [class="slack"]
-# no_focus [class="jetbrains-idea"]
-# no_focus [class="sun-awt-X11-XDialogPeer"]
-
+# I want my focus stable and without surprises
 focus_follows_mouse no
 workspace_auto_back_and_forth no
 
+
+#################### Program specific rules #################### 
+
+# Assign to workspaces
+assign [class="Gnome-terminal" window_role="main"] $ws1
+assign [class="Gnome-terminal" window_role="background"] $ws1
+assign [class="jetbrains-goland"] $ws2
+assign [class="jetbrains-datagrip"] $ws3
+assign [class="Slack"] $ws4
+assign [class="Google-chrome"] $ws5
+assign [class="Microsoft Teams*"] $ws9
+
+# Make sure popup windows float
+for_window [title="Microsoft Teams Notification"] floating enable
+
+# Tag windows
+for_window [class="Gnome-terminal" window_role="main"] mark --add x
+for_window [class="Gnome-terminal" window_role="background"] mark --add b
+for_window [class="jetbrains-goland"] mark --add g
+for_window [class="jetbrains-datagrip"] mark --add d
+for_window [class="Slack"] mark --add s
+for_window [class="Google-chrome"] mark --add c
+for_window [class="Microsoft Teams*"] mark --add t
+for_window [class="Workrave"] mark --add w
+
+# Startup software
+# TODO: Move execs to a script run with gnome-terminal that can be aborted before it does anything
+exec --no-startup-id google-chrome
+exec --no-startup-id gnome-terminal --role="main" --working-directory=$HOME/vippsas/vaam -x startupvaam
+exec --no-startup-id gnome-terminal --role="background" --working-directory=$HOME/vippsas/datagrip-aad
+exec --no-startup-id goland
+exec --no-startup-id datagrip
+exec --no-startup-id slack
+exec --no-startup-id teams
+exec --no-startup-id workrave
+
+# Stop autofocus shenigans
+no_focus [class="Gnome-terminal" window_role="main"]
+no_focus [class="Gnome-terminal" window_role="background"]
+no_focus [class="jetbrains-goland"]
+no_focus [class="jetbrains-datagrip"]
+no_focus [class="Slack"]
+no_focus [class="Google-chrome"]
+no_focus [class="Microsoft Teams*"]
+no_focus [class="Workrave"]
+
+
+#################### THEMING #################### 
+
+
+# Why borders...
+hide_edge_borders both
+default_border none
+default_floating_border pixel 2
+
+title_align center
+
+# TODO: Move this to .Xresources for reuse with terminal etc
+# name some colors
+set $red       #cc0000
+set $green     #00cc00
+set $blue      #0000cc
+set $yellow    #00cccc
+set $darkred       #440000
+set $darkgreen     #004400
+set $darkblue      #000044
+set $darkyellow    #004444
+
+# class                |border   |backgr   |text     |indicator |child_border
+#lient.focused          #000000   #666666   #eeeeee   #ffffff    #888888
+#lient.focused_inactive #000000   #444444   #aaaaaa   #ffffff    #666666
+#lient.unfocused        #000000   #222222   #888888   #ffffff    #444444
+#lient.placeholder      #000000   #111111   #666666   #ffffff    #222222
+#lient.urgent           #ff0000   #eeeeee   #333333   #ffffff    #777777
+#lient.background       #000000
+
+# gruvbox theme
+client.focused          #665c54 #665c54 #eddbb2 #2e9ef4   #665c54
+client.focused_inactive #282828 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #3c3836 #3c3836 #a89984 #292d2e   #222222
+client.urgent           #cc241d #cc241d #ebdbb2 #cc241d   #cc241d
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
+
+# i3bar config (see also i3status config file)
+bindsym $mod+Control+b bar mode toggle
+bar {
+    position bottom
+    status_command i3status
+
+    #font pango:DejaVu Sans Mono $FONTSIZE
+    font pango:Fira Code Regular Nerd Font Complete $FONTSIZE
+    separator_symbol "║"
+
+    # grayscale theme
+#    colors {
+#        # bar background
+#        background #222222
+#        # bar text
+#        statusline #eeeeee
+#        # block separator
+#        separator  #777777
+#
+#        #                   border  backgr. text
+#        # Active on current display:
+#        focused_workspace   #000000 #cccccc #222222
+#        # Active on other display:
+#        active_workspace    #000000 #cccccc #222222
+#        # Inactive on any display:
+#        inactive_workspace  #000000 #222222 #cccccc
+#        # Nagging window
+#        urgent_workspace    #ccaaaa #331111 #ffdddd
+#
+#        # i3 mode menus
+#        binding_mode        #000000 #eeeeee #222222
+#    }
+
+    # gruvbox color scheme
+	colors {
+		# Whole color settings
+		background #3c3836
+		statusline #ebdbb2
+		separator  #666666
+
+		focused_workspace  #458588 #458588 #ebdbb2
+		active_workspace   #83a598 #83a598 #ebdbb2
+		inactive_workspace #504945 #504945 #ebdbb2
+		urgent_workspace   #cc241d #cc241d #504945
+
+        # i3 mode menus
+		binding_mode       #458588 #458588 #ebdbb2
+	}
+
+    # Hide by default, shows when holding Mod4 (Win)
+    #mode hide
+    #hidden_state hide
+    modifier Mod4
+
+    # Disable scroll wheel switches workspace
+    bindsym button4 nop
+    bindsym button5 nop
+}
