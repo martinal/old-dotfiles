@@ -1,0 +1,71 @@
+[
+  {
+    "name": "battery",
+    "instance": "/sys/class/power_supply/BAT0/uevent",
+    "markup": "none",
+    "full_text": " 104%"
+  },
+  {
+    "name": "disk_info",
+    "instance": "/",
+    "markup": "none",
+    "full_text": " 186,7 GiB"
+  },
+  {
+    "name": "cpu_temperature",
+    "instance": "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input",
+    "markup": "none",
+    "full_text": " 49 °C"
+  },
+  {
+    "name": "cpu_usage",
+    "markup": "none",
+    "full_text": "CPU 03%"
+  },
+  {
+    "name": "load",
+    "markup": "none",
+    "full_text": "Load: 1,31"
+  },
+  {
+    "name": "run_watch",
+    "instance": "/var/run/dhclient*.pid",
+    "color": "#50FA7B",
+    "markup": "none",
+    "full_text": "DHCP"
+  },
+  {
+    "name": "run_watch",
+    "instance": "/var/run/vpnc/pid",
+    "color": "#FF5555",
+    "markup": "none",
+    "full_text": ""
+  },
+  {
+    "name": "path_exists",
+    "instance": "/proc/sys/net/ipv4/conf/tun0",
+    "color": "#FF5555",
+    "markup": "none",
+    "full_text": ""
+  },
+  {
+    "name": "wireless",
+    "instance": "wlp0s20f3",
+    "color": "#50FA7B",
+    "markup": "none",
+    "full_text": "  192.168.0.17 ( 52% at Get-93FA6B, 108 Mb/s)"
+  },
+  {
+    "name": "ethernet",
+    "instance": "veth2117f9c",
+    "color": "#F1FA8C",
+    "markup": "none",
+    "full_text": " no IP (10000 Mbit/s)"
+  },
+  {
+    "name": "tztime",
+    "instance": "local",
+    "markup": "none",
+    "full_text": " 2020-10-08 10:10:20"
+  }
+]
