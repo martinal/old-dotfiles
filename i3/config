@@ -54,6 +54,9 @@ bindsym $mod+Shift+Return exec --no-startup-id zsh
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# get window criteria and write to file
+bindsym $mod+Ctrl+c exec "i3-get-window-criteria >> ~/i3-got-window"
+
 # Open rofi menus (theming in rofi config)
 # path search menu
 bindsym $mod+d exec "rofi -dmenu -p 'Path search -❯' -l 10"
@@ -548,12 +551,12 @@ for_window [title="Microsoft Teams Notification"] floating enable
 # Tag windows
 for_window [class="Gnome-terminal" window_role="main"] mark --add x
 for_window [class="Gnome-terminal" window_role="background"] mark --add b
-for_window [class="jetbrains-goland"] mark --add g
-for_window [class="jetbrains-datagrip"] mark --add d
-for_window [class="Slack"] mark --add s
-for_window [class="Google-chrome"] mark --add c
-for_window [class="Microsoft Teams*"] mark --add t
-for_window [class="Workrave"] mark --add w
+for_window [class="jetbrains-goland" tiling] mark --add g
+for_window [class="jetbrains-datagrip" tiling] mark --add d
+for_window [class="Slack" tiling] mark --add s
+for_window [class="Google-chrome" tiling] mark --add c
+for_window [class="Microsoft Teams*" tiling] mark --add t
+# for_window [class="Workrave" tiling] mark --add w
 
 # Startup software
 # TODO: Move execs to a script run with gnome-terminal that can be aborted before it does anything
@@ -569,12 +572,13 @@ exec --no-startup-id workrave
 # Stop autofocus shenigans
 no_focus [class="Gnome-terminal" window_role="main"]
 no_focus [class="Gnome-terminal" window_role="background"]
-no_focus [class="jetbrains-goland"]
-no_focus [class="jetbrains-datagrip"]
+no_focus [class="jetbrains-goland" tiling]
+no_focus [class="jetbrains-datagrip" tiling]
 no_focus [class="Slack"]
 no_focus [class="Google-chrome"]
 no_focus [class="Microsoft Teams*"]
 no_focus [class="Workrave"]
+# no_focus [tiling] # Try this?
 
 
 #################### THEMING #################### 
