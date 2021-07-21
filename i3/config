@@ -560,13 +560,15 @@ for_window [class="Microsoft Teams*" tiling] mark --add t
 
 # Startup software
 # TODO: Move execs to a script run with gnome-terminal that can be aborted before it does anything
-exec --no-startup-id google-chrome
-exec --no-startup-id gnome-terminal --role="main" --working-directory=$HOME/vippsas/vaam -x startupvaam
-exec --no-startup-id gnome-terminal --role="background" --working-directory=$HOME/vippsas/datagrip-aad
-exec --no-startup-id goland
-exec --no-startup-id datagrip
-exec --no-startup-id slack
-exec --no-startup-id teams
+# REMOVED FOR OFFLINE TRIP
+# exec --no-startup-id google-chrome
+# exec --no-startup-id gnome-terminal --role="main" --working-directory=$HOME/vippsas/vaam -x startupvaam
+# exec --no-startup-id gnome-terminal --role="background" --working-directory=$HOME/vippsas/datagrip-aad
+# exec --no-startup-id goland
+# exec --no-startup-id datagrip
+# exec --no-startup-id slack
+# exec --no-startup-id teams
+# REMOVED FOR OFFLINE TRIP
 exec --no-startup-id workrave
 
 # Stop autofocus shenigans

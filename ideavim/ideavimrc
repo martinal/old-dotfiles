@@ -2,6 +2,49 @@
 let mapleader=" "
 
 """ Plugins
+
+" File tree control as nerdtree:
+" :NERDTree
+" :NERDTreeFocus
+" :NERDTreeToggle
+" :NERDTreeClose
+" :NERDTreeFind
+" :NERDTreeRefreshRoot
+"
+" Most of the original commands in the project tree are supported:
+" o	Open files, directories and bookmarks	g:NERDTreeMapActivateNode
+" go	Open selected file, but leave cursor in the NERDTree	g:NERDTreeMapPreview
+" t	Open selected node/bookmark in a new tab	g:NERDTreeMapOpenInTab
+" T	Same as 't' but keep the focus on the current tab	g:NERDTreeMapOpenInTabSilent
+" i	Open selected file in a split window	g:NERDTreeMapOpenSplit
+" gi	Same as i, but leave the cursor on the NERDTree	g:NERDTreeMapPreviewSplit
+" s	Open selected file in a new vsplit	g:NERDTreeMapOpenVSplit
+" gs	Same as s, but leave the cursor on the NERDTree	g:NERDTreeMapPreviewVSplit
+"
+" O	Recursively open the selected directory	g:NERDTreeMapOpenRecursively
+" x	Close the current nodes parent	g:NERDTreeMapCloseDir
+" X	Recursively close all children of the current node	g:NERDTreeMapCloseChildren
+"
+" P	Jump to the root node	g:NERDTreeMapJumpRoot
+" p	Jump to current nodes parent	g:NERDTreeMapJumpParent
+" K	Jump up inside directories at the current tree depth	g:NERDTreeMapJumpFirstChild
+" J	Jump down inside directories at the current tree depth	g:NERDTreeMapJumpLastChild
+" <C-J>	Jump down to next sibling of the current directory	g:NERDTreeMapJumpNextSibling
+" <C-K>	Jump up to previous sibling of the current directory	g:NERDTreeMapJumpPrevSibling
+"
+" r	Recursively refresh the current directory	g:NERDTreeMapRefresh
+" R	Recursively refresh the current root	g:NERDTreeMapRefreshRoot
+"
+" m	Display the NERDTree menu	g:NERDTreeMapMenu
+" q	Close the NERDTree window	g:NERDTreeMapQuit
+" A	Zoom (maximize/minimize) the NERDTree window	g:NERDTreeMapToggleZoom
+"
+" Overriding commands via let is also supported (like this: https://superuser.com/a/197977/909473)
+set NERDTree
+
+" text objects ii, ai, aI
+set textobj-indent
+
 " https://github.com/AlexPl292/IdeaVim-EasyMotion#supported-commands
 " Lots of keymaps in URL, based on <leader>+<leader>+...
 set easymotion
@@ -98,21 +141,141 @@ set idearefactormode=keep
 set clipboard=ideaput
 
 """ Mappings --------------------------------
-" map <leader>f <Plug>(easymotion-s)
-" map <leader>e <Plug>(easymotion-f)
-" 
-" map <leader>d :action Debug<CR>
-" map <leader>r :action RenameElement<CR>
-" map <leader>c :action Stop<CR>
-" map <leader>z :action ToggleDistractionFreeMode<CR>
-" 
-" map <leader>s :action SelectInProjectView<CR>
-" map <leader>a :action Annotate<CR>
-" map <leader>h :action Vcs.ShowTabbedFileHistory<CR>
-" map <S-Space> :action GotoNextError<CR>
-" 
-" map <leader>b :action ToggleLineBreakpoint<CR>
-" map <leader>o :action FileStructurePopup<CR>
+
+" a ???
+
+" b breakpoints:
+" map <leader>ba show all breakpoints
+map <leader>bb <Action>(ToggleLineBreakpoint)
+" map <leader>ba add breakpoint
+" map <leader>br remove breakpoint
+" map <leader>bd disable breakpoint
+" map <leader>be disable breakpoint
+" map <leader>bn next breakpoint
+" map <leader>bp prev breakpoint
+
+" c ???
+
+" d debugging:
+map <leader>db <Action>(StopBackgroundProcesses)
+map <leader>dc <Action>(GoCoreDumpAction)
+" map <leader>dd <Action>(Debug)
+map <leader>dd <Action>(Rerun)
+map <leader>di <Action>(StepInto)
+map <leader>dI <Action>(ForceStepInto)
+map <leader>dm <Action>(StepIntoMyCode)
+map <leader>do <Action>(StepOver)
+map <leader>dO <Action>(ForceStepOver)
+map <leader>dr <Action>(RunToCursor)
+map <leader>dR <Action>(ForceRunToCursor)
+map <leader>ds <Action>(Stop)
+map <leader>du <Action>(StepOut)
+
+" e ???
+
+" f find:
+" map <leader>fp find in project files
+" map <leader>fg find in git files
+" map <leader>fd find in directory
+" map <leader>fa find action
+" map <leader>fn find filename
+" "GoCallHierarchyPopupMenu
+" "GoCallHierarchyPopupMenu.BaseOnThisDeclaration     <A-C-H>
+" "GoTypeHierarchyPopupMenu
+" GotoNextError
+
+" g generate:
+map <leader>gt <Action>(GoTestGenerateGroup)
+map <leader>gc <Action>(GoGenerateConstructorAction)
+map <leader>gf <Action>(GoGenerateFileAction)
+map <leader>gs <Action>(GoGenerateForStruct)
+map <leader>gg <Action>(GoGenerateGetterAction)
+" map <leader>gG <Action>(GoGenerateGetterSetterAction)
+map <leader>gG <Action>(GoGenerateSetterAction)
+
+" h ???
+
+" i ???
+
+" j ???
+
+" k ???
+
+" l ???
+
+" m move:
+map <leader>me <Action>(GotoNextError)
+map <leader>ms <Plug>(easymotion-s)
+map <leader>mf <Plug>(easymotion-f)
+
+" Bookmarks
+" Bookmarks.Goto
+" Bookmarks.Toggle
+
+
+" n ???
+
+" o ???
+
+" p ???
+
+" q ???
+
+" r refactoring:
+map <leader>rc <Action>(IntroduceConstant)
+map <leader>rf <Action>(IntroduceField)
+map <leader>ri <Action>(Inline)
+map <leader>rm <Action>(ImplementMethods)
+map <leader>rp <Action>(IntroduceParameter)
+map <leader>rP <Action>(IntroduceParameterObject)
+map <leader>rr <Action>(RenameElement)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>ra <Action>(Refactor) " change signature
+" map <leader>rs <Action>() " fill struct
+" map <leader>rS <Action>() " fill struct recursively
+
+" s ???
+
+" t testing:
+map <leader>td <Action>(Debug)
+map <leader>tf <Action>(RerunFailedTests)
+map <leader>tr <Action>(Run)
+map <leader>tR <Action>(Rerun)
+map <leader>tt <Action>(RerunTests)
+" map <leader>tt rerun last run test
+" map <leader>tr run test under cursor
+" map <leader>ta run test package
+" map <leader>tn next test (?)
+" map <leader>tp prev test (?)
+
+" u ???
+
+" v version control:
+map <leader>va <Action>(Annotate)
+map <leader>vh <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>vj <Action>(VcsShowNextChangeMarker)
+map <leader>vk <Action>(VcsShowPrevChangeMarker)
+map <leader>vr <Action>(Vcs.RollbackChangedLines)
+
+" w window management:
+map <leader>wf <Action>(SelectInProjectView)
+map <leader>wo <Action>(FileStructurePopup)
+map <leader>wt <Action>(NERDTreeToggle)
+map <leader>wz <Action>(ToggleDistractionFreeMode)
+" IncreaseColumnWidth                                <C-S-Right>
+" IncrementWindowHeight                              <C-S-Down>
+" IncrementWindowWidth                               <C-S-Right>
+
+" x execute:
+map <leader>xf <Action>(GoFmtFileAction)
+map <leader>xi <Action>(GoImportsFileAction)
+map <leader>xn <Action>(Go.NewGoFile)
+map <leader>xp <Action>(GoFmtProjectAction)
+map <leader>xv <Action>(GoVetFileAction)
+
+" y ???
+
+" z ???
 
 
 " ------------------------------------------------------------------------------------
@@ -195,4 +358,3 @@ set clipboard=ideaput
 " 
 " ----------
 " [1] - cursor keys, <End>, <Home>, <PageUp> and <PageDown>
-
