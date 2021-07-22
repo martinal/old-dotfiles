@@ -45,3 +45,24 @@ https://github.com/norcalli/nvim-colorizer.lua
 https://github.com/mhartington/formatter.nvim
 
 
+" ==============================================================================
+" Links with tutorials, ideas, etc on vim:
+" ==============================================================================
+" https://github.com/nanotee/nvim-lua-guide
+" https://learnxinyminutes.com/docs/lua/
+" https://www.2n.pl/blog/how-to-write-neovim-plugins-in-lua
+" https://www.2n.pl/blog/how-to-make-ui-for-neovim-plugins-in-lua
+" 
+" https://arunvelsriram.medium.com/starting-neovim-in-a-separate-alacritty-window-6079b725c817
+" https://github.com/arunvelsriram/dotfiles/blob/master/config/nvim/init.vim
+" https://github.com/arunvelsriram/dotfiles/blob/master/config/alacritty/alacritty.yml
+"
+" https://medium.com/@voyeg3r/vim-nvim-useful-tricks-456efd767240
+" https://of-vim-and-vigor.blogspot.com/
+" https://vimawesome.com/
+" https://github.com/mandus/cfg/
+" https://learnvimscriptthehardway.stevelosh.com/
+" https://devhints.io/vim
+" https://dev.to/l04db4l4nc3r/vim-to-the-rescue-repetition-made-easy-a8c
+" https://vim.works/2019/03/03/cursor-movement-in-vim/
+

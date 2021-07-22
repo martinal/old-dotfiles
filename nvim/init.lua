@@ -1,15 +1,14 @@
---------------------------------------------------------------------------------
-print("init.lua bootstrapping packer")
--- https://github.com/wbthomason/packer.nvim
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local first_install = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  first_install = true
+function section(msg)
+--	print(msg)
 end
 
 --------------------------------------------------------------------------------
-print("init.lua running packer startup")
+section("init.lua running packer startup")
+
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
 
 require('packer').startup(function()
   -- Packer can manage itself
@@ -32,9 +31,12 @@ require('packer').startup(function()
   -- BASIC EDITING
   use 'wellle/vim-exchange'
   use 'inkarkat/vim-ReplaceWithRegister'
-  use 'tommcdo/vim-lion'
   use 'tpope/vim-commentary' -- TODO: Find treesitter based alternative?
   use 'tpope/vim-surround'
+
+  -- ALIGNMENT
+  use 'tommcdo/vim-lion'
+  -- use 'junegunn/vim-easy-align' -- TODO: which?
 
   -- MORE TO CHECK OUT:
   -- https://github.com/wellle/targets.vim
@@ -54,6 +56,10 @@ require('packer').startup(function()
   -- LSP
   -- TODO: Configure LSP more and add servers:  https://github.com/neovim/nvim-lspconfig
   use 'neovim/nvim-lspconfig'
+  -- use 'kabouzeid/nvim-lspinstall' -- TODO: Try this
+  -- use 'folke/trouble.nvim' -- TODO: Try this
+  -- use 'glepnir/lspsaga.nvim' -- TODO: Try this
+
   -- use 'mhartington/formatter.nvim' -- TODO: competes with LSP or not?
   
   -- SNIPPETS
@@ -61,6 +67,7 @@ require('packer').startup(function()
 
   -- DEBUGGER
   use 'mfussenegger/nvim-dap' -- TODO: Test go adapter, configure more debug adapters
+  -- use 'Pocco81/DAPInstall.nvim' -- TODO: Try this
 
   -- TELESCOPE
   -- TODO: Configure telescope and its variants, bigger project!
@@ -82,23 +89,23 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-compe'
 
   -- STATUSLINE
--- TODO: Configure one by one below this point:
-  use 'hoob3rt/lualine.nvim'
+  use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
   -- BUFFERLINE
-  use 'akinsho/nvim-bufferline.lua'
+  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons' }
 
   -- CODE OUTLINE
   use 'stevearc/aerial.nvim'
   -- use '???/minimap.vim'
 
   -- FILETREE
+  -- TODO: Configure one by one below this point:
   use { 'kyazdani42/nvim-tree.lua', requires = { { 'kyazdani42/nvim-web-devicons' } } }
 
   -- GIT
   -- Add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use 'TimUntersberger/neogit'
+  use 'TimUntersberger/neogit' -- TODO: Use this and/or gitsigns?
   -- TODO: octo.nvim?
   -- TODO: vira?
 
@@ -107,6 +114,7 @@ require('packer').startup(function()
 
   -- MOVEMENT
   use 'phaazon/hop.nvim'
+  use "folke/which-key.nvim"
 
   -- VISUAL
   -- Add indentation guides even on blank lines
@@ -114,45 +122,54 @@ require('packer').startup(function()
   use 'folke/twilight.nvim'
   use 'folke/zen-mode.nvim'
 
-  -- COLORS
-  -- TODO: Color scheme
+  -- COLORSCHEMES
+  use 'projekt0n/github-nvim-theme'
+  -- use 'sainnhe/edge'
+  -- use 'sainnhe/neon'
+
+  -- COLOR ADJUSTMENTS
   use 'norcalli/nvim-colorizer.lua'
+
+  -- TESTING
+  -- use 'https://github.com/vim-test/vim-test'
 
   -- SQL
   -- https://github.com/tpope/vim-dadbod
+  -- vim-dadbod-ui
   -- https://github.com/lighttiger2505/sqls
   -- https://github.com/nanotee/sqls.nvim
+  -- 'https://github.com/chrisbra/NrrwRgn'
+  -- sniprun
 
   -- LUA
   -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
 
   -- GO
+  -- use 'https://github.com/ray-x/go.nvim' -- TODO: Try this
 end)
 
 
 --------------------------------------------------------------------------------
--- TODO: When packer gets better autosync this might be unncessesary
-if first_install == true then
-	print("init.lua running PackerInstall")
-	vim.api.nvim_command('PackerInstall')
-else
-	-- print("init.lua running PackerSync")
-	-- vim.api.nvim_command('PackerSync')
-	-- vim.api.nvim_command('PackerCompile')
-end
+section("init.lua configuring basics")
 
-
---------------------------------------------------------------------------------
-print("init.lua configuring basics")
+--Indentation
+--vim.bo.smartindent = true  -- smart autoindenting for C programs
+--vim.bo.expandtab = true -- use spaces when <Tab> is inserted
+--vim.bo.smarttab = true -- use 'shiftwidth' when inserting <Tab>
+--vim.bo.softtabstop = 4 -- number of spaces that <Tab> uses while editing
+--vim.bo.tabstop = 4 -- number of spaces that <Tab> in file uses
+--vim.bo.shiftround = true -- round indent to multiple of shiftwidth
+--vim.bo.shiftwidth = 4 -- number of spaces to use for (auto)indent step
 
 --Incremental live completion
 vim.o.inccommand = 'nosplit'
 
 --Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = false -- true?
 
 --Make line numbers default
 vim.wo.number = true
+-- vim.wo.numberwidth = 8?
 
 --Do not save when switching buffers
 vim.o.hidden = true
@@ -190,9 +207,63 @@ vim.api.nvim_exec(
   false
 )
 
+-- TODO: Merge wanted parts from below into above
+--------------------------------------------------------------------------------
+--Misc
+--set updatetime=100  " after this many milliseconds flush swap file
+--set lazyredraw      " don't redraw while executing macros
+--set nrformats="alpha,octal,hex,bin"  " number formats recognized for CTRL-A command
+--set tildeop  " tilde command "~" behaves like an operator
+--set display="lastline,msgsep,uhex"   " list of flags for how to display text
+--set scrolloff=5
+--set whichwrap=b,s,<,>,[,]  " wrap to next line for backspace, space, and arrows
+--set startofline  " commands move cursor to first non-blank in line
+--set mouse=ar  " enable the use of mouse clicks
+--filetype on
 
 --------------------------------------------------------------------------------
-print("init.lua configuring treesitter")
+--Statusline at bottom
+--set noshowmode   " message on status line to show current mode
+--'fillchars'	  'fcs'     characters to use for displaying special items
+--'ruler'		  'ru'	    show cursor line and column in the status line
+--'rulerformat'	  'ruf'     custom format for the ruler
+--'statusline'	  'stl'     custom format for the status line
+
+
+--------------------------------------------------------------------------------
+--Buffers, windows, tabs
+--https://github.com/qpkorr/vim-bufkill
+--set confirm  " ask what to do about unsaved/read-only files
+--set hidden " don't unload buffer when it is abandoned
+--set splitright  " new window is put right of the current one
+--'switchbuf'	  'swb'     sets behavior when switching to another buffer
+
+--------------------------------------------------------------------------------
+--Guides
+--set cursorcolumn  " highlight the screen column of the cursor
+--set cursorline    " highlight the screen line of the cursor
+
+--------------------------------------------------------------------------------
+--Folding
+--set foldmethod=manual  " folding type (manual, indent, syntax, expr, diff)
+--set foldnestmax=5      " maximum fold depth (file section, class, function, +3 levels = 5, should be plenty!)
+--for which commands a fold will be opened:
+--default   ="block,hor,mark,percent,quickfix,search,tag,undo"
+--set foldopen="block,hor,mark,percent,quickfix,search,tag,undo,jump,insert"
+
+--------------------------------------------------------------------------------
+--System clipboard, cut/copy/paste, etc
+--set clipboard=unnamedplus  " use the clipboard as the unnamed register
+
+--------------------------------------------------------------------------------
+--Undo
+--set undofile          " save undo information in a file
+--set undolevels=1000   " maximum number of changes that can be undone
+--set undoreload=30000  " max nr of lines to save for undo on a buffer reload
+
+
+--------------------------------------------------------------------------------
+section("init.lua configuring treesitter")
 -- TSInstall go lua json yaml html css c cpp
 require('nvim-treesitter.configs').setup({
 	ensure_installed = "maintained",
@@ -368,7 +439,7 @@ require('treesitter-context.config').setup({
 
 
 --------------------------------------------------------------------------------
-print("init.lua configuring LSP")
+section("init.lua configuring LSP")
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 require('lspconfig').gopls.setup{
     cmd = {"gopls", "serve"},
@@ -385,8 +456,33 @@ require('lspconfig').gopls.setup{
 -- TODO: autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 
+-- FIXME: Figure out on_attach stuff for lspconfig and what aerial does here
+-- local aerial = require('aerial')
+
+-- local custom_attach = function(client)
+--   aerial.on_attach(client)
+
+--   -- Aerial does not set any mappings by default, so you'll want to set some up
+--   -- Toggle the aerial window with <leader>a
+--   vim.api.nvim_buf_set_keymap(0, 'n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
+--   -- Jump forwards/backwards with '{' and '}'
+--   vim.api.nvim_buf_set_keymap(0, 'n', '{', '<cmd>AerialPrev<CR>', {})
+--   vim.api.nvim_buf_set_keymap(0, 'n', '}', '<cmd>AerialNext<CR>', {})
+--   -- Jump up the tree with '[[' or ']]'
+--   vim.api.nvim_buf_set_keymap(0, 'n', '[[', '<cmd>AerialPrevUp<CR>', {})
+--   vim.api.nvim_buf_set_keymap(0, 'n', ']]', '<cmd>AerialNextUp<CR>', {})
+
+--   -- TODO: This is a great place to set up all your other LSP mappings
+-- end
+
+-- -- Set up your LSP clients here, using the custom on_attach method
+-- require('lspconfig').vimls.setup{
+--   on_attach = custom_attach,
+-- }
+
+
 --------------------------------------------------------------------------------
-print("init.lua configuring DAP")
+section("init.lua configuring DAP")
 local dap = require('dap')
 
 -- TODO: lua in nvim:
@@ -407,7 +503,7 @@ dap.adapters.go = function(callback, config)
       stdout:close()
       handle:close()
       if code ~= 0 then
-        print('dlv exited with code', code)
+        section('dlv exited with code', code)
       end
     end)
     assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
@@ -452,7 +548,7 @@ dap.configurations.go = {
 }
 
 --------------------------------------------------------------------------------
-print("init.lua configuring telescope")
+section("init.lua configuring telescope")
 
 -- " Find files using Telescope command-line sugar.
 -- nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -467,38 +563,67 @@ print("init.lua configuring telescope")
 -- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 --------------------------------------------------------------------------------
-print("init.lua configuring color scheme")
-vim.o.termguicolors = true
--- TODO: Pick and configure colorscheme
---vim.g.onedark_terminal_italics = 2
---vim.cmd [[colorscheme TODONAME]]
+section("init.lua configuring other plugins")
 
---------------------------------------------------------------------------------
-print("init.lua configuring other plugins")
+-- Gitsigns TODO: Check out default keymaps here
+require('gitsigns').setup{
+  -- keymaps = {
+  --   -- Default keymap options
+  --   noremap = true,
 
--- Map blankline
+  --   ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+  --   ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+  --   ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+  --   ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+  --   ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+  --   ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+  --   ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+  --   ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+  --   ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+  --   ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+
+  --   -- Text objects
+  --   ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+  --   ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+  -- },
+}
+
+-- Lualine
+require('lualine').setup{
+  -- TODO: Configure lualine contents
+  options = {
+    theme = 'github',
+    -- For round icons (require Nerd-Font)
+    -- section_separators = {"", ""},
+    -- component_separators = {"", ""},
+    -- ... your lualine config
+  }
+}
+
+-- Bufferline
+require('bufferline').setup{
+  -- TODO: Configure, consider keymaps
+}
+
+-- Indent lines
 vim.g.indent_blankline_char = '┊'
 vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
--- Gitsigns
-require('gitsigns').setup {
-  signs = {
-    add = { hl = 'GitGutterAdd', text = '+' },
-    change = { hl = 'GitGutterChange', text = '~' },
-    delete = { hl = 'GitGutterDelete', text = '_' },
-    topdelete = { hl = 'GitGutterDelete', text = '‾' },
-    changedelete = { hl = 'GitGutterChange', text = '~' },
-  },
+-- Color scheme
+vim.o.termguicolors = true
+require('github-theme').setup{
+  -- TODO: Adjust theme here
 }
 
+--------------------------------------------------------------------------------
+section('init.lua setting up leadermappings')
+require("which-key").setup{
+  -- TODO: Configure keymappings here
+}
 
 --------------------------------------------------------------------------------
-print('init.lua setting up leadermappings')
-
-
---------------------------------------------------------------------------------
-print('init.lua completed')
-
+section('init.lua completed')
