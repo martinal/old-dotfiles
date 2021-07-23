@@ -1,45 +1,15 @@
-" Text objects and motions
-" Plug 'https://github.com/kana/vim-textobj-user'
-" Plug 'https://github.com/kana/vim-textobj-entire'
-" Plug 'https://github.com/tpope/vim-surround'
-" Plug 'https://github.com/vim-scripts/argtextobj.vim'
-" Plug 'https://github.com/tommcdo/vim-exchange'
-" Plug 'https://github.com/tpope/vim-commentary'
-" Plug 'https://github.com/wellle/targets.vim'
-" Plug 'https://github.com/wellle/line-targets.vim'
-" Plug 'https://github.com/easymotion/vim-easymotion'
-" Plug 'https://github.com/dahu/vim-fanfingtastic'
-" Plug 'https://github.com/terryma/vim-expand-region'
-" Plug 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
-" Plug 'https://github.com/tommcdo/vim-text-objects'
-" vim-textobj-user list of textobject plugins
-" https://github.com/coderifous/textobj-word-coloumn.vim
-" vim-textobj-lastpat
-
 " Adjusting cut/copy/paste/macro
 " Plug 'https://github.com/svermeulen/vim-cutlass'
 " Plug 'https://github.com/svermeulen/vim-subversive'
 " Plug 'https://github.com/svermeulen/vim-yoink'
-" Plug 'https://github.com/tpope/vim-repeat'
 " Plug 'https://github.com/svermeulen/vim-macrobatics'
-
 
 " Project awareness plugins
 " Plug 'https://github.com/tpope/vim-obsession'
 " Plug 'https://github.com/tpope/vim-projectionist'
 
 " Search plugins
-" Plug 'https://github.com/junegunn/fzf.vim'
-" Plug 'https://github.com/pbogut/fzf-mru.vim'
 " Plug 'https://github.com/brooth/far.vim'
-" vim-which-key
-
-" File management plugins
-" Plug 'https://github.com/tpope/vim-vinegar'
-
-" Alignment
-" Plug 'https://github.com/junegunn/vim-easy-align'
-" Plug 'https://github.com/tommcdo/vim-lion'
 
 " Unsorted plugins
 " Plug 'https://github.com/ycm-core/YouCompleteMe'
@@ -60,26 +30,6 @@
 " Plug 'https://github.com/tpope/vim-speeddating'
 " Plug 'https://github.com/tpope/vim-tbone'
 " Plug 'https://github.com/tpope/vim-unimpaired'
-
-" Also: vista.vim, nvim-lsp
-" https://www.youtube.com/watch?v=C9X5VF9ASac
-" https://www.reddit.com/r/neovim/comments/insnvz/neovim_builtin_lsp/
-" https://neovim.io/doc/user/lsp.html#lsp-quickstart
-" Plug 'https://github.com/neovim/nvim-lspconfig'
-" Plug 'https://github.com/neovim/nvim-lsp'
-" Plug 'https://github.com/liuchengxu/vista.vim'
-
-" File managing
-" https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
-" nerd-fonts
-" https://github.com/Shougo/defx.nvim
-" vim-startify
-
-" Buffer and window management
-" buffergator
-" vim-bufferline
-" bufexplorer
-" https://github.com/qpkorr/vim-bufkill
 
 " https://github.com/laher/gothx.vim
 " vim-coloresque

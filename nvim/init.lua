@@ -1,15 +1,12 @@
-function section(msg)
---	print(msg)
+-- Bootstrap packer on initial install
+function setup_packer_bootstrap()
+	local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+	if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+	end
 end
 
---------------------------------------------------------------------------------
-section("init.lua running packer startup")
-
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
-
+function setup_packer()
 require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -27,6 +24,14 @@ require('packer').startup(function()
   use 'kana/vim-textobj-entire'
   -- TODO: Look for more textobjects at: https://github.com/kana/vim-textobj-user/wiki
   -- TODO: Consolidate textobject mappings for these basic plugins and treesitter-textobjects
+  -- use 'https://github.com/vim-scripts/argtextobj.vim'
+  -- use 'https://github.com/dahu/vim-fanfingtastic'
+  -- use 'https://github.com/terryma/vim-expand-region'
+  -- use 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
+  -- use 'https://github.com/tommcdo/vim-text-objects'
+  -- vim-textobj-user list of textobject plugins
+  -- https://github.com/coderifous/textobj-word-coloumn.vim
+  -- vim-textobj-lastpat
 
   -- BASIC EDITING
   use 'wellle/vim-exchange'
@@ -148,10 +153,10 @@ require('packer').startup(function()
   -- use 'https://github.com/ray-x/go.nvim' -- TODO: Try this
 end)
 
+end
 
---------------------------------------------------------------------------------
-section("init.lua configuring basics")
 
+function setup_basics()
 --Indentation
 --vim.bo.smartindent = true  -- smart autoindenting for C programs
 --vim.bo.expandtab = true -- use spaces when <Tab> is inserted
@@ -261,10 +266,13 @@ vim.api.nvim_exec(
 --set undolevels=1000   " maximum number of changes that can be undone
 --set undoreload=30000  " max nr of lines to save for undo on a buffer reload
 
+end
 
---------------------------------------------------------------------------------
-section("init.lua configuring treesitter")
+
+function setup_treesitter()
+
 -- TSInstall go lua json yaml html css c cpp
+
 require('nvim-treesitter.configs').setup({
 	ensure_installed = "maintained",
 	highlight = {
@@ -432,14 +440,15 @@ require('nvim-treesitter.configs').setup({
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
-
 require('treesitter-context.config').setup({
     enable = false, -- TODO: Didn't work very well on this file, see how it works with go
 })
 
+end
 
---------------------------------------------------------------------------------
-section("init.lua configuring LSP")
+
+function setup_lsp()
+
 -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 require('lspconfig').gopls.setup{
     cmd = {"gopls", "serve"},
@@ -480,11 +489,13 @@ require('lspconfig').gopls.setup{
 --   on_attach = custom_attach,
 -- }
 
+end
 
---------------------------------------------------------------------------------
-section("init.lua configuring DAP")
+
+function setup_dap()
+
 local dap = require('dap')
-
+-- TODO: DapInstall?
 -- TODO: lua in nvim:
 -- https://github.com/jbyuki/one-small-step-for-vimkind
 
@@ -547,23 +558,35 @@ dap.configurations.go = {
     } 
 }
 
---------------------------------------------------------------------------------
-section("init.lua configuring telescope")
+end
 
--- " Find files using Telescope command-line sugar.
--- nnoremap <leader>ff <cmd>Telescope find_files<cr>
--- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
--- nnoremap <leader>fb <cmd>Telescope buffers<cr>
--- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
--- " Using Lua functions
--- nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
--- nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
--- nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
--- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+function setup_telescope()
+	require('telescope').setup {
+	  defaults = {
+	    mappings = {
+	      i = {
+	        -- TODO: From defaults.nvim, keep?
+		['<C-u>'] = false,
+		['<C-d>'] = false,
+	      },
+	    },
+	  },
+	}
+	--Add leader shortcuts
+	vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+end
 
---------------------------------------------------------------------------------
-section("init.lua configuring other plugins")
+
+function setup_other()
 
 -- Gitsigns TODO: Check out default keymaps here
 require('gitsigns').setup{
@@ -593,7 +616,7 @@ require('gitsigns').setup{
 require('lualine').setup{
   -- TODO: Configure lualine contents
   options = {
-    theme = 'github',
+    theme = 'github', -- NB! Must be set before github-theme setup
     -- For round icons (require Nerd-Font)
     -- section_separators = {"", ""},
     -- component_separators = {"", ""},
@@ -618,12 +641,25 @@ vim.o.termguicolors = true
 require('github-theme').setup{
   -- TODO: Adjust theme here
 }
+end
+
+
+function setup_whichkey()
+	require("which-key").setup{
+	  -- TODO: Configure keymappings here
+	}
+end
 
 --------------------------------------------------------------------------------
-section('init.lua setting up leadermappings')
-require("which-key").setup{
-  -- TODO: Configure keymappings here
-}
+-- Run all setup sections
+-- TODO: Pass in keymap dict to setup functions to distribute leader maps or collect in whichkey?
+setup_packer_bootstrap{}
+setup_packer{}
+setup_basics{}
+setup_treesitter{}
+setup_lsp{}
+setup_dap{}
+setup_telescope{}
+setup_other{}
+setup_whichkey{}
 
---------------------------------------------------------------------------------
-section('init.lua completed')
