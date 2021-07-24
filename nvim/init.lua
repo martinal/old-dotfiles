@@ -41,7 +41,7 @@ require('packer').startup(function()
 
   -- ALIGNMENT
   use 'tommcdo/vim-lion'
-  -- use 'junegunn/vim-easy-align' -- TODO: which?
+  -- use 'junegunn/vim-easy-align' -- TODO: which to use?
 
   -- MORE TO CHECK OUT:
   -- https://github.com/wellle/targets.vim
@@ -68,21 +68,21 @@ require('packer').startup(function()
   -- use 'mhartington/formatter.nvim' -- TODO: competes with LSP or not?
   
   -- SNIPPETS
-  use 'norcalli/snippets.nvim' -- TODO: Configure and add useful snippets
+  use 'norcalli/snippets.nvim' -- TODO: Configure keymaps and add useful snippets
 
   -- DEBUGGER
   use 'mfussenegger/nvim-dap' -- TODO: Test go adapter, configure more debug adapters
   -- use 'Pocco81/DAPInstall.nvim' -- TODO: Try this
 
   -- TELESCOPE
-  -- TODO: Configure telescope and its variants, bigger project!
+  -- TODO: Configure nicer telescope keymaps!
   use { 'nvim-telescope/telescope.nvim',
     requires = {
 		{ 'nvim-lua/popup.nvim' },
 		{ 'nvim-lua/plenary.nvim' }
 	}
   }
-  use 'nvim-telescope/telescope-hop.nvim'
+  use 'nvim-telescope/telescope-hop.nvim' -- TODO: Configure
   use 'nvim-telescope/telescope-github.nvim'
   use 'nvim-telescope/telescope-symbols.nvim'
   use 'nvim-telescope/telescope-snippets.nvim'
@@ -562,6 +562,15 @@ end
 
 
 function setup_snippets()
+	-- TODO: Move this to setup_whichkey and find other mapping:
+	--require('snippets').use_suggested_mappings() -- Configures C-k, C-j
+	-- " <c-k> will either expand the current snippet at the word or try to jump to
+	-- " the next position for the snippet.
+	-- inoremap <c-k> <cmd>lua return require'snippets'.expand_or_advance(1)<CR>
+	-- " <c-j> will jump backwards to the previous field.
+	-- " If you jump before the first field, it will cancel the snippet.
+	-- inoremap <c-j> <cmd>lua return require'snippets'.advance_snippet(-1)<CR>
+
 	require('snippets').snippets = {
 		_global = {
 			["todo"] = "TODO(martinal): ",
@@ -612,13 +621,12 @@ function setup_telescope()
 
 	telescope.load_extension('hop')
 	telescope.load_extension('snippets')
+	telescope.load_extension('dap')
 
 	-- TODO: Install github-cli
 	-- TODO: Configure keybindings in whichkey setup
 	-- https://github.com/nvim-telescope/telescope-github.nvim
 	telescope.load_extension('gh')
-
-	-- telescope.load_extension('dap')
 end
 
 function setup_indentlines()
@@ -730,7 +738,15 @@ function setup_whichkey()
 	local telescope = require('telescope.builtin')
 	local extensions = require('telescope').extensions
 
+
 	wk.register({
+		d = {
+			name = "Debug",
+			c = { function() extensions.dap.configurations{} end, "DAP configurations" },
+			b = { function() extensions.dap.list_breakpoints{} end, "DAP breakpoints" },
+			v = { function() extensions.dap.variables{} end, "DAP variables" },
+			f = { function() extensions.dap.frames{} end, "DAP frames" },
+		},
 		s = {
 			name = "Symbols",
 			e = { function() telescope.symbols{ sources = {'emoji'} } end, "Emoji" },
