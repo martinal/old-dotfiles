@@ -342,6 +342,7 @@ mode "$mode_display" {
     bindsym l exec --no-startup-id ${HOME}/.screenlayout/externalleft.sh, mode "default"
     bindsym r exec --no-startup-id ${HOME}/.screenlayout/externalright.sh, mode "default"
     bindsym h exec --no-startup-id ${HOME}/.screenlayout/home-external-above.sh, mode "default"
+    bindsym k exec --no-startup-id ${HOME}/.screenlayout/home-laptop-right-lifted.sh, mode "default"
     bindsym d exec --no-startup-id ${HOME}/.screenlayout/dongle.sh, mode "default"
 
     # back to normal: Enter or Escape
@@ -501,7 +502,6 @@ mode "$mode_top" {
 }
 # Top level menu
 bindsym $mod+z mode "$mode_top"
-
 
 # Deeplink shortcuts to modes
 bindsym $mod+x mode "$mode_quicklaunch"

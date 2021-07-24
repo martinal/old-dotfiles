@@ -84,7 +84,6 @@ require('packer').startup(function()
   }
   use 'nvim-telescope/telescope-hop.nvim'
   use 'nvim-telescope/telescope-github.nvim'
-  use 'nvim-telescope/telescope-project.nvim'
   use 'nvim-telescope/telescope-symbols.nvim'
   use 'nvim-telescope/telescope-snippets.nvim'
   use 'nvim-telescope/telescope-dap.nvim'
@@ -95,9 +94,6 @@ require('packer').startup(function()
 
   -- STATUSLINE
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
-
-  -- BUFFERLINE
-  use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons' }
 
   -- CODE OUTLINE
   use 'stevearc/aerial.nvim'
@@ -157,22 +153,26 @@ end
 
 
 function setup_basics()
---Indentation
---vim.bo.smartindent = true  -- smart autoindenting for C programs
---vim.bo.expandtab = true -- use spaces when <Tab> is inserted
---vim.bo.smarttab = true -- use 'shiftwidth' when inserting <Tab>
---vim.bo.softtabstop = 4 -- number of spaces that <Tab> uses while editing
---vim.bo.tabstop = 4 -- number of spaces that <Tab> in file uses
---vim.bo.shiftround = true -- round indent to multiple of shiftwidth
---vim.bo.shiftwidth = 4 -- number of spaces to use for (auto)indent step
+-- Indentation
+-- vim.bo.smartindent = true  -- smart autoindenting for C programs
+-- vim.bo.expandtab = true -- use spaces when <Tab> is inserted
+-- vim.bo.smarttab = true -- use 'shiftwidth' when inserting <Tab>
+-- vim.bo.softtabstop = 4 -- number of spaces that <Tab> uses while editing
+-- vim.bo.tabstop = 4 -- number of spaces that <Tab> in file uses
+-- vim.bo.shiftround = true -- round indent to multiple of shiftwidth
+-- vim.bo.shiftwidth = 4 -- number of spaces to use for (auto)indent step
 
---Incremental live completion
+-- Time in milliseconds to wait for a mapped sequence to complete.
+-- Note: affects when whichkey pops up
+vim.o.timeoutlen = 500 -- default 1000
+
+-- Incremental live completion
 vim.o.inccommand = 'nosplit'
 
---Set highlight on search
+-- Set highlight on search
 vim.o.hlsearch = false -- true?
 
---Make line numbers default
+-- Make line numbers default
 vim.wo.number = true
 -- vim.wo.numberwidth = 8?
 
@@ -561,93 +561,205 @@ dap.configurations.go = {
 end
 
 
-function setup_telescope()
-	require('telescope').setup {
-	  defaults = {
-	    mappings = {
-	      i = {
-	        -- TODO: From defaults.nvim, keep?
-		['<C-u>'] = false,
-		['<C-d>'] = false,
-	      },
-	    },
-	  },
+function setup_snippets()
+	require('snippets').snippets = {
+		_global = {
+			["todo"] = "TODO(martinal): ",
+		},
+		lua = {
+			["for"] = [[
+for ${1:i}, ${2:v} in ipairs(${3:t}) do
+  $0
+end]];
+		},
+		go = {
+			["for"] = [[
+for ${1:i}, ${2:v} := range ${3:values} do
+  $0
+end]];
+		},
 	}
-	--Add leader shortcuts
-	vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
-	vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 end
 
+function setup_telescope()
+	-- NB! See setup_whichkey for keymaps
+	local telescope = require('telescope')
+	telescope.setup {
+	  extensions = {
+	    hop = {
+		-- TODO: Configure telescope-hop!
+		-- https://github.com/nvim-telescope/telescope-hop.nvim
+	      -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
+	      keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";"}, -- ... and more
 
-function setup_other()
+	  -- Highlight groups to link to signs and lines; the below configuration refers to demo
+	      -- sign_hl typically only defines foreground to possibly be combined with line_hl
+	      sign_hl = { "WarningMsg", "Title" },
+	      -- optional, typically a table of two highlight groups that are alternated between
+	      line_hl = { "CursorLine", "Normal" },
+	  -- options specific to `hop_loop`
+	      -- true temporarily disables Telescope selection highlighting
+	      clear_selection_hl = false,
+	      -- highlight hopped to entry with telescope selection highlight
+	      -- note: mutually exclusive with `clear_selection_hl`
+	      trace_entry = true,
+	      -- jump to entry where hoop loop was started from
+	      reset_selection = true,
+	    },
+	    -- snippets = {},
+	  }
+	}
 
--- Gitsigns TODO: Check out default keymaps here
-require('gitsigns').setup{
-  -- keymaps = {
-  --   -- Default keymap options
-  --   noremap = true,
+	telescope.load_extension('hop')
+	telescope.load_extension('snippets')
 
-  --   ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-  --   ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+	-- TODO: Install github-cli
+	-- TODO: Configure keybindings in whichkey setup
+	-- https://github.com/nvim-telescope/telescope-github.nvim
+	telescope.load_extension('gh')
 
-  --   ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-  --   ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-  --   ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-  --   ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-  --   ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-  --   ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-  --   ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-  --   ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+	-- telescope.load_extension('dap')
+end
 
-  --   -- Text objects
-  --   ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-  --   ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-  -- },
-}
+function setup_indentlines()
+	-- Indent lines
+	vim.g.indent_blankline_char = '┊'
+	vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
+	vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
+	vim.g.indent_blankline_char_highlight = 'LineNr'
+	vim.g.indent_blankline_show_trailing_blankline_indent = false
+end
 
--- Lualine
-require('lualine').setup{
-  -- TODO: Configure lualine contents
-  options = {
-    theme = 'github', -- NB! Must be set before github-theme setup
-    -- For round icons (require Nerd-Font)
-    -- section_separators = {"", ""},
-    -- component_separators = {"", ""},
-    -- ... your lualine config
-  }
-}
+function setup_gitsigns()
+	require('gitsigns').setup{
+	-- TODO: Move these to whichkey setup
+	  -- keymaps = {
+	  --   -- Default keymap options
+	  --   noremap = true,
 
--- Bufferline
-require('bufferline').setup{
-  -- TODO: Configure, consider keymaps
-}
+	  --   ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+	  --   ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
 
--- Indent lines
-vim.g.indent_blankline_char = '┊'
-vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
-vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
-vim.g.indent_blankline_char_highlight = 'LineNr'
-vim.g.indent_blankline_show_trailing_blankline_indent = false
+	  --   ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+	  --   ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+	  --   ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+	  --   ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+	  --   ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+	  --   ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+	  --   ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+	  --   ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
 
--- Color scheme
-vim.o.termguicolors = true
-require('github-theme').setup{
-  -- TODO: Adjust theme here
-}
+	  --   -- Text objects
+	  --   ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+	  --   ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+	  -- },
+	}
+end
+
+function setup_lualine()
+	-- Ideas here:  https://github.com/folke/dot/blob/master/config/nvim/lua/config/lualine.lua
+	-- TODO: Use?
+	local function lsp_progress()
+	  local messages = vim.lsp.util.get_progress_messages()
+	  if #messages == 0 then
+	    return
+	  end
+	  local status = {}
+	  for _, msg in pairs(messages) do
+	    table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
+	  end
+	  local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+	  local ms = vim.loop.hrtime() / 1000000
+	  local frame = math.floor(ms / 120) % #spinners
+	  return table.concat(status, " | ") .. " " .. spinners[frame + 1]
+	end
+
+	require('lualine').setup{
+	  -- TODO: Configure lualine contents
+	  options = {
+	    theme = 'github', -- NB! Must be set before github-theme setup
+	  },
+	  sections = {
+	    lualine_a = {'mode'},
+	    lualine_b = {'branch'},
+	    lualine_c = { 'filename', {'diagnostics', sources = {'nvim_lsp'} } },
+	    lualine_x = { lsp_progress, 'encoding', 'fileformat', 'filetype'},
+	    lualine_y = {'progress'},
+	    lualine_z = {'location'}
+	  },
+	  inactive_sections = {
+	    lualine_a = {},
+	    lualine_b = {},
+	    lualine_c = {'filename'},
+	    lualine_x = {'location'},
+	    lualine_y = {},
+	    lualine_z = {}
+	  },
+	  tabline = {},
+	  extensions = {
+	    -- 'nerdtree',
+	  },
+	}
+end
+
+function setup_colorscheme()
+	-- Color scheme
+	vim.o.termguicolors = true
+	require('github-theme').setup{
+	  themeStyle = "dark"
+	}
 end
 
 
 function setup_whichkey()
-	require("which-key").setup{
-	  -- TODO: Configure keymappings here
-	}
+	local wk = require("which-key")
+	wk.setup{}
+
+	-- Default ops from documentation:
+	-- {
+	--   mode = "n", -- NORMAL mode
+	--   -- prefix: use "<leader>f" for example for mapping everything related to finding files
+	--   -- the prefix is prepended to every mapping part of `mappings` 
+	--   prefix = "",
+	--   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+	--   silent = true, -- use `silent` when creating keymaps
+	--   noremap = true, -- use `noremap` when creating keymaps
+	--   nowait = false, -- use `nowait` when creating keymaps
+	-- }
+
+	local telescope = require('telescope.builtin')
+	local extensions = require('telescope').extensions
+
+	wk.register({
+		s = {
+			name = "Symbols",
+			e = { function() telescope.symbols{ sources = {'emoji'} } end, "Emoji" },
+			k = { function() telescope.symbols{ sources = {'kaomoji'} } end, "Kaomoji" },
+			m = { function() telescope.symbols{ sources = {'math'} } end, "math" },
+			l = { function() telescope.symbols{ sources = {'latex'} } end, "Latex" },
+			g = { function() telescope.symbols{ sources = {'gitmoji'} } end, "Gitmoji" },
+		},
+		n = {
+			name = "Snippets",
+			n = { function() extensions.snippets.snippets{} end, "Snippets" },
+		},
+		f = {
+			name = "Find",
+			-- TODO: Refine list of telescope searches,
+			-- i.e. add telescope extensions here:
+			-- lsp, dap, treesitter, git, vira?
+			b = { function() telescope.buffers() end, "🔍 Buffers" },
+			c = { function() telescope.tags{ only_current_buffer = true } end, "🔍 Tags in current buffer" },
+			f = { function() telescope.find_files({previewer = false}) end, "🔍 Find Files" },
+			g = { function() telescope.grep_string() end, "🔍 Grep string" },
+			h = { function() telescope.help_tags() end, "🔍 Help tags" },
+			l = { function() telescope.live_grep() end, "🔍 Live Grep" },
+			o = { function() telescope.oldfiles() end, "🔍 Old Files" },
+			p = { function() telescope.find_files({previewer = true}) end, "🔍 Preview Files" },
+			t = { function() telescope.tags() end, "🔍 Tags" },
+			z = { function() telescope.current_buffer_fuzzy_find() end, "🔍 Fuzzy Find in buffer" },
+		},
+	}, { prefix = "<leader>" })
 end
 
 --------------------------------------------------------------------------------
@@ -659,7 +771,11 @@ setup_basics{}
 setup_treesitter{}
 setup_lsp{}
 setup_dap{}
+setup_snippets{}
 setup_telescope{}
-setup_other{}
+setup_gitsigns{}
+setup_lualine{}
+setup_indentlines{}
+setup_colorscheme{}
 setup_whichkey{}
 
