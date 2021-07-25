@@ -593,30 +593,46 @@ end
 function setup_telescope()
 	-- NB! See setup_whichkey for keymaps
 	local telescope = require('telescope')
+	local actions = require('telescope.actions')
 	telescope.setup {
-	  extensions = {
-	    hop = {
-		-- TODO: Configure telescope-hop!
-		-- https://github.com/nvim-telescope/telescope-hop.nvim
-	      -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
-	      keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";"}, -- ... and more
-
-	  -- Highlight groups to link to signs and lines; the below configuration refers to demo
-	      -- sign_hl typically only defines foreground to possibly be combined with line_hl
-	      sign_hl = { "WarningMsg", "Title" },
-	      -- optional, typically a table of two highlight groups that are alternated between
-	      line_hl = { "CursorLine", "Normal" },
-	  -- options specific to `hop_loop`
-	      -- true temporarily disables Telescope selection highlighting
-	      clear_selection_hl = false,
-	      -- highlight hopped to entry with telescope selection highlight
-	      -- note: mutually exclusive with `clear_selection_hl`
-	      trace_entry = true,
-	      -- jump to entry where hoop loop was started from
-	      reset_selection = true,
-	    },
-	    -- snippets = {},
-	  }
+		defaults = {
+			mappings = {
+				i = {
+					["<C-h>"] = function(prompt_bufnr)
+						telescope.extensions.hop.hop(prompt_bufnr)
+					end,
+					-- ["<C-space>"] = function(prompt_bufnr)
+					-- 	local opts = {
+					-- 		callback = actions.toggle_selection,
+					-- 		loop_callback = actions.send_selected_to_qflist,
+					-- 	}
+					-- 	telescope.extensions.hop._hop_loop(prompt_bufnr, opts)
+					-- end,
+				},
+			},
+		},
+		extensions = {
+			hop = {
+				-- https://github.com/nvim-telescope/telescope-hop.nvim
+				keys = { "a", "s", "d", "f", "g", "h", "j", "k", "l", ";",
+				         "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+				         "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
+				},
+				-- Highlight groups to link to signs and lines; the below configuration refers to demo
+				-- sign_hl typically only defines foreground to possibly be combined with line_hl
+				sign_hl = { "WarningMsg", "Title" },
+				-- optional, typically a table of two highlight groups that are alternated between
+				line_hl = { "CursorLine", "Normal" },
+				-- options specific to `hop_loop`
+				-- true temporarily disables Telescope selection highlighting
+				clear_selection_hl = false,
+				-- highlight hopped to entry with telescope selection highlight
+				-- note: mutually exclusive with `clear_selection_hl`
+				trace_entry = true,
+				-- jump to entry where hoop loop was started from
+				reset_selection = true,
+			},
+		},
 	}
 
 	telescope.load_extension('hop')
@@ -735,29 +751,88 @@ function setup_whichkey()
 	--   nowait = false, -- use `nowait` when creating keymaps
 	-- }
 
-	local telescope = require('telescope.builtin')
-	local extensions = require('telescope').extensions
+	local tsb = require('telescope.builtin')
+	local tse = require('telescope').extensions
+	local gits = require('gitsigns')
+	local gitsa = require('gitsigns.actions')
 
+	-- TODO: Move these to whichkey setup
+	  -- keymaps = {
+	  --   -- Default keymap options
+	  --   noremap = true,
+
+	  --   ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+	  --   ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+	  --   -- Text objects
+	  --   ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+	  --   ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+	  -- },
 
 	wk.register({
+		-- Git mappings
+		['[h'] = { function() gitsa.prev_hunk() end, "Prev Hunk" },
+		[']h'] = { function() gitsa.next_hunk() end, "Next Hunk" },
+		-- Builtin vim commands
+		['[B'] = { ":bfirst<cr>", "First Buffer" },
+		['[T'] = { ":tfirst<cr>", "First Tag" },
+		['[Q'] = { ":cfirst<cr>", "First Quickfix" },
+		['[L'] = { ":lfirst<cr>", "First Location" },
+		['[A'] = { ":first<cr>",  "First Argument File" },
+		[']B'] = { ":blast<cr>", "Last Buffer" },
+		[']T'] = { ":tlast<cr>", "Last Tag" },
+		[']Q'] = { ":clast<cr>", "Last Quickfix" },
+		[']L'] = { ":llast<cr>", "Last Location" },
+		[']A'] = { ":last<cr>",  "Last Argument File" },
+		['[b'] = { ":bprevious<cr>", "Prev Buffer" },
+		['[t'] = { ":tprevious<cr>", "Prev Tag" },
+		['[q'] = { ":cprevious<cr>", "Prev Quickfix" },
+		['[l'] = { ":lprevious<cr>", "Prev Location" },
+		['[a'] = { ":previous<cr>",  "Prev Argument File" },
+		[']b'] = { ":bnext<cr>", "Next Buffer" },
+		[']t'] = { ":tnext<cr>", "Next Tag" },
+		[']q'] = { ":cnext<cr>", "Next Quickfix" },
+		[']l'] = { ":lnext<cr>", "Next Location" },
+		[']a'] = { ":next<cr>",  "Next Argument File" },
+		-- TODO: Treesitter node movements
+		-- TODO: LSP movements
+		-- TODO: More inspiration from https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt
+	})
+
+	wk.register({
+		g = {
+			name = "Git",
+			q = { function() extensions.dap.frames{} end, "DAP frames" },
+	-- TODO: visual mode for the first two here
+	  --   s = { function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Stage Hunk" },
+	  --   r = { function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Reset Hunk" },
+	-- TODO: normal mode for the rest
+		    s = { function() gitsigns.stage_hunk() end, "Stage Hunk" },
+		    u = { function() gitsigns.undo_stage_hunk() end, "Undo Stage Hunk" },
+		    r = { function() gitsigns.reset_hunk() end, "Reset Hunk" },
+		    R = { function() gitsigns.reset_buffer() end, "Reset Buffer" },
+		    p = { function() gitsigns.preview_hunk() end, "Preview Hunk" },
+		    b = { function() gitsigns.blame_line(true) end, "Blame Line" },
+
+		},
 		d = {
 			name = "Debug",
-			c = { function() extensions.dap.configurations{} end, "DAP configurations" },
-			b = { function() extensions.dap.list_breakpoints{} end, "DAP breakpoints" },
-			v = { function() extensions.dap.variables{} end, "DAP variables" },
-			f = { function() extensions.dap.frames{} end, "DAP frames" },
+			c = { function() tse.dap.configurations{} end, "DAP configurations" },
+			b = { function() tse.dap.list_breakpoints{} end, "DAP breakpoints" },
+			v = { function() tse.dap.variables{} end, "DAP variables" },
+			f = { function() tse.dap.frames{} end, "DAP frames" },
 		},
 		s = {
 			name = "Symbols",
-			e = { function() telescope.symbols{ sources = {'emoji'} } end, "Emoji" },
-			k = { function() telescope.symbols{ sources = {'kaomoji'} } end, "Kaomoji" },
-			m = { function() telescope.symbols{ sources = {'math'} } end, "math" },
-			l = { function() telescope.symbols{ sources = {'latex'} } end, "Latex" },
-			g = { function() telescope.symbols{ sources = {'gitmoji'} } end, "Gitmoji" },
+			e = { function() tsb.symbols{ sources = {'emoji'} } end, "Emoji" },
+			k = { function() tsb.symbols{ sources = {'kaomoji'} } end, "Kaomoji" },
+			m = { function() tsb.symbols{ sources = {'math'} } end, "math" },
+			l = { function() tsb.symbols{ sources = {'latex'} } end, "Latex" },
+			g = { function() tsb.symbols{ sources = {'gitmoji'} } end, "Gitmoji" },
 		},
 		n = {
 			name = "Snippets",
-			n = { function() extensions.snippets.snippets{} end, "Snippets" },
+			n = { function() tse.snippets.snippets{} end, "Snippets" },
 		},
 		f = {
 			name = "Find",
