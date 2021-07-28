@@ -2,363 +2,376 @@
 function setup_packer_bootstrap()
 	local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 	if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	  vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+		vim.fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
 	end
 end
 
 function setup_packer()
-require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+	require('packer').startup(function()
+		-- Packer can manage itself
+		use 'wbthomason/packer.nvim'
 
-  -- Enables plugins to register operations for repeat with .
-  use 'tpope/vim-repeat'
+		-- Enables plugins to register operations for repeat with .
+		use 'tpope/vim-repeat'
 
-  -- BASIC SEARCH
-  use 'bronson/vim-visual-star-search'
+		-- BASIC SEARCH
+		use 'bronson/vim-visual-star-search' -- '*' searches for visual selection
 
-  -- BASIC TEXT OBJECTS
-  use 'wellle/targets.vim'
-  use 'wellle/line-targets.vim'
-  use 'kana/vim-textobj-user'
-  use 'kana/vim-textobj-entire'
-  -- TODO: Look for more textobjects at: https://github.com/kana/vim-textobj-user/wiki
-  -- TODO: Consolidate textobject mappings for these basic plugins and treesitter-textobjects
-  -- use 'https://github.com/vim-scripts/argtextobj.vim'
-  -- use 'https://github.com/dahu/vim-fanfingtastic'
-  -- use 'https://github.com/terryma/vim-expand-region'
-  -- use 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
-  -- use 'https://github.com/tommcdo/vim-text-objects'
-  -- vim-textobj-user list of textobject plugins
-  -- https://github.com/coderifous/textobj-word-coloumn.vim
-  -- vim-textobj-lastpat
+		-- BASIC TEXT OBJECTS
+		use 'wellle/targets.vim'
+		use 'wellle/line-targets.vim'
+		use 'kana/vim-textobj-user'
+		use 'kana/vim-textobj-entire'
+		-- TODO: Look for more textobjects at: https://github.com/kana/vim-textobj-user/wiki
+		-- TODO: Consolidate textobject mappings for these basic plugins and treesitter-textobjects
+		-- use 'https://github.com/vim-scripts/argtextobj.vim'
+		-- use 'https://github.com/dahu/vim-fanfingtastic'
+		-- use 'https://github.com/terryma/vim-expand-region'
+		-- use 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
+		-- use 'https://github.com/tommcdo/vim-text-objects'
+		-- vim-textobj-user list of textobject plugins
+		-- https://github.com/coderifous/textobj-word-coloumn.vim
+		-- vim-textobj-lastpat
+		
+		-- BASIC EDITING
+		-- gr operator to replace target with register
+		use 'inkarkat/vim-ReplaceWithRegister'
+		-- gc to toggle comment TODO: Find treesitter based alternative?
+		use 'tpope/vim-commentary'
+		-- Editing of surrounding characters and html tags ds(, cs"', cs"<emph>, ysiW( etc
+		use 'tpope/vim-surround'
+		-- cx target1, cx target2 to swap targets, but it doesn't work!
+		-- use 'wellle/vim-exchange'
 
-  -- BASIC EDITING
-  use 'wellle/vim-exchange'
-  use 'inkarkat/vim-ReplaceWithRegister'
-  use 'tpope/vim-commentary' -- TODO: Find treesitter based alternative?
-  use 'tpope/vim-surround'
+		-- ALIGNMENT
+		use 'tommcdo/vim-lion' -- gLip, to align in paragraph with spaces on the right of ,
+		-- https://github.com/junegunn/vim-easy-align -- more features in this one
+		-- use 'junegunn/vim-easy-align' TODO: Consider if the extra features are useful
 
-  -- ALIGNMENT
-  use 'tommcdo/vim-lion'
-  -- use 'junegunn/vim-easy-align' -- TODO: which to use?
+		-- WINDOW MANAGEMENT
+		-- use 'wellle/visual-split.vim' -- TODO: Configure this with keymaps
 
-  -- MORE TO CHECK OUT:
-  -- https://github.com/wellle/targets.vim
-  -- https://github.com/wellle/visual-split.vim
-  -- https://github.com/tpope/vim-unimpaired
+		-- TREESITTER
+		use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+		use 'romgrk/nvim-treesitter-context'
+		use 'nvim-treesitter/nvim-treesitter-textobjects'
+		use 'nvim-treesitter/nvim-treesitter-refactor'
+		use 'nvim-treesitter/playground'
+		use 'vigoux/architext.nvim'
+		use 'p00f/nvim-ts-rainbow'
 
-  -- TREESITTER
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use 'romgrk/nvim-treesitter-context'
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use 'RRethy/nvim-treesitter-textsubjects'
-  use 'nvim-treesitter/nvim-treesitter-refactor'
-  use 'nvim-treesitter/playground'
-  use 'vigoux/architext.nvim'
-  use 'p00f/nvim-ts-rainbow'
+		-- LSP
+		-- TODO: Configure LSP more and add servers:  https://github.com/neovim/nvim-lspconfig
+		use 'neovim/nvim-lspconfig'
+		-- use 'kabouzeid/nvim-lspinstall' -- TODO: Try this
+		-- use 'folke/trouble.nvim' -- TODO: Try this
+		-- use 'glepnir/lspsaga.nvim' -- TODO: Try this
+		-- use 'ray-x/navigator.lua' -- TODO: Try this
 
-  -- LSP
-  -- TODO: Configure LSP more and add servers:  https://github.com/neovim/nvim-lspconfig
-  use 'neovim/nvim-lspconfig'
-  -- use 'kabouzeid/nvim-lspinstall' -- TODO: Try this
-  -- use 'folke/trouble.nvim' -- TODO: Try this
-  -- use 'glepnir/lspsaga.nvim' -- TODO: Try this
+		-- use 'mhartington/formatter.nvim' -- TODO: competes with LSP or not?
 
-  -- use 'mhartington/formatter.nvim' -- TODO: competes with LSP or not?
-  
-  -- SNIPPETS
-  use 'norcalli/snippets.nvim' -- TODO: Configure keymaps and add useful snippets
+		-- SNIPPETS
+		use 'norcalli/snippets.nvim' -- TODO: Configure keymaps and add useful snippets
 
-  -- DEBUGGER
-  use 'mfussenegger/nvim-dap' -- TODO: Test go adapter, configure more debug adapters
-  -- use 'Pocco81/DAPInstall.nvim' -- TODO: Try this
+		-- DEBUGGER
+		use 'mfussenegger/nvim-dap'
+		use 'theHamsta/nvim-dap-virtual-text'
+		-- use 'Pocco81/DAPInstall.nvim' -- TODO: Try this
 
-  -- TELESCOPE
-  -- TODO: Configure nicer telescope keymaps!
-  use { 'nvim-telescope/telescope.nvim',
-    requires = {
-		{ 'nvim-lua/popup.nvim' },
-		{ 'nvim-lua/plenary.nvim' }
-	}
-  }
-  use 'nvim-telescope/telescope-hop.nvim' -- TODO: Configure
-  use 'nvim-telescope/telescope-github.nvim'
-  use 'nvim-telescope/telescope-symbols.nvim'
-  use 'nvim-telescope/telescope-snippets.nvim'
-  use 'nvim-telescope/telescope-dap.nvim'
+		-- TELESCOPE
+		-- TODO: Configure nicer telescope keymaps!
+		use { 'nvim-telescope/telescope.nvim',
+			requires = {
+				{ 'nvim-lua/popup.nvim' },
+				{ 'nvim-lua/plenary.nvim' }
+			}
+		}
+		use 'nvim-telescope/telescope-hop.nvim' -- TODO: Configure
+		use 'nvim-telescope/telescope-github.nvim'
+		use 'nvim-telescope/telescope-symbols.nvim'
+		use 'nvim-telescope/telescope-snippets.nvim'
+		use 'nvim-telescope/telescope-dap.nvim'
 
-  -- AUTOCOMPLETION
-  -- TODO: Configure completion and integration with treesitter, snippets, lsp
-  use 'hrsh7th/nvim-compe'
+		-- AUTOCOMPLETION
+		-- TODO: Configure completion and integration with treesitter, snippets, lsp
+		use 'hrsh7th/nvim-compe'
 
-  -- STATUSLINE
-  use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+		-- STATUSLINE
+		use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
-  -- CODE OUTLINE
-  use 'stevearc/aerial.nvim'
-  -- use '???/minimap.vim'
+		-- CODE OUTLINE
+		use 'stevearc/aerial.nvim' -- TODO: Configure or remove
+		-- use '???/minimap.vim'
 
-  -- FILETREE
-  -- TODO: Configure one by one below this point:
-  use { 'kyazdani42/nvim-tree.lua', requires = { { 'kyazdani42/nvim-web-devicons' } } }
+		-- FILETREE
+		-- TODO: Configure one by one below this point:
+		use { 'kyazdani42/nvim-tree.lua', requires = { { 'kyazdani42/nvim-web-devicons' } } }
 
-  -- GIT
-  -- Add git related info in the signs columns and popups
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use 'TimUntersberger/neogit' -- TODO: Use this and/or gitsigns?
-  -- TODO: octo.nvim?
-  -- TODO: vira?
+		-- GIT
+		-- Add git related info in the signs columns and popups
+		use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+		use 'TimUntersberger/neogit' -- TODO: Use this and/or gitsigns?
+		-- TODO: octo.nvim?
+		-- TODO: vira?
 
-  -- UTILITIES
-  use 'windwp/nvim-autopairs'
+		-- UTILITIES
+		use 'windwp/nvim-autopairs'
 
-  -- MOVEMENT
-  use 'phaazon/hop.nvim'
-  use "folke/which-key.nvim"
+		-- MOVEMENT
+		use 'phaazon/hop.nvim'
+		use "folke/which-key.nvim"
 
-  -- VISUAL
-  -- Add indentation guides even on blank lines
-  use 'lukas-reineke/indent-blankline.nvim'
-  use 'folke/twilight.nvim'
-  use 'folke/zen-mode.nvim'
+		-- VISUAL
+		-- Add indentation guides even on blank lines
+		use 'lukas-reineke/indent-blankline.nvim'
+		use 'folke/twilight.nvim'
+		use 'folke/zen-mode.nvim'
 
-  -- COLORSCHEMES
-  use 'projekt0n/github-nvim-theme'
-  -- use 'sainnhe/edge'
-  -- use 'sainnhe/neon'
+		-- COLORSCHEMES
+		use 'projekt0n/github-nvim-theme'
+		-- use 'sainnhe/edge'
+		-- use 'sainnhe/neon'
 
-  -- COLOR ADJUSTMENTS
-  use 'norcalli/nvim-colorizer.lua'
+		-- COLOR ADJUSTMENTS
+		use 'norcalli/nvim-colorizer.lua'
 
-  -- TESTING
-  -- use 'https://github.com/vim-test/vim-test'
+		-- TESTING
+		-- use 'https://github.com/vim-test/vim-test'
 
-  -- SQL
-  -- https://github.com/tpope/vim-dadbod
-  -- vim-dadbod-ui
-  -- https://github.com/lighttiger2505/sqls
-  -- https://github.com/nanotee/sqls.nvim
-  -- 'https://github.com/chrisbra/NrrwRgn'
-  -- sniprun
+		-- SQL
+		-- https://github.com/tpope/vim-dadbod
+		-- vim-dadbod-ui
+		-- https://github.com/lighttiger2505/sqls
+		-- https://github.com/nanotee/sqls.nvim
+		-- 'https://github.com/chrisbra/NrrwRgn'
+		-- sniprun
 
-  -- LUA
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+		-- LUA
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
 
-  -- GO
-  -- use 'https://github.com/ray-x/go.nvim' -- TODO: Try this
-end)
-
+		-- GO
+		-- use 'https://github.com/ray-x/go.nvim' -- TODO: Try this
+	end)
 end
 
 
 function setup_basics()
--- Indentation
--- vim.bo.smartindent = true  -- smart autoindenting for C programs
--- vim.bo.expandtab = true -- use spaces when <Tab> is inserted
--- vim.bo.smarttab = true -- use 'shiftwidth' when inserting <Tab>
--- vim.bo.softtabstop = 4 -- number of spaces that <Tab> uses while editing
--- vim.bo.tabstop = 4 -- number of spaces that <Tab> in file uses
--- vim.bo.shiftround = true -- round indent to multiple of shiftwidth
--- vim.bo.shiftwidth = 4 -- number of spaces to use for (auto)indent step
+	-- Set font to be used by gui clients. For neovide this is required.
+	vim.g.guifont = "Fira Code Regular Nerd Font Complete"
 
--- Time in milliseconds to wait for a mapped sequence to complete.
--- Note: affects when whichkey pops up
-vim.o.timeoutlen = 500 -- default 1000
+	-- Indentation
+	-- vim.bo.smartindent = true  -- smart autoindenting for C programs
+	-- vim.bo.expandtab = true -- use spaces when <Tab> is inserted
+	-- vim.bo.smarttab = true -- use 'shiftwidth' when inserting <Tab>
+	-- vim.bo.softtabstop = 4 -- number of spaces that <Tab> uses while editing
+	-- vim.bo.tabstop = 4 -- number of spaces that <Tab> in file uses
+	-- vim.bo.shiftround = true -- round indent to multiple of shiftwidth
+	-- vim.bo.shiftwidth = 4 -- number of spaces to use for (auto)indent step
 
--- Incremental live completion
-vim.o.inccommand = 'nosplit'
+	-- Time in milliseconds to wait for a mapped sequence to complete.
+	-- Note: affects when whichkey pops up
+	vim.o.timeoutlen = 500 -- default 1000
 
--- Set highlight on search
-vim.o.hlsearch = false -- true?
+	-- Incremental live completion
+	vim.o.inccommand = 'nosplit'
 
--- Make line numbers default
-vim.wo.number = true
--- vim.wo.numberwidth = 8?
+	-- Set highlight on search
+	vim.o.hlsearch = false -- true?
 
---Do not save when switching buffers
-vim.o.hidden = true
+	-- Make line numbers default
+	vim.wo.number = true
+	-- vim.wo.numberwidth = 8?
 
---Enable mouse mode
-vim.o.mouse = 'a'
+	--Do not save when switching buffers
+	vim.o.hidden = true
 
---Enable break indent
-vim.o.breakindent = true
+	--Enable mouse mode
+	vim.o.mouse = 'a'
 
---Save undo history
-vim.cmd [[set undofile]]
+	--Enable break indent
+	vim.o.breakindent = true
 
---Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+	--Save undo history
+	vim.cmd [[set undofile]]
 
---Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+	--Case insensitive searching UNLESS /C or capital in search
+	vim.o.ignorecase = true
+	vim.o.smartcase = true
 
---Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+	--Decrease update time
+	vim.o.updatetime = 250
+	vim.wo.signcolumn = 'yes'
 
--- Highlight on yank
-vim.api.nvim_exec(
-  [[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
-]],
-  false
-)
+	--Remap space as leader key
+	vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+	vim.g.mapleader = ' '
+	vim.g.maplocalleader = ' '
 
--- TODO: Merge wanted parts from below into above
---------------------------------------------------------------------------------
---Misc
---set updatetime=100  " after this many milliseconds flush swap file
---set lazyredraw      " don't redraw while executing macros
---set nrformats="alpha,octal,hex,bin"  " number formats recognized for CTRL-A command
---set tildeop  " tilde command "~" behaves like an operator
---set display="lastline,msgsep,uhex"   " list of flags for how to display text
---set scrolloff=5
---set whichwrap=b,s,<,>,[,]  " wrap to next line for backspace, space, and arrows
---set startofline  " commands move cursor to first non-blank in line
---set mouse=ar  " enable the use of mouse clicks
---filetype on
+	-- Highlight on yank
+	vim.api.nvim_exec(
+	  [[
+	  augroup YankHighlight
+	    autocmd!
+	    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+	  augroup end
+	]],
+	  false
+	)
 
---------------------------------------------------------------------------------
---Statusline at bottom
---set noshowmode   " message on status line to show current mode
---'fillchars'	  'fcs'     characters to use for displaying special items
---'ruler'		  'ru'	    show cursor line and column in the status line
---'rulerformat'	  'ruf'     custom format for the ruler
---'statusline'	  'stl'     custom format for the status line
+	-- TODO: Merge wanted parts from below into above
+	--------------------------------------------------------------------------------
+	--Misc
+	--set updatetime=100  " after this many milliseconds flush swap file
+	--set lazyredraw      " don't redraw while executing macros
+	--set nrformats="alpha,octal,hex,bin"  " number formats recognized for CTRL-A command
+	--set tildeop  " tilde command "~" behaves like an operator
+	--set display="lastline,msgsep,uhex"   " list of flags for how to display text
+	--set scrolloff=5
+	--set whichwrap=b,s,<,>,[,]  " wrap to next line for backspace, space, and arrows
+	--set startofline  " commands move cursor to first non-blank in line
+	--set mouse=ar  " enable the use of mouse clicks
+	--filetype on
+
+	--------------------------------------------------------------------------------
+	--Statusline at bottom
+	--set noshowmode   " message on status line to show current mode
+	--'fillchars'	  'fcs'     characters to use for displaying special items
+	--'ruler'		  'ru'	    show cursor line and column in the status line
+	--'rulerformat'	  'ruf'     custom format for the ruler
+	--'statusline'	  'stl'     custom format for the status line
 
 
---------------------------------------------------------------------------------
---Buffers, windows, tabs
---https://github.com/qpkorr/vim-bufkill
---set confirm  " ask what to do about unsaved/read-only files
---set hidden " don't unload buffer when it is abandoned
---set splitright  " new window is put right of the current one
---'switchbuf'	  'swb'     sets behavior when switching to another buffer
+	--------------------------------------------------------------------------------
+	--Buffers, windows, tabs
+	--https://github.com/qpkorr/vim-bufkill
+	--set confirm  " ask what to do about unsaved/read-only files
+	--set hidden " don't unload buffer when it is abandoned
+	--set splitright  " new window is put right of the current one
+	--'switchbuf'	  'swb'     sets behavior when switching to another buffer
 
---------------------------------------------------------------------------------
---Guides
---set cursorcolumn  " highlight the screen column of the cursor
---set cursorline    " highlight the screen line of the cursor
+	--------------------------------------------------------------------------------
+	--Guides
+	--set cursorcolumn  " highlight the screen column of the cursor
+	--set cursorline    " highlight the screen line of the cursor
 
---------------------------------------------------------------------------------
---Folding
---set foldmethod=manual  " folding type (manual, indent, syntax, expr, diff)
---set foldnestmax=5      " maximum fold depth (file section, class, function, +3 levels = 5, should be plenty!)
---for which commands a fold will be opened:
---default   ="block,hor,mark,percent,quickfix,search,tag,undo"
---set foldopen="block,hor,mark,percent,quickfix,search,tag,undo,jump,insert"
+	--------------------------------------------------------------------------------
+	--Folding
+	--set foldmethod=manual  " folding type (manual, indent, syntax, expr, diff)
+	--set foldnestmax=5      " maximum fold depth (file section, class, function, +3 levels = 5, should be plenty!)
+	--for which commands a fold will be opened:
+	--default   ="block,hor,mark,percent,quickfix,search,tag,undo"
+	--set foldopen="block,hor,mark,percent,quickfix,search,tag,undo,jump,insert"
 
---------------------------------------------------------------------------------
---System clipboard, cut/copy/paste, etc
---set clipboard=unnamedplus  " use the clipboard as the unnamed register
+	--------------------------------------------------------------------------------
+	--System clipboard, cut/copy/paste, etc
+	--set clipboard=unnamedplus  " use the clipboard as the unnamed register
 
---------------------------------------------------------------------------------
---Undo
---set undofile          " save undo information in a file
---set undolevels=1000   " maximum number of changes that can be undone
---set undoreload=30000  " max nr of lines to save for undo on a buffer reload
-
+	--------------------------------------------------------------------------------
+	--Undo
+	--set undofile          " save undo information in a file
+	--set undolevels=1000   " maximum number of changes that can be undone
+	--set undoreload=30000  " max nr of lines to save for undo on a buffer reload
 end
 
 
 function setup_treesitter()
-
--- TSInstall go lua json yaml html css c cpp
-
-require('nvim-treesitter.configs').setup({
-	ensure_installed = "maintained",
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-	incremental_selection = {
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
+	-- TSInstall go lua json yaml html css c cpp
+	require('nvim-treesitter.configs').setup({
+		ensure_installed = "maintained",
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
 		},
-	},
-	indent = {
-		enable = true,
-	},
-    textsubjects = {
-        enable = true, -- TODO: Not sure, test in go before deciding
-        keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
-        }
-    }, -- textsubjects
-  textobjects = {
-    -- TODO: Refine keymaps later
-    -- Built-in textobjects:
-    -- @block.inner
-    -- @block.outer
-    -- @call.inner
-    -- @call.outer
-    --  @class.inner
-    --  @class.outer
-    --  @comment.outer
-    --  @conditional.inner
-    --  @conditional.outer
-    --  @frame.inner not go
-    --  @frame.outer not go
-    --  @function.inner
-    --  @function.outer
-    --  @loop.inner
-    --  @loop.outer
-    -- @parameter.inner
-    --  @parameter.outer not go
-    --  @scopename.inner not go
-    -- @statement.outer
-    select = {
-      enable = true,
+		indent = {
+			enable = true,
+		},
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<leader>ii",
+				node_incremental = "<leader>in",
+				scope_incremental = "<leader>is",
+				node_decremental = "<leader>id",
+			},
+		},
+		textobjects = {
+			select = {
+				enable = true,
 
-      -- Automatically jump forward to textobj, similar to targets.vim 
-      lookahead = true,
+				-- Automatically jump forward to textobj, similar to targets.vim 
+				lookahead = true,
 
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["aq"] = "@commment.outer",
-        ["an"] = "@conditional.outer",
-        ["in"] = "@conditional.inner",
-        ["al"] = "@loop.outer",
-        ["il"] = "@loop.inner",
-	-- TODO: Add more!
+				-- TODO: Test all these in go
+				-- TODO: Add all plugin textobjects to documentation here
+				-- TODO: Document with whichkey?
+				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
+					-- Commenting builtins and other plugins for completeness here:
+					-- [] = [] block (builtin)
+					-- ( or ) = () block (builtin)
+					-- { or } = {} block (builtin)
+					-- < or > = <> block (builtin)
+					-- "'` = string between quotes (builtin)
+					["aa"] = "@parameter.outer", -- TODO: Not in go?
+					["ia"] = "@parameter.inner",
+					-- b = () (builtin) -- could be repurposed?
+					-- B = {} (builtin) -- could be repurposed?
+					["ac"] = "@call.outer",
+					["ic"] = "@call.inner",
+					["aC"] = "@class.outer",
+					["iC"] = "@class.inner",
+					-- d = delimited plugin
+					-- e = entire plugin
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					-- g = ? TODO
+					-- h = gitsigns hunk TODO
+					-- i = indentation level TODO
+					-- j = 
+					-- k = 
+					["al"] = "@loop.outer",
+					["il"] = "@loop.inner",
+					-- m = 
+					["an"] = "@conditional.outer",
+					["in"] = "@conditional.inner",
+					["ao"] = "@block.outer",
+					["io"] = "@block.inner",
+					-- p = paragraph (builtin)
+					["aq"] = "@comment.outer",
+					-- r = 
+					-- s = sentence (builtin)
+					["aS"] = "@statement.outer",
+					-- t = tag block for html-like syntax (builtin)
+					-- u = 
+					-- v = camelCase subword or _ delimited subword TODO
+					-- w = word (builtin)
+					-- W = WORD (builtin)
+					-- x = 
+					-- y = 
+					-- z = 
 
-        -- Or you can define your own textobjects like this
-        -- ["iF"] = {
-        --   python = "(function_definition) @function",
-        --   cpp = "(function_definition) @function",
-        --   c = "(function_definition) @function",
-        --   java = "(method_declaration) @function",
-        -- },
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>a"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>A"] = "@parameter.inner",
-      },
-    },
+					-- Or you can define your own textobjects like this
+					-- ["iF"] = {
+					--   python = "(function_definition) @function",
+					--   cpp = "(function_definition) @function",
+					--   c = "(function_definition) @function",
+					--   java = "(method_declaration) @function",
+					-- },
+				},
+			},
+			swap = {
+				enable = true,
+				swap_next = {
+					["<leader>a"] = "@parameter.inner",
+				},
+				swap_previous = {
+					["<leader>A"] = "@parameter.inner",
+				},
+			},
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
+      -- TODO: Document these in setup_whichkey
       goto_next_start = {
         ["]m"] = "@function.outer",
         ["]]"] = "@class.outer",
@@ -430,10 +443,10 @@ require('nvim-treesitter.configs').setup({
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
     -- TODO: Define colors here depending on chosen color scheme:
-    colors = { -- table of hex strings
-    },
-    termcolors = { -- table of colour name strings
-    }
+    -- colors = { -- table of hex strings
+    -- },
+    -- termcolors = { -- table of colour name strings
+    -- }
   }, -- rainbow
 })
 -- Folding is not a module but part of treesitter
@@ -769,51 +782,116 @@ function setup_whichkey()
 	  --   ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 	  -- },
 
-	wk.register({
-		-- Git mappings
+	-- Jumps using []-something to mean prev/next/first/last something, inspired by vim-unimpaired
+	local jumps = {
+		-- TODO: Reconcile with motions defined in setup_treesitter move section
+		['[A'] = { ":first<cr>",     "First Argument File" },
+		[']A'] = { ":last<cr>",      "Last Argument File" },
+		['[a'] = { ":previous<cr>",  "Prev Argument File" },
+		[']a'] = { ":next<cr>",      "Next Argument File" },
+		['[B'] = { ":bfirst<cr>",    "First Buffer" },
+		[']B'] = { ":blast<cr>",     "Last Buffer" },
+		['[b'] = { ":bprevious<cr>", "Prev Buffer" },
+		[']b'] = { ":bnext<cr>",     "Next Buffer" },
+		-- builtin: c
+		-- builtin: d
+		-- builtin: D
+		-- builtin: f
 		['[h'] = { function() gitsa.prev_hunk() end, "Prev Hunk" },
 		[']h'] = { function() gitsa.next_hunk() end, "Next Hunk" },
-		-- Builtin vim commands
-		['[B'] = { ":bfirst<cr>", "First Buffer" },
-		['[T'] = { ":tfirst<cr>", "First Tag" },
-		['[Q'] = { ":cfirst<cr>", "First Quickfix" },
-		['[L'] = { ":lfirst<cr>", "First Location" },
-		['[A'] = { ":first<cr>",  "First Argument File" },
-		[']B'] = { ":blast<cr>", "Last Buffer" },
-		[']T'] = { ":tlast<cr>", "Last Tag" },
-		[']Q'] = { ":clast<cr>", "Last Quickfix" },
-		[']L'] = { ":llast<cr>", "Last Location" },
-		[']A'] = { ":last<cr>",  "Last Argument File" },
-		['[b'] = { ":bprevious<cr>", "Prev Buffer" },
-		['[t'] = { ":tprevious<cr>", "Prev Tag" },
-		['[q'] = { ":cprevious<cr>", "Prev Quickfix" },
+		-- builtin: i
+		-- builtin: I
+		['[L'] = { ":lfirst<cr>",    "First Location" },
+		[']L'] = { ":llast<cr>",     "Last Location" },
 		['[l'] = { ":lprevious<cr>", "Prev Location" },
-		['[a'] = { ":previous<cr>",  "Prev Argument File" },
-		[']b'] = { ":bnext<cr>", "Next Buffer" },
-		[']t'] = { ":tnext<cr>", "Next Tag" },
-		[']q'] = { ":cnext<cr>", "Next Quickfix" },
-		[']l'] = { ":lnext<cr>", "Next Location" },
-		[']a'] = { ":next<cr>",  "Next Argument File" },
-		-- TODO: Treesitter node movements
-		-- TODO: LSP movements
-		-- TODO: More inspiration from https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt
-	})
+		[']l'] = { ":lnext<cr>",     "Next Location" },
+		-- builtin: m, also overridden by setup_treesitter
+		-- builtin: p
+		-- builtin: P
+		['[Q'] = { ":cfirst<cr>",    "First Quickfix" },
+		[']Q'] = { ":clast<cr>",     "Last Quickfix" },
+		['[q'] = { ":cprevious<cr>", "Prev Quickfix" },
+		[']q'] = { ":cnext<cr>",     "Next Quickfix" },
+		-- builtin: s
+		['[T'] = { ":tfirst<cr>",    "First Tag" },
+		[']T'] = { ":tlast<cr>",     "Last Tag" },
+		['[t'] = { ":tprevious<cr>", "Prev Tag" },
+		[']t'] = { ":tnext<cr>",     "Next Tag" },
+		-- builtin: z
+	}
+	wk.register(jumps, { mode = "n" })
+	-- TODO: More inspiration from https://github.com/tpope/vim-unimpaired/blob/master/doc/unimpaired.txt
 
-	wk.register({
+-- TODO: Reconcile the above with builtins and with treesitter motions
+--tag		char	      note action in Normal mode	~
+--------------------------------------------------------------------------------
+--|[#|		[#		1  cursor to N previous unmatched #if, #else or #ifdef
+--|['|		['		1  cursor to previous lowercase mark, on first non-blank
+--|[(|		[(		1  cursor N times back to unmatched '('
+--|[star|		[*		1  same as "[/"
+--|[`|		[`		1  cursor to previous lowercase mark
+--|[/|		[/		1  cursor to N previous start of a C comment
+--|[[|		[[		1  cursor N sections backward
+--|[]|		[]		1  cursor N SECTIONS backward
+--|[{|		[{		1  cursor N times back to unmatched '{'
+-- and ditto starting with ]
+
+--|[D|		[D		   list all defines found in current and
+--				   included files matching the word under the
+--				   cursor, start searching at beginning of
+--				   current file
+--|[I|		[I		   list all lines found in current and
+--				   included files that contain the word under
+--				   the cursor, start searching at beginning of
+--				   current file
+--|[P|		[P		2  same as "[p"
+--|[c|		[c		1  cursor N times backwards to start of change
+--|[d|		[d		   show first #define found in current and
+--				   included files matching the word under the
+--				   cursor, start searching at beginning of
+--				   current file
+--|[f|		[f		   same as "gf"
+--|[i|		[i		   show first line found in current and
+--				   included files that contains the word under
+--				   the cursor, start searching at beginning of
+--				   current file
+--|[m|		[m		1  cursor N times back to start of member
+--				   function
+--|[p|		[p		2  like "P", but adjust indent to current line
+--|[s|		[s		1  move to the previous misspelled word
+--|[z|		[z		1  move to start of open fold
+-- and ditto starting with ]
+
+
+	-- local motions = {
+	-- }
+	-- wk.register(motions, { mode = "n" })
+	-- wk.register(motions, { mode = "v" })
+	-- wk.register(motions, { mode = "o" })
+
+	-- Note: Treesitter motions are configured in setup_treesitter
+	-- TODO: LSP movements
+
+	local vleader = {
+		g = {
+			name = "Git",
+			s = { function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Stage Hunk" },
+			r = { function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Reset Hunk" },
+		},
+	}
+	wk.register(vleader, { mode = "v", prefix = "<leader>" })
+
+	local nleader = {
+		-- a/A = { swap argument, see setup_treesitter }
 		g = {
 			name = "Git",
 			q = { function() extensions.dap.frames{} end, "DAP frames" },
-	-- TODO: visual mode for the first two here
-	  --   s = { function() gitsigns.stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Stage Hunk" },
-	  --   r = { function() gitsigns.reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end, "Reset Hunk" },
-	-- TODO: normal mode for the rest
-		    s = { function() gitsigns.stage_hunk() end, "Stage Hunk" },
-		    u = { function() gitsigns.undo_stage_hunk() end, "Undo Stage Hunk" },
-		    r = { function() gitsigns.reset_hunk() end, "Reset Hunk" },
-		    R = { function() gitsigns.reset_buffer() end, "Reset Buffer" },
-		    p = { function() gitsigns.preview_hunk() end, "Preview Hunk" },
-		    b = { function() gitsigns.blame_line(true) end, "Blame Line" },
-
+			s = { function() gitsigns.stage_hunk() end, "Stage Hunk" },
+			u = { function() gitsigns.undo_stage_hunk() end, "Undo Stage Hunk" },
+			r = { function() gitsigns.reset_hunk() end, "Reset Hunk" },
+			R = { function() gitsigns.reset_buffer() end, "Reset Buffer" },
+			p = { function() gitsigns.preview_hunk() end, "Preview Hunk" },
+			b = { function() gitsigns.blame_line(true) end, "Blame Line" },
 		},
 		d = {
 			name = "Debug",
@@ -830,6 +908,7 @@ function setup_whichkey()
 			l = { function() tsb.symbols{ sources = {'latex'} } end, "Latex" },
 			g = { function() tsb.symbols{ sources = {'gitmoji'} } end, "Gitmoji" },
 		},
+		-- i = { treesitter incremental selection, see setup_treesitter }
 		n = {
 			name = "Snippets",
 			n = { function() tse.snippets.snippets{} end, "Snippets" },
@@ -839,18 +918,19 @@ function setup_whichkey()
 			-- TODO: Refine list of telescope searches,
 			-- i.e. add telescope extensions here:
 			-- lsp, dap, treesitter, git, vira?
-			b = { function() telescope.buffers() end, "🔍 Buffers" },
-			c = { function() telescope.tags{ only_current_buffer = true } end, "🔍 Tags in current buffer" },
-			f = { function() telescope.find_files({previewer = false}) end, "🔍 Find Files" },
-			g = { function() telescope.grep_string() end, "🔍 Grep string" },
-			h = { function() telescope.help_tags() end, "🔍 Help tags" },
-			l = { function() telescope.live_grep() end, "🔍 Live Grep" },
-			o = { function() telescope.oldfiles() end, "🔍 Old Files" },
-			p = { function() telescope.find_files({previewer = true}) end, "🔍 Preview Files" },
-			t = { function() telescope.tags() end, "🔍 Tags" },
-			z = { function() telescope.current_buffer_fuzzy_find() end, "🔍 Fuzzy Find in buffer" },
+			b = { function() tsb.buffers() end, "🔍 Buffers" },
+			c = { function() tsb.tags{ only_current_buffer = true } end, "🔍 Tags in current buffer" },
+			f = { function() tsb.find_files({previewer = false}) end, "🔍 Find Files" },
+			g = { function() tsb.grep_string() end, "🔍 Grep string" },
+			h = { function() tsb.help_tags() end, "🔍 Help tags" },
+			l = { function() tsb.live_grep() end, "🔍 Live Grep" },
+			o = { function() tsb.oldfiles() end, "🔍 Old Files" },
+			p = { function() tsb.find_files({previewer = true}) end, "🔍 Preview Files" },
+			t = { function() tsb.tags() end, "🔍 Tags" },
+			z = { function() tsb.current_buffer_fuzzy_find() end, "🔍 Fuzzy Find in buffer" },
 		},
-	}, { prefix = "<leader>" })
+	}
+	wk.register(nleader, { mode = "n", prefix = "<leader>" })
 end
 
 --------------------------------------------------------------------------------
