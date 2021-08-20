@@ -91,8 +91,7 @@ function setup_packer()
 		use 'nvim-telescope/telescope-symbols.nvim'
 		use 'nvim-telescope/telescope-snippets.nvim'
 		use 'nvim-telescope/telescope-dap.nvim'
-
-		-- AUTOCOMPLETION
+-- AUTOCOMPLETION
 		-- TODO: Configure completion and integration with treesitter, snippets, lsp
 		use 'hrsh7th/nvim-compe'
 
@@ -116,6 +115,8 @@ function setup_packer()
 
 		-- UTILITIES
 		use 'windwp/nvim-autopairs'
+		-- https://github.com/theHamsta/nvim-treesitter-pairs
+		-- https://github.com/andymass/vim-matchup
 
 		-- MOVEMENT
 		use 'phaazon/hop.nvim'
@@ -128,9 +129,14 @@ function setup_packer()
 		use 'folke/zen-mode.nvim'
 
 		-- COLORSCHEMES
+		-- TODO: Setup colorscheme picker with telescope and consider themes with some real code
 		use 'projekt0n/github-nvim-theme'
-		-- use 'sainnhe/edge'
-		-- use 'sainnhe/neon'
+		use 'RRethy/nvim-base16'
+		use 'rafamadriz/neon'
+		use 'sainnhe/edge' -- :help 
+		use 'sainnhe/sonokai' -- :help sonokai.txt
+		use 'sainnhe/everforest' -- :help everforest.txt
+		use 'sainnhe/gruvbox-material' -- :help gruvbox-material.txt
 
 		-- COLOR ADJUSTMENTS
 		use 'norcalli/nvim-colorizer.lua'
@@ -740,11 +746,13 @@ function setup_lualine()
 end
 
 function setup_colorscheme()
-	-- Color scheme
 	vim.o.termguicolors = true
-	require('github-theme').setup{
-	  themeStyle = "dark"
-	}
+
+	-- Color scheme
+	require('github-theme').setup{ themeStyle = "dark" }
+
+
+	-- require('').setup{ themeStyle = "dark" }
 end
 
 
