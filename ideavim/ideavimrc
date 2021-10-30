@@ -144,7 +144,18 @@ set clipboard=ideaput
 
 " a ???
 
-" b breakpoints:
+" b buffers (no point?)
+" map <leader>bn :bn<CR>
+" map <leader>bp :bp<CR>
+" map <leader>bd :bd<CR>
+" delete other tabs?
+" delete tabgroup?
+
+" b Bookmarks
+map <leader>bg <Action>(Bookmarks.Goto)
+map <leader>bt <Action(Bookmarks.Toggle)
+
+" B breakpoints:
 " map <leader>ba show all breakpoints
 map <leader>bb <Action>(ToggleLineBreakpoint)
 " map <leader>ba add breakpoint
@@ -183,6 +194,35 @@ map <leader>du <Action>(StepOut)
 " "GoCallHierarchyPopupMenu.BaseOnThisDeclaration     <A-C-H>
 " "GoTypeHierarchyPopupMenu
 " GotoNextError
+"
+" GotoSymbol
+" GotoFile
+" GotoClass
+" GotoAction
+" FindInPath
+" ReplaceInPath
+"
+" Test and run:
+" GotoTest
+" RunClass
+" Rerun
+" RerunFailedTests
+"
+" Undo history:
+" LocalHistory.ShowHistory
+"
+" Navigation:
+" GotoNextError
+" GotoPreviousError
+" VcsShowNextChangeMarker
+" VcsShowPrevChangeMarker
+
+" Suggestions:
+" GotoImplementation
+" ActivateStructureToolWindow
+" ParameterInfo
+" QuickImplementations
+" Scala.TypeInfo -- equivalent for go?
 
 " g generate:
 map <leader>gt <Action>(GoTestGenerateGroup)
@@ -190,10 +230,17 @@ map <leader>gc <Action>(GoGenerateConstructorAction)
 map <leader>gf <Action>(GoGenerateFileAction)
 map <leader>gs <Action>(GoGenerateForStruct)
 map <leader>gg <Action>(GoGenerateGetterAction)
-" map <leader>gG <Action>(GoGenerateGetterSetterAction)
+" map <leader>gb <Action>(GoGenerateGetterSetterAction)
 map <leader>gG <Action>(GoGenerateSetterAction)
 
+
 " h ???
+map <leader>hh <Action>(TypeHierarchy)
+map <leader>hc <Action>(TypeHierarchy.Class)
+map <leader>hs <Action>(TypeHierarchy.Subtypes)
+map <leader>hS <Action>(TypeHierarchy.Supertypes)
+map <leader>hb <Action>(TypeHierarchyBase.BaseOnThisType)
+map <leader>hp <Action>(TypeHierarchyPopupMenu)
 
 " i ???
 
@@ -208,10 +255,6 @@ map <leader>me <Action>(GotoNextError)
 map <leader>ms <Plug>(easymotion-s)
 map <leader>mf <Plug>(easymotion-f)
 
-" Bookmarks
-" Bookmarks.Goto
-" Bookmarks.Toggle
-
 
 " n ???
 
@@ -220,19 +263,26 @@ map <leader>mf <Plug>(easymotion-f)
 " p ???
 
 " q ???
+map <leader>qf <Action>(ShowIntentionActions)
 
 " r refactoring:
 map <leader>rc <Action>(IntroduceConstant)
+map <leader>re <Action>(RenameElement)
+map <leader>rF <Action>(RenameFile)
 map <leader>rf <Action>(IntroduceField)
 map <leader>ri <Action>(Inline)
 map <leader>rm <Action>(ImplementMethods)
+map <leader>ro <Action>(OverrideMethods)
 map <leader>rp <Action>(IntroduceParameter)
 map <leader>rP <Action>(IntroduceParameterObject)
-map <leader>rr <Action>(RenameElement)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
 map <leader>rv <Action>(IntroduceVariable)
 map <leader>ra <Action>(Refactor) " change signature
 " map <leader>rs <Action>() " fill struct
 " map <leader>rS <Action>() " fill struct recursively
+
+" OptimizeImports
+" ReformatCode
 
 " s ???
 
@@ -253,8 +303,8 @@ map <leader>tt <Action>(RerunTests)
 " v version control:
 map <leader>va <Action>(Annotate)
 map <leader>vh <Action>(Vcs.ShowTabbedFileHistory)
-map <leader>vj <Action>(VcsShowNextChangeMarker)
-map <leader>vk <Action>(VcsShowPrevChangeMarker)
+map <leader>vn <Action>(VcsShowNextChangeMarker)
+map <leader>vp <Action>(VcsShowPrevChangeMarker)
 map <leader>vr <Action>(Vcs.RollbackChangedLines)
 
 " w window management:
@@ -273,7 +323,9 @@ map <leader>xn <Action>(Go.NewGoFile)
 map <leader>xp <Action>(GoFmtProjectAction)
 map <leader>xv <Action>(GoVetFileAction)
 
-" y ???
+" y yank related
+" map <leader>y <Action>(PasteMultiple)
+
 
 " z ???
 
