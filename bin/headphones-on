@@ -1,0 +1,8 @@
+#!/bin/bash
+# 04:5D:4B:82:64:71
+# bluetoothctl -- scan on
+# bluetoothctl -- scan off
+# bluetoothctl -- pair 04:5D:4B:82:64:71
+# bluetoothctl -- trust 04:5D:4B:82:64:71
+bluetoothctl -- connect 04:5D:4B:82:64:71
+# bluetoothctl -- disconnect 04:5D:4B:82:64:71
