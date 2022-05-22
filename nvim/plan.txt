@@ -1,0 +1,174 @@
+=== Installing with packer
+	require('packer').startup(function()
+		-- Packer can manage itself
+		use 'wbthomason/packer.nvim'
+
+=== Manage keymaps with which-key.nvim
+
+
+
+=== Treesitter install with go
+
+		-- TREESITTER
+		use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+		use 'romgrk/nvim-treesitter-context'
+		use 'nvim-treesitter/nvim-treesitter-textobjects'
+		use 'nvim-treesitter/nvim-treesitter-refactor'
+		use 'nvim-treesitter/playground'
+		use 'vigoux/architext.nvim'
+		use 'p00f/nvim-ts-rainbow'
+
+
+=== LSP install with go
+
+		-- LSP
+		-- TODO: Configure LSP more and add servers:  https://github.com/neovim/nvim-lspconfig
+		use 'neovim/nvim-lspconfig'
+		-- use 'kabouzeid/nvim-lspinstall' -- TODO: Try this
+		-- use 'folke/trouble.nvim' -- TODO: Try this
+		-- use 'glepnir/lspsaga.nvim' -- TODO: Try this
+		-- use 'ray-x/navigator.lua' -- TODO: Try this
+
+		-- use 'mhartington/formatter.nvim' -- TODO: competes with LSP or not?
+
+
+=== Telescope
+
+		-- TELESCOPE
+		-- TODO: Configure nicer telescope keymaps!
+		use { 'nvim-telescope/telescope.nvim',
+			requires = {
+				{ 'nvim-lua/popup.nvim' },
+				{ 'nvim-lua/plenary.nvim' }
+			}
+		}
+		use 'nvim-telescope/telescope-hop.nvim' -- TODO: Configure
+		use 'nvim-telescope/telescope-github.nvim'
+		use 'nvim-telescope/telescope-symbols.nvim'
+		use 'nvim-telescope/telescope-snippets.nvim'
+		use 'nvim-telescope/telescope-dap.nvim'
+
+
+=== Autocompletion
+		use 'hrsh7th/nvim-cmp'
+
+
+=== Debugger with DAP
+
+		use 'mfussenegger/nvim-dap'
+		use 'theHamsta/nvim-dap-virtual-text'
+		-- use 'Pocco81/DAPInstall.nvim' -- TODO: Try this
+		dap-ui
+
+=== Git/github
+
+
+=== Various small convenience stuff
+
+		-- Enables plugins to register operations for repeat with .
+		use 'tpope/vim-repeat'
+
+		-- BASIC SEARCH
+		use 'bronson/vim-visual-star-search' -- '*' searches for visual selection
+
+		-- BASIC TEXT OBJECTS
+		use 'wellle/targets.vim'
+		use 'wellle/line-targets.vim'
+		use 'kana/vim-textobj-user'
+		use 'kana/vim-textobj-entire'
+
+		-- TODO: Look for more textobjects at: https://github.com/kana/vim-textobj-user/wiki
+		-- TODO: Consolidate textobject mappings for these basic plugins and treesitter-textobjects
+		-- use 'https://github.com/vim-scripts/argtextobj.vim'
+		-- use 'https://github.com/dahu/vim-fanfingtastic'
+		-- use 'https://github.com/terryma/vim-expand-region'
+		-- use 'https://github.com/thalesmello/vim-textobj-multiline-str' " Python only, adjust to support go?
+		-- use 'https://github.com/tommcdo/vim-text-objects'
+		-- vim-textobj-user list of textobject plugins
+		-- https://github.com/coderifous/textobj-word-coloumn.vim
+		-- vim-textobj-lastpat
+		
+		-- BASIC EDITING
+		-- gr operator to replace target with register
+		use 'inkarkat/vim-ReplaceWithRegister'
+		-- gc to toggle comment TODO: Find treesitter based alternative?
+		use 'tpope/vim-commentary'
+		-- Editing of surrounding characters and html tags ds(, cs"', cs"<emph>, ysiW( etc
+		use 'tpope/vim-surround'
+		-- cx target1, cx target2 to swap targets, but it doesn't work!
+		-- use 'wellle/vim-exchange'
+
+		-- ALIGNMENT
+		use 'tommcdo/vim-lion' -- gLip, to align in paragraph with spaces on the right of ,
+		-- https://github.com/junegunn/vim-easy-align -- more features in this one
+		-- use 'junegunn/vim-easy-align' TODO: Consider if the extra features are useful
+
+		-- WINDOW MANAGEMENT
+		-- use 'wellle/visual-split.vim' -- TODO: Configure this with keymaps
+
+		-- SNIPPETS
+		use 'norcalli/snippets.nvim' -- TODO: Configure keymaps and add useful snippets
+
+		-- STATUSLINE
+		use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+
+		-- CODE OUTLINE
+		use 'stevearc/aerial.nvim' -- TODO: Configure or remove
+		-- use '???/minimap.vim'
+
+		-- FILETREE
+		-- TODO: Configure one by one below this point:
+		use { 'kyazdani42/nvim-tree.lua', requires = { { 'kyazdani42/nvim-web-devicons' } } }
+
+		-- GIT
+		-- Add git related info in the signs columns and popups
+		use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+		use 'TimUntersberger/neogit' -- TODO: Use this and/or gitsigns?
+		-- TODO: octo.nvim?
+		-- TODO: vira?
+
+		-- UTILITIES
+		use 'windwp/nvim-autopairs'
+		-- https://github.com/theHamsta/nvim-treesitter-pairs
+		-- https://github.com/andymass/vim-matchup
+
+		-- MOVEMENT
+		use 'phaazon/hop.nvim'
+		use "folke/which-key.nvim"
+
+		-- VISUAL
+		-- Add indentation guides even on blank lines
+		use 'lukas-reineke/indent-blankline.nvim'
+		use 'folke/twilight.nvim'
+		use 'folke/zen-mode.nvim'
+
+		-- COLORSCHEMES
+		-- TODO: Setup colorscheme picker with telescope and consider themes with some real code
+		use 'projekt0n/github-nvim-theme'
+		use 'RRethy/nvim-base16'
+		use 'rafamadriz/neon'
+		use 'sainnhe/edge' -- :help 
+		use 'sainnhe/sonokai' -- :help sonokai.txt
+		use 'sainnhe/everforest' -- :help everforest.txt
+		use 'sainnhe/gruvbox-material' -- :help gruvbox-material.txt
+
+		-- COLOR ADJUSTMENTS
+		use 'norcalli/nvim-colorizer.lua'
+
+		-- TESTING
+		-- use 'https://github.com/vim-test/vim-test'
+
+		-- SQL
+		-- https://github.com/tpope/vim-dadbod
+		-- vim-dadbod-ui
+		-- https://github.com/lighttiger2505/sqls
+		-- https://github.com/nanotee/sqls.nvim
+		-- 'https://github.com/chrisbra/NrrwRgn'
+		-- sniprun
+
+		-- LUA
+		-- https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#sumneko_lua
+
+		-- GO
+		-- use 'https://github.com/ray-x/go.nvim' -- TODO: Try this
+	end)
