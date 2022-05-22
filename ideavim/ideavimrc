@@ -138,7 +138,11 @@ set ideajoin
 "              Visual or select mode are not changed.
 set idearefactormode=keep
 
-set clipboard=ideaput
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
 """ Mappings --------------------------------
 
@@ -216,6 +220,10 @@ map <leader>du <Action>(StepOut)
 " GotoPreviousError
 " VcsShowNextChangeMarker
 " VcsShowPrevChangeMarker
+map [c <Action>(VcsShowPrevChangeMarker)
+map ]c <Action>(VcsShowNextChangeMarker)
+map [e <Action>(GotoPreviousError)
+map ]e <Action>(GotoNextError)
 
 " Suggestions:
 " GotoImplementation
@@ -284,7 +292,24 @@ map <leader>ra <Action>(Refactor) " change signature
 " OptimizeImports
 " ReformatCode
 
-" s ???
+" s splits management
+map <leader>sW <Action>(IncreaseColumnWidth)
+map <leader>sw <Action>(DecreaseColumnWidth)
+map <leader>sk <Action>(IncrementWindowHeight)
+map <leader>sl <Action>(IncrementWindowWidth)
+map <leader>sj <Action>(DecrementWindowHeight)
+map <leader>sh <Action>(DecrementWindowWidth)
+map <leader>ssv <Action>(SplitVertically)
+map <leader>ssh <Action>(SplitHorizontally)
+map <leader>su <Action>(Unsplit)
+" MoveEditorToOppositeTabGroup
+" EditSourceInNewWindow
+map <leader>sp <Action>(PreviousTab)
+map <leader>sn <Action>(NextTab)
+map <leader>sp <Action>(PreviousWindow)
+map <leader>sn <Action>(NextWindow)
+map <leader>sc <Action>(CloseContent)
+map <leader>sC <Action>(CloseAllEditors)
 
 " t testing:
 map <leader>td <Action>(Debug)
@@ -308,13 +333,12 @@ map <leader>vp <Action>(VcsShowPrevChangeMarker)
 map <leader>vr <Action>(Vcs.RollbackChangedLines)
 
 " w window management:
-map <leader>wf <Action>(SelectInProjectView)
+map <leader>wf <Action>(NERDTreeToggle)
 map <leader>wo <Action>(FileStructurePopup)
-map <leader>wt <Action>(NERDTreeToggle)
+map <leader>wp <Action>(SelectInProjectView)
+map <leader>wt <Action>(ActivateTerminalToolWindow)
+map <leader>wT <Action>(Terminal.OpenInTerminal)
 map <leader>wz <Action>(ToggleDistractionFreeMode)
-" IncreaseColumnWidth                                <C-S-Right>
-" IncrementWindowHeight                              <C-S-Down>
-" IncrementWindowWidth                               <C-S-Right>
 
 " x execute:
 map <leader>xf <Action>(GoFmtFileAction)
@@ -325,7 +349,6 @@ map <leader>xv <Action>(GoVetFileAction)
 
 " y yank related
 " map <leader>y <Action>(PasteMultiple)
-
 
 " z ???
 
